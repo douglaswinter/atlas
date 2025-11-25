@@ -1,12 +1,13 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": false,
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationMap": false,
-    "emitDeclarationOnly": false,
     "esModuleInterop": true,
-    "resolveJsonModule": true,
+    "noEmit": false,
     "rootDir": "src"
   },
-  "include": ["src", "src/globals.d.ts"]
+  "exclude": ["dist", "node_modules"],
+  "extends": "../../tsconfig.json",
+  "include": ["src"]
 }
