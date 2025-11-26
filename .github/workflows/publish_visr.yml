@@ -13,7 +13,7 @@ on:
 
 jobs:
   publish:
-    uses: ./.github/workflows/publish-app.yml
+    uses: ./.github/workflows/publish_app.yml
     with:
       app: visr
       image: ghcr.io/DiamondLightSource/atlas/visr

@@ -21,8 +21,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.branch }}
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -37,14 +35,16 @@ jobs:
         with:
           images: ${{ inputs.image }}
           tags: |
-            type=ref,event=branch
-            type=ref,event=tag
+            ${{ github.event_name == 'release' && 'type=semver,pattern={{version}}' || github.event.inputs.tag }}
 
       - name: Build & push image
         id: push
         uses: docker/build-push-action@v6
         with:
-          context: apps/${{ inputs.app }}
+          context: .
+          file: docker/Dockerfile.web-app
+          build-args: |
+            APP_NAME=${{ inputs.app }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

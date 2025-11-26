@@ -28,4 +28,4 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run turbo pipeline
-        run: pnpm turbo run lint test build
+        run: pnpm turbo run lint build test
