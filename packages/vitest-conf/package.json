@@ -5,6 +5,10 @@
   "type": "module",
   "exports": {
     ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./vitest.config": {
       "import": "./dist/vitest.config.js",
       "types": "./dist/vitest.config.d.ts"
     },
@@ -16,8 +20,8 @@
       "types": "./types/global-types/index.d.ts"
     }
   },
-  "main": "./dist/vitest.config.js",
-  "types": "./dist/vitest.config.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "types"
@@ -30,7 +34,9 @@
     "@testing-library/jest-dom": "^6.6.4",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
-    "jsdom": "^26.1.0",
-    "vitest": "^3.2.4"
+    "jsdom": "^26.1.0"
+  },
+  "peerDependencies": {
+    "vitest": "*"
   }
 }
