@@ -58,8 +58,13 @@ interface MapResponse {
   values: (number | null)[][];
 }
 
-async function fetchMap(filepath: string, datapath: string, colour: RGBColour) {
-  const url = `/api/data/map?filepath=${encodeURIComponent(filepath)}&datapath=${encodeURIComponent(datapath)}`;
+async function fetchMap(
+  filepath: string,
+  datapath: string,
+  colour: RGBColour,
+  snake: boolean,
+) {
+  const url = `/api/data/map?filepath=${encodeURIComponent(filepath)}&datapath=${encodeURIComponent(datapath)}&snake=${encodeURIComponent(snake)}`;
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(resp.statusText);
   const mapResponse: MapResponse = await resp.json();

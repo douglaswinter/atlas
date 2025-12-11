@@ -7,6 +7,7 @@ export type FetchMapFunction = (
   filepath: string,
   datapath: string,
   colour: RGBColour,
+  snake: boolean,
 ) => Promise<NDT>;
 
 export interface DataChannels {
@@ -19,11 +20,13 @@ export interface ScanEventMessage {
   status: "running" | "finished" | "failed";
   filepath: string;
   uuid: string;
+  snake: boolean;
 }
 
 export function useSpectroscopyData(fetchMap: FetchMapFunction) {
   const [running, setRunning] = useState<boolean>(false);
   const [filepath, setFilepath] = useState<string | null>(null);
+  const [snake, setSnake] = useState<boolean>(false);
   const [data, setData] = useState<DataChannels>({
     red: null,
     green: null,
@@ -45,6 +48,7 @@ export function useSpectroscopyData(fetchMap: FetchMapFunction) {
         if (msg.status === "running") {
           setRunning(true);
           setFilepath(msg.filepath);
+          setSnake(msg.snake);
         } else if (msg.status === "finished" || msg.status === "failed") {
           setRunning(false); // triggers final poll below
         }
@@ -71,9 +75,9 @@ export function useSpectroscopyData(fetchMap: FetchMapFunction) {
       try {
         const basePath = "/entry/instrument/spectroscopy_detector/";
         const [red, green, blue] = await Promise.all([
-          fetchMap(filepath, basePath + "RedTotal", "red"),
-          fetchMap(filepath, basePath + "GreenTotal", "green"),
-          fetchMap(filepath, basePath + "BlueTotal", "blue"),
+          fetchMap(filepath, basePath + "RedTotal", "red", snake),
+          fetchMap(filepath, basePath + "GreenTotal", "green", snake),
+          fetchMap(filepath, basePath + "BlueTotal", "blue", snake),
         ]);
         setData({ red, green, blue });
       } catch (err) {
@@ -98,7 +102,7 @@ export function useSpectroscopyData(fetchMap: FetchMapFunction) {
         pollInterval.current = null;
       }
     };
-  }, [running, filepath, fetchMap]);
+  }, [running, filepath, snake, fetchMap]);
 
   return { data, running };
 }
