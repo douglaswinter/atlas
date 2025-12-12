@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { type NDT } from "@diamondlightsource/davidia";
+import { useScanEvents } from "../../hooks/scanEvents/useScanEvents";
 
 export type RGBColour = "red" | "green" | "blue" | "gray";
 
@@ -16,14 +17,8 @@ export interface DataChannels {
   blue: NDT | null;
 }
 
-export interface ScanEventMessage {
-  status: "running" | "finished" | "failed";
-  filepath: string;
-  uuid: string;
-  snake: boolean;
-}
-
 export function useSpectroscopyData(fetchMap: FetchMapFunction) {
+  const scanEvent = useScanEvents();
   const [running, setRunning] = useState<boolean>(false);
   const [filepath, setFilepath] = useState<string | null>(null);
   const [snake, setSnake] = useState<boolean>(false);
@@ -36,37 +31,21 @@ export function useSpectroscopyData(fetchMap: FetchMapFunction) {
   /** Cached interval id */
   const pollInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Subscribe to SSE
+  // React to scan updates
   useEffect(() => {
-    const evtSource = new EventSource("/api/data/events");
+    if (!scanEvent) return;
 
-    evtSource.onmessage = event => {
-      try {
-        const msg = JSON.parse(event.data) as ScanEventMessage;
-        console.log("SSE message:", msg);
-
-        if (msg.status === "running") {
-          setRunning(true);
-          setFilepath(msg.filepath);
-          setSnake(msg.snake);
-        } else if (msg.status === "finished" || msg.status === "failed") {
-          setRunning(false); // triggers final poll below
-        }
-      } catch (err) {
-        console.error("Error parsing SSE:", err);
-      }
-    };
-
-    evtSource.onerror = err => {
-      console.warn("Temporary SSE connection error:", err);
-    };
-
-    evtSource.onopen = () => {
-      console.log("SSE connection opened or re-established");
-    };
-
-    return () => evtSource.close();
-  }, []);
+    if (scanEvent.status === "running") {
+      setRunning(true);
+      setFilepath(scanEvent.filepath);
+      setSnake(scanEvent.snake);
+    } else if (
+      scanEvent.status === "finished" ||
+      scanEvent.status === "failed"
+    ) {
+      setRunning(false); // triggers final poll below
+    }
+  }, [scanEvent]);
 
   // Poll during scan + once more afterwards
   useEffect(() => {

@@ -7,12 +7,12 @@
       "description": "Data processing for the Visible Light Spectroscopy beamline (ViSR).\n",
       "arguments": {
         "properties": {
-          "inpath": {
+          "input-file-path": {
             "default": "",
             "type": "string"
           }
         },
-        "required": ["inpath"],
+        "required": ["input-file-path"],
         "type": "object"
       },
       "uiSchema": null,

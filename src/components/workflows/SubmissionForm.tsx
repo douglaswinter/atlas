@@ -1,8 +1,8 @@
 import { useFragment } from "react-relay";
-import { type JSONObject, type Visit } from "../utils/types";
+import { type JSONObject, type Visit } from "../../utils/types";
 import type { JsonSchema, UISchemaElement } from "@jsonforms/core";
-import type { workflowTemplateFragment$key } from "../graphql/__generated__/workflowTemplateFragment.graphql";
-import { workflowTemplateFragment } from "../graphql/workflowTemplateFragment";
+import type { workflowTemplateFragment$key } from "../../graphql/__generated__/workflowTemplateFragment.graphql";
+import { workflowTemplateFragment } from "../../graphql/workflowTemplateFragment";
 import TemplateSubmissionForm from "./TemplateSubmissionForm";
 
 const SubmissionForm = (props: {

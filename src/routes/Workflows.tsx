@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Container, Box } from "@mui/material";
-import TemplateView from "../components/TemplateView";
+import TemplateView from "../components/workflows/TemplateView";
 
 const Workflows: React.FC = () => {
   return (

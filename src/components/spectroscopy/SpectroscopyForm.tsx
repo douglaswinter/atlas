@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { Box, TextField } from "@mui/material";
+import { useInstrumentSession } from "../../context/instrumentSession/useInstrumentSession";
 import NumberTextField from "./NumberTextField";
-import RunPlanButton from "./RunPlanButton";
-import RawSpectroscopyData from "./RawSpectroscopyData";
-import { useInstrumentSession } from "../context/instrumentSession/useInstrumentSession";
+import RunPlanButton from "../RunPlanButton";
+import { useState } from "react";
 
 export type SpectroscopyFormData = {
   total_number_of_scan_points: number;
@@ -13,7 +12,8 @@ export type SpectroscopyFormData = {
   exposure_time: number;
 };
 
-function SpectroscopyForm() {
+export function SpectroscopyForm() {
+  const { instrumentSession, setInstrumentSession } = useInstrumentSession();
   const [formData, setFormData] = useState<SpectroscopyFormData>({
     total_number_of_scan_points: 25,
     grid_size: 5.0,
@@ -21,18 +21,8 @@ function SpectroscopyForm() {
     grid_origin_y: 0.0,
     exposure_time: 0.1,
   });
-
-  const { instrumentSession, setInstrumentSession } = useInstrumentSession();
-
   return (
-    <Box
-      sx={{
-        margin: 2,
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <RawSpectroscopyData />
+    <Box>
       <Box
         sx={{
           display: "grid",
@@ -98,5 +88,3 @@ function SpectroscopyForm() {
     </Box>
   );
 }
-
-export default SpectroscopyForm;

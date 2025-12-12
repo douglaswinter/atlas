@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
-import SpectroscopyForm from "../components/SpectroscopyForm";
+import SpectroscopyView from "../components/spectroscopy/SpectroscopyView";
 
 function Spectroscopy() {
   return (
     <>
       <Box display={"flex"} justifyContent={"center"} sx={{ mt: 3 }}>
-        <SpectroscopyForm />
+        <SpectroscopyView />
       </Box>
     </>
   );
