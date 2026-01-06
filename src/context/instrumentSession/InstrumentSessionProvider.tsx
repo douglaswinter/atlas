@@ -5,7 +5,7 @@ const STORAGE_KEY = "instrument-session-id";
 
 export const InstrumentSessionProvider = ({
   children,
-  defaultSessionId = "cm40661-6",
+  defaultSessionId = "cm44191-1",
 }: {
   children: ReactNode;
   defaultSessionId?: string;

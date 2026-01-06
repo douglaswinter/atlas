@@ -44,7 +44,15 @@ function Dashboard() {
             </Button>
           </Stack>
           {/* <InstrumentSessionView sessionsList={GetInstrumentSessions()} /> */}
-          <InstrumentSessionView sessionsList={["cm40661-6"]} />
+          <InstrumentSessionView
+            sessionsList={[
+              "cm44191-1",
+              "cm44191-2",
+              "cm44191-3",
+              "cm44191-4",
+              "cm44191-5",
+            ]}
+          />
         </Stack>
       </Container>
     </>
