@@ -1,8 +1,10 @@
-import { Box, TextField } from "@mui/material";
 import { useInstrumentSession } from "../../context/instrumentSession/useInstrumentSession";
-import NumberTextField from "./NumberTextField";
 import RunPlanButton from "../RunPlanButton";
 import { useState } from "react";
+import { NumberInput } from "../NumberInput";
+import { Box } from "@mui/material";
+import { visitToText, VisitInput } from "@diamondlightsource/sci-react-ui";
+import { visitTextToVisit } from "../../utils/common";
 
 export type SpectroscopyFormData = {
   total_number_of_scan_points: number;
@@ -35,47 +37,57 @@ export function SpectroscopyForm() {
           flexGrow: 1,
         }}
       >
-        <NumberTextField
-          formData={formData}
-          setFormData={setFormData}
-          field="grid_origin_x"
-          step={0.1}
-          label="Grid origin x"
+        <NumberInput
+          label="Grid Origin x"
+          numberMode="scientific"
+          defaultValue={formData["grid_origin_x"]}
+          onCommit={parsedValue => {
+            setFormData({ ...formData, ["grid_origin_x"]: parsedValue });
+          }}
         />
-        <NumberTextField
-          formData={formData}
-          setFormData={setFormData}
-          field="grid_origin_y"
-          step={0.1}
-          label="Grid origin y"
+        <NumberInput
+          label="Grid Origin y"
+          numberMode="scientific"
+          defaultValue={formData["grid_origin_y"]}
+          onCommit={parsedValue => {
+            setFormData({ ...formData, ["grid_origin_y"]: parsedValue });
+          }}
         />
-        <NumberTextField
-          formData={formData}
-          setFormData={setFormData}
-          field="grid_size"
-          step={0.1}
-          label="Grid size"
+        <NumberInput
+          label="Grid Size"
+          numberMode="scientific"
+          defaultValue={formData["grid_size"]}
+          onCommit={parsedValue => {
+            setFormData({ ...formData, ["grid_size"]: parsedValue });
+          }}
         />
-        <NumberTextField
-          formData={formData}
-          setFormData={setFormData}
-          field="total_number_of_scan_points"
-          step={1}
+        <NumberInput
           label="Number of Points"
+          numberMode="natural"
+          defaultValue={formData["total_number_of_scan_points"]}
+          onCommit={parsedValue => {
+            setFormData({
+              ...formData,
+              ["total_number_of_scan_points"]: parsedValue,
+            });
+          }}
         />
-        <NumberTextField
-          formData={formData}
-          setFormData={setFormData}
-          field="exposure_time"
-          step={0.1}
-          label="Exposure time"
+        <NumberInput
+          label="Exposure Time"
+          numberMode="scientific"
+          defaultValue={formData["exposure_time"]}
+          onCommit={parsedValue => {
+            setFormData({ ...formData, ["exposure_time"]: parsedValue });
+          }}
         />
-        <TextField
-          fullWidth
-          id="instrumentSession"
-          label="Instrument Session"
-          defaultValue={instrumentSession}
-          onChange={e => setInstrumentSession(e.target.value)}
+        <VisitInput
+          visit={
+            visitTextToVisit(instrumentSession) ??
+            visitTextToVisit("cm12345-1") ??
+            undefined
+          }
+          onSubmit={visit => setInstrumentSession(visitToText(visit))}
+          submitButton={false}
         />
       </Box>
       <Box sx={{ mt: 4 }} display={"flex"} justifyContent={"center"}>
