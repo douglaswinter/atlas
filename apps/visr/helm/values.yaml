@@ -4,7 +4,7 @@ ui-base:
 
   image:
     repository: ghcr.io/douglas/atlas/visr
-    tag: 0.1.5
+    tag: 0.1.7
 
   upstreams:
     - id: blueapi
