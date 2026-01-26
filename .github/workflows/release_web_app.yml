@@ -66,13 +66,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
-
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: docker/Dockerfile.web-app
           push: true
+          build-args: |
+            APP_NAME=${{ needs.parse-tag.outputs.app }}
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ needs.parse-tag.outputs.app }}:${{ needs.parse-tag.outputs.version }}
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ needs.parse-tag.outputs.app }}:latest
@@ -96,7 +97,6 @@ jobs:
             helm registry login ghcr.io \
               --username ${{ github.actor }} \
               --password-stdin
-
 
       - name: Package chart
         run: |
