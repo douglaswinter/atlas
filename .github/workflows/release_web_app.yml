@@ -98,10 +98,14 @@ jobs:
               --username ${{ github.actor }} \
               --password-stdin
 
+      - name: Build chart dependencies
+        run: |
+          CHART_DIR="apps/${{ needs.parse-tag.outputs.app }}/helm"
+          helm dependency update "$CHART_DIR"
+
       - name: Package chart
         run: |
           CHART_DIR="apps/${{ needs.parse-tag.outputs.app }}/helm"
-
           helm package "$CHART_DIR" \
             --version "${{ needs.parse-tag.outputs.version }}" \
             --app-version "${{ needs.parse-tag.outputs.version }}"
