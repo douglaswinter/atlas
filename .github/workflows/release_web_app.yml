@@ -98,6 +98,10 @@ jobs:
               --username ${{ github.actor }} \
               --password-stdin
 
+      - name: Build base chart dependencies
+        run: |
+          helm dependency build ./helm
+
       - name: Build chart dependencies
         run: |
           CHART_DIR="apps/${{ needs.parse-tag.outputs.app }}/helm"
