@@ -3,7 +3,7 @@ ui-base:
   host: visr.diamond.ac.uk
 
   image:
-    repository: ghcr.io/diamondlightsource/visr-ui
+    repository: ghcr.io/douglas/atlas/visr
     tag: 0.5.0
 
   upstreams:
@@ -37,5 +37,5 @@ ui-base:
         external:
           uri: https://graph-nightly.diamond.ac.uk
       passHostHeader: false
-    
+
   identityProvider: legacy
