@@ -1,9 +1,9 @@
 apiVersion: v2
-name: visr-ui
+name: visr
 description: ViSR UI
 type: application
-version: 0.1.0
-appVersion: "0.1.0"
+version: 0.1.5
+appVersion: "0.1.5"
 
 dependencies:
   - name: ui-base
