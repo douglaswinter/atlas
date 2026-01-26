@@ -1,10 +1,10 @@
 ui-base:
-  name: visr-ui
-  host: visr.diamond.ac.uk
+  name: visr
+  host: douglas.diamond.ac.uk
 
   image:
     repository: ghcr.io/douglas/atlas/visr
-    tag: 0.1.8
+    tag: 0.1.9
 
   upstreams:
     - id: blueapi
