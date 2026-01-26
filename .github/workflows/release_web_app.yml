@@ -1,0 +1,114 @@
+name: Build & Publish Web App (Docker + Helm)
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag in the form appName@x.y.z"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  parse-tag:
+    name: Parse app name and version
+    runs-on: ubuntu-latest
+    outputs:
+      app: ${{ steps.parse.outputs.app }}
+      version: ${{ steps.parse.outputs.version }}
+    steps:
+      - name: Determine tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG=${{ inputs.tag }}" >> $GITHUB_ENV
+          fi
+
+      - name: Parse tag
+        id: parse
+        run: |
+          TAG="${TAG}"
+
+          if [[ ! "$TAG" =~ ^[^@]+@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Invalid tag format: $TAG"
+            exit 1
+          fi
+
+          APP="${TAG%@*}"
+          VERSION="${TAG#*@}"
+
+          echo "app=$APP" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+  docker:
+    name: Build & Push Docker image
+    runs-on: ubuntu-latest
+    needs: parse-tag
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
+
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile.web-app
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ needs.parse-tag.outputs.app }}:${{ needs.parse-tag.outputs.version }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ needs.parse-tag.outputs.app }}:latest
+
+  helm:
+    name: Package & Push Helm chart
+    runs-on: ubuntu-latest
+    needs: parse-tag
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+        with:
+          version: v3.14.0
+
+      - name: Log in to GHCR (Helm OCI)
+        run: |
+          echo "${{ secrets.GHCR_PAT }}" | \
+            helm registry login ghcr.io \
+              --username ${{ github.actor }} \
+              --password-stdin
+
+
+      - name: Package chart
+        run: |
+          CHART_DIR="apps/${{ needs.parse-tag.outputs.app }}/helm"
+
+          helm package "$CHART_DIR" \
+            --version "${{ needs.parse-tag.outputs.version }}" \
+            --app-version "${{ needs.parse-tag.outputs.version }}"
+
+      - name: Push chart
+        run: |
+          CHART_PACKAGE=$(ls *.tgz)
+
+          helm push "$CHART_PACKAGE" \
+            oci://${{ env.REGISTRY }}/${{ github.repository }}/charts

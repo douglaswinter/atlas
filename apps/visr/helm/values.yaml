@@ -1,0 +1,41 @@
+ui-base:
+  name: visr-ui
+  host: visr.diamond.ac.uk
+
+  image:
+    repository: ghcr.io/diamondlightsource/visr-ui
+    tag: 0.5.0
+
+  upstreams:
+    - id: blueapi
+      path: /api/
+      rewriteTarget: /
+      target:
+        external:
+          uri: http://b01-1-blueapi.diamond.ac.uk
+
+    - id: workflows
+      path: /api/workflows
+      rewriteTarget: /graphql
+      target:
+        external:
+          uri: https://workflows.diamond.ac.uk
+
+    - id: data
+      path: /api/data/
+      rewriteTarget: /
+      sse: true
+      target:
+        service:
+          name: dataserver
+          port: 8000
+
+    - id: supergraph
+      path: /api/graphql
+      rewriteTarget: /
+      target:
+        external:
+          uri: https://graph-nightly.diamond.ac.uk
+      passHostHeader: false
+    
+  identityProvider: legacy
