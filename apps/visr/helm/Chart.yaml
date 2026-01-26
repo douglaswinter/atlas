@@ -7,5 +7,5 @@ appVersion: "0.1.0"
 
 dependencies:
   - name: ui-base
-    repository: "file://../ui-base/"
+    repository: "file://../../../helm/"
     version: 0.1.0
