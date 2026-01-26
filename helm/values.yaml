@@ -1,0 +1,47 @@
+name: ui-base
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+host: ""
+
+replicaCount: 1
+
+ui:
+  port: 8080
+
+upstreams: []
+
+identityProviders:
+  prod: https://identity.diamond.ac.uk/realms/dls
+  test: https://identity-test.diamond.ac.uk/realms/dls
+  dev: https://identity-dev.diamond.ac.uk/realms/dls
+  legacy: https://authn.diamond.ac.uk/realms/master
+
+identityProvider: prod
+
+oauth2-proxy:
+  enabled: true
+
+  extraArgs:
+    skip-provider-button: "true"
+    standard-logging: "true"
+    request-logging: "true"
+    auth-logging: "true"
+    show-debug-on-error: "true"
+
+  ingress:
+    enabled: false
+
+  config:
+    existingSecret: ui-keycloak-secret
+    existingConfig: oauth2-proxy-config
+  
+  alphaConfig:
+    enabled: true
+    existingSecret: ui-oauth2-alpha-secret
+  
+  service:
+    portNumber: 4180

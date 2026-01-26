@@ -1,0 +1,11 @@
+apiVersion: v2
+name: visr-ui
+description: ViSR UI
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+
+dependencies:
+  - name: ui-base
+    repository: "file://../ui-base/"
+    version: 0.1.0

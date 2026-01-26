@@ -24,3 +24,5 @@ dist-ssr
 
 # Turborepo
 .turbo
+
+*/charts
