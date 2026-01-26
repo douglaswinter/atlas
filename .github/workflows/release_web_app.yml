@@ -101,7 +101,7 @@ jobs:
       - name: Build chart dependencies
         run: |
           CHART_DIR="apps/${{ needs.parse-tag.outputs.app }}/helm"
-          helm dependency update "$CHART_DIR"
+          helm dependency build "$CHART_DIR"
 
       - name: Package chart
         run: |
@@ -109,6 +109,7 @@ jobs:
           helm package "$CHART_DIR" \
             --version "${{ needs.parse-tag.outputs.version }}" \
             --app-version "${{ needs.parse-tag.outputs.version }}"
+            --destination .
 
       - name: Push chart
         run: |
