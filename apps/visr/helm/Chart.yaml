@@ -2,8 +2,8 @@ apiVersion: v2
 name: visr
 description: ViSR UI
 type: application
-version: 0.1.8
-appVersion: "0.1.8"
+version: 0.1.8 # Bumped by CI job
+appVersion: "0.1.8" # Bumped by CI job
 
 dependencies:
   - name: ui-base

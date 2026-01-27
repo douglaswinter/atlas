@@ -98,6 +98,18 @@ jobs:
               --username ${{ github.actor }} \
               --password-stdin
 
+      - name: Sync versions in Chart and Values
+        run: |
+          CHART_DIR="apps/${{ needs.parse-tag.outputs.app }}/helm"
+          VERSION="${{ needs.parse-tag.outputs.version }}"
+
+          # 1. Update Chart.yaml
+          yq -i ".version = \"$VERSION\" | .appVersion = \"$VERSION\"" "$CHART_DIR/Chart.yaml"
+
+          # 2. Update the image tag in values.yaml
+          # This ensures the base chart's .Values.image.tag logic finds the release tag
+          yq -i "ui-base.image.tag = \"$VERSION\"" "$CHART_DIR/values.yaml"
+
       - name: Build base chart dependencies
         run: |
           helm dependency build ./helm
