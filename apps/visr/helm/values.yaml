@@ -3,7 +3,7 @@ ui-base:
   host: douglas.diamond.ac.uk
 
   image:
-    repository: ghcr.io/douglas/atlas/visr
+    repository: ghcr.io/douglaswinter/atlas/visr
     tag: 0.1.9
 
   upstreams:
