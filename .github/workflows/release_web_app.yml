@@ -107,8 +107,7 @@ jobs:
           yq -i ".version = \"$VERSION\" | .appVersion = \"$VERSION\"" "$CHART_DIR/Chart.yaml"
 
           # 2. Update the image tag in values.yaml
-          # This ensures the base chart's .Values.image.tag logic finds the release tag
-          yq -i "ui-base.image.tag = \"$VERSION\"" "$CHART_DIR/values.yaml"
+          yq -i ".ui-base.image.tag = \"$VERSION\"" "$CHART_DIR/values.yaml"
 
       - name: Build base chart dependencies
         run: |
