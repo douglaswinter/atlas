@@ -41,6 +41,10 @@ export const handlers = [
     });
   }),
 
+  http.put("/api/worker/state", () => {
+    return HttpResponse.json("IDLE");
+  }),
+
   http.get("/api/data/map", ({ request }) => {
     const url = new URL(request.url);
     const filepath = url.searchParams.get("filepath");

@@ -77,3 +77,35 @@ export async function startTask(task_id: string): Promise<TaskResponse> {
 
   return await response.json();
 }
+
+export interface WorkerRequest {
+  new_state: string;
+  defer: boolean;
+  reason: string;
+}
+
+export interface WorkerResponse {
+  worker_state: string;
+}
+
+export async function setWorkerState(
+  worker_request: WorkerRequest,
+): Promise<WorkerResponse> {
+  const url = "/api/worker/state";
+
+  const headers = new Headers();
+  headers.append("Content-Type", "application/json");
+  headers.append("X-Requested-By", "XMLHttpRequest");
+
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify({
+      new_state: worker_request.new_state,
+      defer: worker_request.defer,
+      reason: worker_request.reason,
+    }),
+  });
+
+  return await response.json();
+}

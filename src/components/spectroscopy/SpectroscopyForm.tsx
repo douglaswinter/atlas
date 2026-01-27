@@ -1,5 +1,6 @@
 import { useInstrumentSession } from "../../context/instrumentSession/useInstrumentSession";
 import RunPlanButton from "../RunPlanButton";
+import AbortButton from "../AbortButton";
 import { useState } from "react";
 import { NumberInput } from "../NumberInput";
 import { Box } from "@mui/material";
@@ -96,6 +97,9 @@ export function SpectroscopyForm() {
           params={formData}
           instrumentSession={instrumentSession}
         />
+      </Box>
+      <Box sx={{ mt: 4 }} display={"flex"} justifyContent={"center"}>
+        <AbortButton />
       </Box>
     </Box>
   );
