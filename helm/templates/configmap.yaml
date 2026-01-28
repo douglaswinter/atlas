@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy-config
+data:
+  oauth2_proxy.cfg: |
+    email_domains = ["*"]
+    cookie_secure = true
+    cookie_samesite = "lax"
+    cookie_expire = "168h"
+    cookie_refresh = "45s"
+    cookie_name = "{{ include "oauth2-proxy.fullname" . }}-cookie"

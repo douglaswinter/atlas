@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UI Base Chart Values",
+  "type": "object",
+  "required": ["name", "image", "host", "identityProvider"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the application deployment."
+    },
+    "host": {
+      "type": "string",
+      "description": "The FQDN for the application ingress (e.g., visr.diamond.ac.uk)."
+    },
+    "replicaCount": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    },
+    "image": {
+      "type": "object",
+      "required": ["repository", "tag"],
+      "properties": {
+        "repository": { "type": "string" },
+        "tag": { "type": "string" },
+        "pullPolicy": {
+          "type": "string",
+          "enum": ["Always", "Never", "IfNotPresent"],
+          "default": "IfNotPresent"
+        }
+      }
+    },
+    "ui": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "default": 8080
+        }
+      }
+    },
+    "identityProvider": {
+      "type": "string",
+      "description": "The key of the identity provider to use from the identityProviders list.",
+      "enum": ["prod", "test", "dev", "legacy"]
+    },
+    "identityProviders": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "format": "uri"
+      }
+    },
+    "upstreams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "path", "target"],
+        "properties": {
+          "id": { "type": "string" },
+          "path": { "type": "string" },
+          "rewriteTarget": { "type": "string" },
+          "sse": { "type": "boolean" },
+          "passHostHeader": { "type": "boolean" },
+          "target": {
+            "type": "object",
+            "oneOf": [
+              {
+                "required": ["external"],
+                "properties": {
+                  "external": {
+                    "type": "object",
+                    "required": ["uri"],
+                    "properties": {
+                      "uri": { "type": "string", "format": "uri" }
+                    }
+                  }
+                }
+              },
+              {
+                "required": ["service"],
+                "properties": {
+                  "service": {
+                    "type": "object",
+                    "required": ["name", "port"],
+                    "properties": {
+                      "name": { "type": "string" },
+                      "port": { "type": "integer", "minimum": 1 }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "oauth2-proxy": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "config": {
+          "type": "object",
+          "properties": {
+            "existingSecret": { "type": "string" },
+            "existingConfig": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
