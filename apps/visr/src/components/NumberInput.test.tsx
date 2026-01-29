@@ -1,6 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, userEvent } from "@atlas/vitest-conf";
 import { NumberInput } from "./NumberInput";
-import userEvent from "@testing-library/user-event";
 
 describe("NumberInput", () => {
   it("default value is marked invalid", async () => {

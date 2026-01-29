@@ -1,7 +1,5 @@
 import * as React from "react";
-import { render, screen, within } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { vi, describe, it, expect } from "vitest";
+import { render, screen, within, userEvent } from "@atlas/vitest-conf";
 import SearchablePlanList from "./SearchablePlanList";
 import type { Plan } from "../../utils/api";
 

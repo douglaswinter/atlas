@@ -1,8 +1,6 @@
-import { vi, describe, it, expect } from "vitest";
 import type { Plan } from "../../utils/api";
-import { render, screen } from "@testing-library/react";
+import { render, screen, userEvent } from "@atlas/vitest-conf";
 import PlanBrowser from "./PlanBrowser";
-import userEvent from "@testing-library/user-event";
 
 const plans: Plan[] = [
   { name: "Plan 1", schema: {}, description: "" },

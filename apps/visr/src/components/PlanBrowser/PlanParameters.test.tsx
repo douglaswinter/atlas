@@ -1,6 +1,5 @@
-import { describe, it, expect } from "vitest";
 import type { Plan } from "../../utils/api";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "@atlas/vitest-conf";
 
 import PlanParameters from "./PlanParameters";
 import { InstrumentSessionProvider } from "../../context/instrumentSession/InstrumentSessionProvider";
