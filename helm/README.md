@@ -75,7 +75,6 @@ ui-base:
     - id: data
       path: /api/data/
       rewriteTarget: /
-      sse: true
       target:
         service:
           name: dataserver
