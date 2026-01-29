@@ -1,0 +1,71 @@
+{
+  "data": {
+    "instrument": {
+      "instrumentSessions": [
+        {
+          "instrumentSessionNumber": 1,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 39125
+          }
+        },
+        {
+          "instrumentSessionNumber": 2,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 39125
+          }
+        },
+        {
+          "instrumentSessionNumber": 3,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 39125
+          }
+        },
+        {
+          "instrumentSessionNumber": 1,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 40661
+          }
+        },
+        {
+          "instrumentSessionNumber": 2,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 40661
+          }
+        },
+        {
+          "instrumentSessionNumber": 3,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 40661
+          }
+        },
+        {
+          "instrumentSessionNumber": 4,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 40661
+          }
+        },
+        {
+          "instrumentSessionNumber": 5,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 40661
+          }
+        },
+        {
+          "instrumentSessionNumber": 6,
+          "proposal": {
+            "proposalCategory": "CM",
+            "proposalNumber": 40661
+          }
+        }
+      ]
+    }
+  }
+}
