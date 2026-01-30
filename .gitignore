@@ -24,3 +24,8 @@ dist-ssr
 
 # Turborepo
 .turbo
+
+# Helm dependency build artifacts
+/helm/charts/
+/apps/*/helm/charts/
+*.tgz

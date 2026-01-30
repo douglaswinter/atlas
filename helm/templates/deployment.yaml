@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+    name: {{ include "ui-base.name" . }}
+    namespace: {{ .Release.Namespace }}
+spec:
+    replicas: {{ include "ui-base.replicas" . }}
+    selector:
+        matchLabels:
+            app: {{ include "ui-base.name" . }}
+    template:
+        metadata:
+            labels:
+                app: {{ include "ui-base.name" . }}
+        spec:
+            containers:
+            - name: {{ include "ui-base.name" . }}
+              image: {{ include "ui-base.image" . }}
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              ports:
+              - containerPort: {{ .Values.ui.port }}
