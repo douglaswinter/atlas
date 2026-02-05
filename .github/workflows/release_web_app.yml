@@ -66,6 +66,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Normalise repository name to lowercase
+        id: repo
+        run: |
+          echo "repo_lc=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -75,8 +80,8 @@ jobs:
           build-args: |
             APP_NAME=${{ needs.parse-tag.outputs.app }}
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ needs.parse-tag.outputs.app }}:${{ needs.parse-tag.outputs.version }}
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ needs.parse-tag.outputs.app }}:latest
+            ${{ env.REGISTRY }}/${{ steps.repo.outputs.repo_lc }}/${{ needs.parse-tag.outputs.app }}:${{ needs.parse-tag.outputs.version }}
+            ${{ env.REGISTRY }}/${{ steps.repo.outputs.repo_lc }}/${{ needs.parse-tag.outputs.app }}:latest
 
   helm:
     name: Package & Push Helm chart
@@ -96,8 +101,13 @@ jobs:
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | \
             helm registry login ghcr.io \
-              --username ${{ github.repository_ownder }} \
+              --username ${{ github.repository_owner }} \
               --password-stdin
+
+      - name: Normalise repository name to lowercase
+        id: repo
+        run: |
+          echo "repo_lc=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
       - name: Sync versions in Chart and Values
         run: |
@@ -131,4 +141,4 @@ jobs:
           CHART_PACKAGE=$(ls *.tgz)
 
           helm push "$CHART_PACKAGE" \
-            oci://${{ env.REGISTRY }}/${{ github.repository }}/charts
+            oci://${{ env.REGISTRY }}/${{ steps.repo.outputs.repo_lc }}/charts
