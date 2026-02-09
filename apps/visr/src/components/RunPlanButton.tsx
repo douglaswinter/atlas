@@ -9,13 +9,22 @@ type RunPlanButtonProps = {
   instrumentSession: string;
 };
 
+type ButtonState =
+  | "inherit"
+  | "primary"
+  | "secondary"
+  | "success"
+  | "error"
+  | "info"
+  | "warning";
+
 const RunPlanButton = ({
   name,
   params,
   instrumentSession,
 }: RunPlanButtonProps) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [colour, setColour] = useState<any>("primary");
+  const [colour, setColour] = useState<ButtonState>("primary");
   useEffect(() => {
     const timeout = setTimeout(() => {
       setColour("primary");
