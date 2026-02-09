@@ -16,12 +16,6 @@ const RunPlanButton = ({
 }: RunPlanButtonProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [colour, setColour] = useState<any>("primary");
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     setLoading(false);
-  //   }, 2000);
-  //   return () => clearTimeout(timeout);
-  // });
   useEffect(() => {
     const timeout = setTimeout(() => {
       setColour("primary");
@@ -42,7 +36,7 @@ const RunPlanButton = ({
         };
         setLoading(true);
         const resp = await createAndStartTask(taskRequest);
-        if (resp === 200) {
+        if (resp === true) {
           setLoading(false);
           setColour("success");
         } else {

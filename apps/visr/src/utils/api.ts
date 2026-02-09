@@ -35,7 +35,7 @@ export async function getPlans(): Promise<PlansResponse> {
 
 export async function createAndStartTask(
   request: TaskRequest,
-): Promise<number> {
+): Promise<boolean> {
   const task = await createTask(request);
   return await startTask(task.task_id);
 }
@@ -62,7 +62,7 @@ export async function createTask(request: TaskRequest): Promise<TaskResponse> {
   return await response.json();
 }
 
-export async function startTask(task_id: string): Promise<number> {
+export async function startTask(task_id: string): Promise<boolean> {
   const url = "/api/worker/task";
 
   const headers = new Headers();
@@ -75,7 +75,7 @@ export async function startTask(task_id: string): Promise<number> {
     body: JSON.stringify({ task_id: task_id }),
   });
 
-  return await response.status;
+  return await response.ok;
 }
 
 export interface WorkerRequest {
