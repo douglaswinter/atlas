@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import { createAndStartTask, type TaskRequest } from "../utils/api";
 
@@ -13,9 +14,25 @@ const RunPlanButton = ({
   params,
   instrumentSession,
 }: RunPlanButtonProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [colour, setColour] = useState<any>("primary");
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     setLoading(false);
+  //   }, 2000);
+  //   return () => clearTimeout(timeout);
+  // });
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setColour("primary");
+    }, 4000);
+    return () => clearTimeout(timeout);
+  });
   return (
     <Button
       variant="contained"
+      loading={loading}
+      color={colour}
       sx={{ width: "150px" }}
       onClick={async () => {
         const taskRequest: TaskRequest = {
@@ -23,7 +40,15 @@ const RunPlanButton = ({
           params: params,
           instrument_session: instrumentSession,
         };
-        await createAndStartTask(taskRequest);
+        setLoading(true);
+        const resp = await createAndStartTask(taskRequest);
+        if (resp === 200) {
+          setLoading(false);
+          setColour("success");
+        } else {
+          setLoading(false);
+          setColour("error");
+        }
       }}
     >
       Run
