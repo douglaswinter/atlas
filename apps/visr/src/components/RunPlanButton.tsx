@@ -26,7 +26,7 @@ const RunPlanButton = ({
     if (scanEvent.status == "finished" || scanEvent.status == "failed") {
       setDisabled(false);
     }
-  });
+  }, [scanEvent]);
   return (
     <Button
       variant="contained"
@@ -40,7 +40,7 @@ const RunPlanButton = ({
           instrument_session: instrumentSession,
         };
         setLoading(true);
-        const resp = await createAndStartTask(taskRequest);
+        await createAndStartTask(taskRequest);
         setLoading(false);
       }}
     >

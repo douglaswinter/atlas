@@ -15,7 +15,7 @@ const AbortButton = () => {
     if (scanEvent.status == "finished" || scanEvent.status == "failed") {
       setDisabled(true);
     }
-  });
+  }, [scanEvent]);
   return (
     <Button
       variant="contained"
