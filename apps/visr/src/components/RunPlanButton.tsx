@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { createAndStartTask, type TaskRequest } from "../utils/api";
+import { useScanEvents } from "../hooks/scanEvents";
 
 type RunPlanButtonProps = {
   name: string;
@@ -9,33 +10,28 @@ type RunPlanButtonProps = {
   instrumentSession: string;
 };
 
-type ButtonState =
-  | "inherit"
-  | "primary"
-  | "secondary"
-  | "success"
-  | "error"
-  | "info"
-  | "warning";
-
 const RunPlanButton = ({
   name,
   params,
   instrumentSession,
 }: RunPlanButtonProps) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [colour, setColour] = useState<ButtonState>("primary");
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const scanEvent = useScanEvents();
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setColour("primary");
-    }, 4000);
-    return () => clearTimeout(timeout);
+    if (!scanEvent) return;
+    if (scanEvent.status == "running") {
+      setDisabled(true);
+    }
+    if (scanEvent.status == "finished" || scanEvent.status == "failed") {
+      setDisabled(false);
+    }
   });
   return (
     <Button
       variant="contained"
       loading={loading}
-      color={colour}
+      disabled={disabled}
       sx={{ width: "150px" }}
       onClick={async () => {
         const taskRequest: TaskRequest = {
@@ -45,13 +41,7 @@ const RunPlanButton = ({
         };
         setLoading(true);
         const resp = await createAndStartTask(taskRequest);
-        if (resp === true) {
-          setLoading(false);
-          setColour("success");
-        } else {
-          setLoading(false);
-          setColour("error");
-        }
+        setLoading(false);
       }}
     >
       Run
