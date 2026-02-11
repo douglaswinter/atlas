@@ -19,7 +19,10 @@ const RunPlanButton = ({
   const [disabled, setDisabled] = useState<boolean>(false);
   const scanEvent = useScanEvents();
   useEffect(() => {
-    if (!scanEvent) return;
+    if (!scanEvent) {
+      setDisabled(false);
+      return;
+    }
     if (scanEvent.status == "running") {
       setDisabled(true);
     }
