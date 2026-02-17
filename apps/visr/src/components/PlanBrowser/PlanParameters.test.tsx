@@ -14,6 +14,8 @@ vi.mock("@jsonforms/react", () => {
   };
 });
 
+vi.mock("../../hooks/scanEvents");
+
 const plan: Plan = {
   name: "hi_plan",
   description: "Says hi to you",
