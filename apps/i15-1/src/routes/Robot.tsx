@@ -5,15 +5,15 @@ import { NumberInput } from "../components/NumberInput";
 import RunPlanButton from "../components/RunPlanButton";
 
 type RobotSampleFormData = {
-  puck_number: number;
-  pin_number: number;
+  puck: number;
+  position: number;
 };
 
 function Robot() {
   const { instrumentSession, setInstrumentSession } = useInstrumentSession();
   const [formData, setFormData] = useState<RobotSampleFormData>({
-    puck_number: 1,
-    pin_number: 1,
+    puck: 1,
+    position: 1,
   });
   return (
     <>
@@ -36,24 +36,24 @@ function Robot() {
             }}
           >
             <NumberInput
-              label="Puck Number"
+              label="Puck"
               numberMode="natural"
-              defaultValue={formData["puck_number"]}
+              defaultValue={formData["puck"]}
               onCommit={(parsedValue) => {
-                setFormData({ ...formData, ["puck_number"]: parsedValue });
+                setFormData({ ...formData, ["puck"]: parsedValue });
               }}
             />
             <NumberInput
-              label="Pin Number"
+              label="Position"
               numberMode="natural"
-              defaultValue={formData["pin_number"]}
+              defaultValue={formData["position"]}
               onCommit={(parsedValue) => {
-                setFormData({ ...formData, ["pin_number"]: parsedValue });
+                setFormData({ ...formData, ["position"]: parsedValue });
               }}
             />
           </Box>
           <RunPlanButton
-            name="plan_name"
+            name="robot_load"
             params={formData}
             instrumentSession={instrumentSession}
             buttonText="Load Sample"
