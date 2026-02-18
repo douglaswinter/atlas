@@ -5,6 +5,7 @@ import { StrictMode } from "react";
 
 import { Layout } from "./routes/Layout.tsx";
 import Dashboard from "./routes/Dashboard.tsx";
+import Robot from "./routes/Robot.tsx";
 import { InstrumentSessionProvider } from "./context/instrumentSession/InstrumentSessionProvider.tsx";
 
 declare global {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Dashboard />,
+      },
+      {
+        path: "robot",
+        element: <Robot />,
       },
     ],
   },
