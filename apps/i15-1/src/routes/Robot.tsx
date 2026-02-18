@@ -1,13 +1,69 @@
+import { useInstrumentSession } from "../context/instrumentSession/useInstrumentSession";
 import { Box, Typography, Stack } from "@mui/material";
+import { useState } from "react";
+import { NumberInput } from "../components/NumberInput";
+import RunPlanButton from "../components/RunPlanButton";
+
+type RobotSampleFormData = {
+  puck_number: number;
+  pin_number: number;
+};
 
 function Robot() {
+  const { instrumentSession, setInstrumentSession } = useInstrumentSession();
+  const [formData, setFormData] = useState<RobotSampleFormData>({
+    puck_number: 1,
+    pin_number: 1,
+  });
   return (
     <>
       <Box display={"flex"} justifyContent={"center"} sx={{ mt: 3 }}>
-        <Stack direction={"column"} alignItems={"center"} spacing={3}>
-          <Typography variant="h4" component="h1" textAlign={"center"}>
-            Robot!
+        <Stack direction={"column"} spacing={3} alignItems={"center"}>
+          <Typography component="h1" variant="h5">
+            Sample Position
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "1fr 1fr",
+                md: "1fr 1fr 1fr",
+              },
+              gap: 3,
+              flexGrow: 1,
+            }}
+          >
+            <NumberInput
+              label="Puck Number"
+              numberMode="natural"
+              defaultValue={formData["puck_number"]}
+              onCommit={(parsedValue) => {
+                setFormData({ ...formData, ["puck_number"]: parsedValue });
+              }}
+            />
+            <NumberInput
+              label="Pin Number"
+              numberMode="natural"
+              defaultValue={formData["pin_number"]}
+              onCommit={(parsedValue) => {
+                setFormData({ ...formData, ["pin_number"]: parsedValue });
+              }}
+            />
+          </Box>
+          <RunPlanButton
+            name="plan_name"
+            params={formData}
+            instrumentSession={instrumentSession}
+            buttonText="Load Sample"
+          />
+          <RunPlanButton
+            name="plan_name"
+            params={formData}
+            instrumentSession={instrumentSession}
+            buttonText="Unload Sample"
+          />
         </Stack>
       </Box>
     </>

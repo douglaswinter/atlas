@@ -40,7 +40,6 @@ const router = createBrowserRouter([
 
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
-    // <RelayEnvironmentProvider environment={RelayEnvironment}>
     <InstrumentSessionProvider>
       <StrictMode>
         <ThemeProvider theme={DiamondTheme} defaultMode="light">
@@ -48,6 +47,5 @@ enableMocking().then(() => {
         </ThemeProvider>
       </StrictMode>
     </InstrumentSessionProvider>,
-    // </RelayEnvironmentProvider>,
   );
 });
