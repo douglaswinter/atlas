@@ -17,12 +17,8 @@ const RunPlanButton = ({
   buttonText = "Run",
 }: RunPlanButtonProps) => {
   const [loading, setLoading] = useState<boolean>(false);
-  return (
-    <Button
-      variant="contained"
-      loading={loading}
-      sx={{ width: "150px" }}
-      onClick={async () => {
+  const handleClick = () => {
+      async () => {
         const taskRequest: TaskRequest = {
           name: name,
           params: params,
@@ -31,7 +27,14 @@ const RunPlanButton = ({
         setLoading(true);
         await createAndStartTask(taskRequest);
         setLoading(false);
-      }}
+      }
+  }
+  return (
+    <Button
+      variant="contained"
+      loading={loading}
+      sx={{ width: "150px" }}
+      onClick={handleClick}
     >
       {buttonText}
     </Button>
