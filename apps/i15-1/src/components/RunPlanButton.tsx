@@ -17,18 +17,17 @@ const RunPlanButton = ({
   buttonText = "Run",
 }: RunPlanButtonProps) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const handleClick = () => {
-      async () => {
-        const taskRequest: TaskRequest = {
-          name: name,
-          params: params,
-          instrument_session: instrumentSession,
-        };
-        setLoading(true);
-        await createAndStartTask(taskRequest);
-        setLoading(false);
-      }
-  }
+  const handleClick = async () => {
+    const taskRequest: TaskRequest = {
+      name: name,
+      params: params,
+      instrument_session: instrumentSession,
+    };
+    setLoading(true);
+    await createAndStartTask(taskRequest);
+    setLoading(false);
+  };
+
   return (
     <Button
       variant="contained"
