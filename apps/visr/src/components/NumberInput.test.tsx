@@ -18,6 +18,64 @@ describe("NumberInput", () => {
     expect(screen.queryByText("Invalid input")).not.toBeInTheDocument();
   });
 
+  it("is marked valid when limits are present", async () => {
+    render(
+      <NumberInput
+        label="numberbox"
+        numberMode="natural"
+        defaultValue={1}
+        minValue={-2}
+        maxValue={2}
+      />,
+    );
+
+    const numberInput = screen.getByLabelText("numberbox");
+
+    const user = userEvent.setup();
+    await user.clear(numberInput);
+    await user.type(numberInput, "0");
+
+    expect(screen.queryByText("Invalid input")).not.toBeInTheDocument();
+  });
+
+  it("is marked invalid when a lower limit is exceeded", async () => {
+    render(
+      <NumberInput
+        label="numberbox"
+        numberMode="natural"
+        defaultValue={1}
+        minValue={0}
+      />,
+    );
+
+    const numberInput = screen.getByLabelText("numberbox");
+
+    const user = userEvent.setup();
+    await user.clear(numberInput);
+    await user.type(numberInput, "-1");
+
+    expect(screen.queryByText("Invalid input")).toBeInTheDocument();
+  });
+
+  it("is marked invalid when an upper limit is exceeded", async () => {
+    render(
+      <NumberInput
+        label="numberbox"
+        numberMode="natural"
+        defaultValue={1}
+        maxValue={10}
+      />,
+    );
+
+    const numberInput = screen.getByLabelText("numberbox");
+
+    const user = userEvent.setup();
+    await user.clear(numberInput);
+    await user.type(numberInput, "15");
+
+    expect(screen.queryByText("Invalid input")).toBeInTheDocument();
+  });
+
   it("does not accept negative numbers in natural mode", async () => {
     render(
       <NumberInput label="numberbox" numberMode="natural" defaultValue={1} />,
