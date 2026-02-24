@@ -24,6 +24,9 @@ export function SpectroscopyForm() {
     grid_origin_y: 0.0,
     exposure_time: 0.1,
   });
+  const minValue = -14.5;
+  const maxValue = 14.5;
+
   return (
     <Box>
       <Box
@@ -45,6 +48,8 @@ export function SpectroscopyForm() {
           onCommit={parsedValue => {
             setFormData({ ...formData, ["grid_origin_x"]: parsedValue });
           }}
+          minValue={minValue}
+          maxValue={maxValue}
         />
         <NumberInput
           label="Grid Origin y"
@@ -53,6 +58,8 @@ export function SpectroscopyForm() {
           onCommit={parsedValue => {
             setFormData({ ...formData, ["grid_origin_y"]: parsedValue });
           }}
+          minValue={minValue}
+          maxValue={maxValue}
         />
         <NumberInput
           label="Grid Size"
@@ -61,6 +68,8 @@ export function SpectroscopyForm() {
           onCommit={parsedValue => {
             setFormData({ ...formData, ["grid_size"]: parsedValue });
           }}
+          minValue={0.1}
+          maxValue={15}
         />
         <NumberInput
           label="Number of Points"
@@ -72,6 +81,7 @@ export function SpectroscopyForm() {
               ["total_number_of_scan_points"]: parsedValue,
             });
           }}
+          minValue={1}
         />
         <NumberInput
           label="Exposure Time"
@@ -80,6 +90,7 @@ export function SpectroscopyForm() {
           onCommit={parsedValue => {
             setFormData({ ...formData, ["exposure_time"]: parsedValue });
           }}
+          minValue={0.1}
         />
         <VisitInput
           visit={
