@@ -13,6 +13,8 @@
     "test:watch": "vitest"
   },
   "dependencies": {
+    "@atlas/blueapi": "workspace:*",
+    "@atlas/blueapi-query": "workspace:*",
     "@diamondlightsource/davidia": "^1.0.3",
     "@diamondlightsource/sci-react-ui": "^0.2.0",
     "@emotion/react": "^11.14.0",
@@ -24,6 +26,7 @@
     "@mui/lab": "6.0.0-beta.22",
     "@mui/material": "<7.0.0",
     "@mui/x-date-pickers": "^7.17.0",
+    "@tanstack/react-query": "^5.90.21",
     "ndarray": "^1.0.19",
     "react-error-boundary": "^6.0.0",
     "react-router-dom": "^7.7.1"

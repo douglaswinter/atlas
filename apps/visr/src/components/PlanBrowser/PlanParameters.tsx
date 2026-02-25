@@ -6,7 +6,7 @@ import {
   materialCells,
 } from "@jsonforms/material-renderers";
 import sanitizeSchema from "../../utils/schema";
-import type { Plan } from "../../utils/api";
+import type { Plan } from "@atlas/blueapi";
 import RunPlanButton from "../RunPlanButton";
 import { useInstrumentSession } from "../../context/instrumentSession/useInstrumentSession";
 
@@ -31,7 +31,6 @@ const PlanParameters: React.FC<PlanParametersProps> = (
 ) => {
   const schema = sanitizeSchema(props.plan.schema);
 
-  // const renderers = materialRenderers;
   const [planParameters, setPlanParameters] = useState({});
   const { instrumentSession, setInstrumentSession } = useInstrumentSession();
 

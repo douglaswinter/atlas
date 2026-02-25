@@ -1,7 +1,7 @@
 import * as React from "react";
 import { render, screen, within, userEvent } from "@atlas/vitest-conf";
 import SearchablePlanList from "./SearchablePlanList";
-import type { Plan } from "../../utils/api";
+import type { Plan } from "@atlas/blueapi";
 
 const plans: Plan[] = [
   { name: "Align Beam", description: "", schema: {} },

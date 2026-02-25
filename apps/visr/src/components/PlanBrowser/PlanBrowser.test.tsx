@@ -1,4 +1,4 @@
-import type { Plan } from "../../utils/api";
+import type { Plan } from "@atlas/blueapi";
 import { render, screen, userEvent } from "@atlas/vitest-conf";
 import PlanBrowser from "./PlanBrowser";
 

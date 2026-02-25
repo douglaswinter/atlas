@@ -1,4 +1,4 @@
-import type { Plan } from "../../utils/api";
+import type { Plan } from "@atlas/blueapi";
 import { render, screen } from "@atlas/vitest-conf";
 
 import PlanParameters from "./PlanParameters";
@@ -14,7 +14,10 @@ vi.mock("@jsonforms/react", () => {
   };
 });
 
-vi.mock("../../hooks/scanEvents");
+// mock run plan button which is out of scope of this test
+vi.mock("../RunPlanButton", () => ({
+  default: () => <button>Run</button>,
+}));
 
 const plan: Plan = {
   name: "hi_plan",
@@ -25,6 +28,8 @@ const plan: Plan = {
 };
 
 describe("PlanParameters", () => {
+  afterEach(() => vi.restoreAllMocks());
+
   it("renders a plan's name, description, parameters, session, and run button", () => {
     render(
       <InstrumentSessionProvider>
@@ -40,6 +45,10 @@ describe("PlanParameters", () => {
   });
 
   it("renders fallback UI if JSON Forms component fails", async () => {
+    // suppress error message in test output
+    const errorHandler = (event: ErrorEvent) => event.preventDefault();
+    window.addEventListener("error", errorHandler);
+
     // this time JsonForms will throw
     mockJsonFormsImpl.mockImplementation(() => {
       throw new Error("I can't do it!");
@@ -52,5 +61,7 @@ describe("PlanParameters", () => {
     );
 
     expect(screen.getByText("UI unavailable")).toBeInTheDocument();
+
+    window.removeEventListener("error", errorHandler);
   });
 });
