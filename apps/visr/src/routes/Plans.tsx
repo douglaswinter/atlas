@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-// import { getPlans, type PlansResponse } from "../utils/api";
 import PlanBrowser from "../components/PlanBrowser/PlanBrowser";
 import PlanParameters from "../components/PlanBrowser/PlanParameters";
 import { usePlans } from "@atlas/blueapi-query";
