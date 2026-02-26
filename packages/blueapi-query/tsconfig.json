@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "composite": true,
     "allowImportingTsExtensions": false,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
@@ -9,6 +10,13 @@
     "outDir": "dist",
     "rootDir": "src"
   },
+  "references": [{ "path": "../blueapi" }],
   "include": ["src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/testUtils.tsx"
+  ]
 }

@@ -15,11 +15,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -b",
     "test": "vitest run"
   },
+  "dependencies": {
+    "@atlas/blueapi": "workspace:*"
+  },
   "devDependencies": {
-    "@atlas/blueapi": "workspace:*",
     "@atlas/vitest-conf": "workspace:*",
     "vitest": "*"
   },
