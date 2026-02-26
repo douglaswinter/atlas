@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "noEmit": true,
     "types": ["vite/client", "@atlas/vitest-conf/global-types"]
   },
   "include": ["src"]

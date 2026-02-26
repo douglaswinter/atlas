@@ -6,7 +6,6 @@
     "allowSyntheticDefaultImports": true,
     "declaration": true,
     "esModuleInterop": true,
-    "noEmit": false,
     "rootDir": "src",
     "outDir": "dist"
   },
