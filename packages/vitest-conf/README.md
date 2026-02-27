@@ -4,8 +4,6 @@ Shared Vitest configuration and test environment for the **Atlas** monorepo.
 
 This package centralises all testing setup — including Vitest configuration, jsdom environment, and Testing Library matchers — so that individual apps and packages can keep their own configs minimal and consistent.
 
----
-
 ## Features
 
 - Shared **Vitest** configuration via `vitest.config.ts`
@@ -14,23 +12,19 @@ This package centralises all testing setup — including Vitest configuration, j
 - TypeScript definitions for `expect`, `describe`, etc.
 - Central place to update dependencies like `@testing-library/*`
 
----
-
 ## Usage
 
-1.  add `vitest` and `@atlas/vitest-conf` as dev dependencies in `apps/my-app/package.json`:
+1.  Add `vitest` and `@atlas/vitest-conf` as dev dependencies:
 
-```json
-"devDependencies": {
-    "vitest": "*",
-    "@atlas/vitest-conf": "workspace:*"
-}
+```bash
+pnpm add -D -F @atlas/myapp @atlas/vitest-conf --workspace
+pnpm add -D -F @atlas/myapp vitest
 ```
 
 2.  Create a `vitest.config.ts` that simply reuses the shared base config:
 
 ```ts
-// apps/my-app/vitest.config.ts
+// apps/myapp/vitest.config.ts
 import { defineConfig } from "vitest/config";
 import baseConfig from "@atlas/vitest-conf/vitest.config";
 
@@ -50,3 +44,28 @@ export default defineConfig({
 ```
 
 4. Write some tests! Vitest will find tests that match `**/*.test.{ts,tsx}`.
+
+## Coverage
+
+Should _everything_ be covered by unit tests? `@atlas/vitest-conf` doesn't think so, and so makes some opinionated and generic exclusions for producing coverage reports. If your app needs to add to these, use `mergeConfig` in your app's `vitest.config.ts`.
+
+Example:
+
+```typescript
+// apps/myapp/vitest.config.ts
+import { defineConfig, mergeConfig } from "vitest/config";
+import baseConfig from "@atlas/vitest-conf/vitest.config";
+
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    test: {
+      coverage: {
+        exclude: ["../RelayEnvironment.ts", "**/AppProviders.tsx"],
+      },
+    },
+  }),
+);
+```
+
+If it is not a logic-bearing module, it may be OK for exclusion. Use your disgression.

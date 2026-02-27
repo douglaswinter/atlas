@@ -1,6 +1,13 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig, mergeConfig } from "vitest/config";
 import baseConfig from "@atlas/vitest-conf/vitest.config";
 
-export default defineConfig({
-  ...baseConfig,
-});
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    test: {
+      coverage: {
+        exclude: ["**/RelayEnvironment.ts"],
+      },
+    },
+  }),
+);
