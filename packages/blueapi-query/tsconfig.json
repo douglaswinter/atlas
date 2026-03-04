@@ -1,15 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "allowImportingTsExtensions": false,
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "outDir": "dist",
-    "rootDir": "src"
+    "esModuleInterop": true
   },
-  "references": [{ "path": "../blueapi" }],
   "include": ["src"],
   "exclude": [
     "node_modules",

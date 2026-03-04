@@ -1,14 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     "allowImportingTsExtensions": false,
     "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "rootDir": "src",
-    "outDir": "dist"
+    "esModuleInterop": true
   },
-  "exclude": ["dist", "node_modules"],
-  "include": ["src"]
+  "exclude": ["node_modules"],
+  "include": ["src", "types"]
 }
