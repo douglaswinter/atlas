@@ -5,6 +5,7 @@ import {
   Navbar,
   NavLink,
   NavLinks,
+  User,
 } from "@diamondlightsource/sci-react-ui";
 
 function WaffleNavbar() {
@@ -32,6 +33,16 @@ function WaffleNavbar() {
       }
       rightSlot={
         <Box sx={{ marginLeft: 4 }}>
+          <User
+            onLogin={() => {
+              console.log("logging in");
+            }}
+            onLogout={() => {
+              console.log("logging out");
+            }}
+            user={{ fedid: "aaa0000", name: "Nonloso" }}
+            color="white"
+          />
           <ColourSchemeButton />
         </Box>
       }
