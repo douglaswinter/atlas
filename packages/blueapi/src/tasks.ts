@@ -37,7 +37,7 @@ export interface TaskRequest {
   name: string;
 
   /** Values for parameters to plan, if any */
-  params: object;
+  params?: object;
 
   /** Instrument session associated with this task */
   instrument_session: string;
