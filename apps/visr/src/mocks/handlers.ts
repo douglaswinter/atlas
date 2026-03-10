@@ -38,6 +38,7 @@ export const handlers = [
   http.post("/api/tasks", () => {
     return HttpResponse.json({
       task_id: fakeTaskId,
+      status: 201,
     });
   }),
 

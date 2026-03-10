@@ -1,0 +1,23 @@
+{
+  "name": "@atlas/blueapi-query",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@atlas/blueapi": "workspace:*"
+  },
+  "devDependencies": {
+    "@atlas/vitest-conf": "workspace:*",
+    "vitest": "*"
+  },
+  "peerDependencies": {
+    "@atlas/blueapi": "workspace:*",
+    "@tanstack/react-query": "^5.90.21"
+  }
+}

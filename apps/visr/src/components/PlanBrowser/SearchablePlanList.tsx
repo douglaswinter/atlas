@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import type { Plan } from "../../utils/api";
+import type { Plan } from "@atlas/blueapi";
 import { useMemo, useState } from "react";
 
 type Props = {

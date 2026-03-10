@@ -1,12 +1,14 @@
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import { setWorkerState, type WorkerRequest } from "../utils/api";
 import { useScanEvents } from "../hooks/scanEvents";
+import type { WorkerStateRequest } from "@atlas/blueapi";
+import { useSetWorkerState } from "@atlas/blueapi-query";
 
 const AbortButton = () => {
   const [disabled, setDisabled] = useState<boolean>(true);
   const scanEvent = useScanEvents();
+  const workerState = useSetWorkerState();
   useEffect(() => {
     if (!scanEvent) return;
     if (scanEvent.status == "running") {
@@ -23,12 +25,11 @@ const AbortButton = () => {
       disabled={disabled}
       sx={{ width: "150px" }}
       onClick={async () => {
-        const workerRequest: WorkerRequest = {
+        const workerRequest: WorkerStateRequest = {
           new_state: "ABORTING",
-          defer: false,
           reason: "UI Intervention",
         };
-        await setWorkerState(workerRequest);
+        workerState.mutate(workerRequest);
       }}
     >
       Abort
