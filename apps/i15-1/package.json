@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@atlas/blueapi": "workspace:*",
+    "@atlas/blueapi-query": "workspace:*",
     "@diamondlightsource/sci-react-ui": "^0.4.0",
     "@mui/icons-material": "^6.5.0",
-    "@mui/material": "<7.0.0"
+    "@mui/material": "<7.0.0",
+    "@tanstack/react-query": "^5.90.21"
   },
   "devDependencies": {
     "@atlas/vitest-conf": "workspace:*",
