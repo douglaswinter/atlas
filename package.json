@@ -6,7 +6,8 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format:pkg": "sort-package-json \"apps/*/package.json\" \"packages/*/package.json\"",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "react": "^18.3.1",

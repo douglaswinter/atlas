@@ -8,6 +8,7 @@ import { Layout } from "./routes/Layout.tsx";
 import Spectroscopy from "./routes/Spectroscopy.tsx";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 declare global {
   interface Window {
@@ -19,6 +20,8 @@ window.global ||= window;
 import Workflows from "./routes/Workflows.tsx";
 import { RelayEnvironmentProvider } from "react-relay";
 import { RelayEnvironment } from "./RelayEnvironment.ts";
+import { createApi } from "@atlas/blueapi";
+import { BlueapiProvider } from "@atlas/blueapi-query";
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -52,13 +55,20 @@ const router = createBrowserRouter([
   },
 ]);
 
+const api = createApi("/api");
+const queryClient = new QueryClient();
+
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <RelayEnvironmentProvider environment={RelayEnvironment}>
       <InstrumentSessionProvider>
         <StrictMode>
           <ThemeProvider theme={DiamondTheme} defaultMode="light">
-            <RouterProvider router={router} />
+            <QueryClientProvider client={queryClient}>
+              <BlueapiProvider api={api}>
+                <RouterProvider router={router} />
+              </BlueapiProvider>
+            </QueryClientProvider>
           </ThemeProvider>
         </StrictMode>
       </InstrumentSessionProvider>
