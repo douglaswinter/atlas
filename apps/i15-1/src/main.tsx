@@ -7,12 +7,16 @@ import { Layout } from "./routes/Layout.tsx";
 import Dashboard from "./routes/Dashboard.tsx";
 import Robot from "./routes/Robot.tsx";
 import { InstrumentSessionProvider } from "./context/instrumentSession/InstrumentSessionProvider.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 declare global {
   interface Window {
     global?: typeof globalThis;
   }
 }
+
+import { createApi } from "@atlas/blueapi";
+import { BlueapiProvider } from "@atlas/blueapi-query";
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -38,12 +42,19 @@ const router = createBrowserRouter([
   },
 ]);
 
+const api = createApi("/api");
+const queryClient = new QueryClient();
+
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <InstrumentSessionProvider>
       <StrictMode>
         <ThemeProvider theme={DiamondTheme} defaultMode="light">
-          <RouterProvider router={router} />
+          <QueryClientProvider client={queryClient}>
+            <BlueapiProvider api={api}>
+              <RouterProvider router={router} />
+            </BlueapiProvider>
+          </QueryClientProvider>
         </ThemeProvider>
       </StrictMode>
     </InstrumentSessionProvider>,
