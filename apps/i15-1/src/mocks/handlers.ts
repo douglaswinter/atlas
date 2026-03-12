@@ -18,4 +18,8 @@ export const handlers = [
   http.put("/api/worker/state", () => {
     return HttpResponse.json("IDLE");
   }),
+
+  http.get("/oauth2/userinfo", () => {
+    return HttpResponse.json({});
+  }),
 ];
