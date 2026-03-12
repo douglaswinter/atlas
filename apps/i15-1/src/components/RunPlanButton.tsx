@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useSetActiveTask, useSubmitTask } from "@atlas/blueapi-query";
 import type { TaskRequest } from "@atlas/blueapi";

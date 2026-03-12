@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode } from "react";
 import { UserAuthContext } from "./UserAuthContext";
 import { getUser, type UserAuthStatus } from "./authUtils";
 import { useQuery } from "@tanstack/react-query";
