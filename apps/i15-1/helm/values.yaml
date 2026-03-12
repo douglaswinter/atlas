@@ -6,18 +6,6 @@ ui-base:
     repository: ghcr.io/diamondlightsource/atlas/i15-1
     tag: # Updated by CI job with latest release version
 
-  oauth2-proxy:
-    config:
-      configFile: |-
-        email_domains = [ "*" ]
-        skip_auth_routes = ["GET=^/$","GET=^/assets","GET=^/conexs.svg$",]
-        api_routes = ["^/api"]
-        skip_provider_button = true
-        cookie_secure = true
-        cookie_refresh = "1m"
-        cookie_expire = "24h"
-        whitelist_domains = ["identity.diamond.ac.uk"]
-
   upstreams:
     - id: blueapi
       path: /api/
