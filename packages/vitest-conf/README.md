@@ -45,6 +45,17 @@ export default defineConfig({
 
 4. Write some tests! Vitest will find tests that match `**/*.test.{ts,tsx}`.
 
+5. Add test and coverage Vitest scripts to your `package.json`. Turbo will run them if you call them 'test' and 'coverage':
+
+```json
+{
+  "scripts": {
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  }
+}
+```
+
 ## Coverage
 
 Should _everything_ be covered by unit tests? `@atlas/vitest-conf` doesn't think so, and so makes some opinionated and generic exclusions for producing coverage reports. If your app needs to add to these, use `mergeConfig` in your app's `vitest.config.ts`.
@@ -68,4 +79,4 @@ export default mergeConfig(
 );
 ```
 
-If it is not a logic-bearing module, it may be OK for exclusion. Use your disgression.
+If it is not a logic-bearing module, it may be OK for exclusion. Use your discretion.
