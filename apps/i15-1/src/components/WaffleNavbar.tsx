@@ -7,8 +7,10 @@ import {
   NavLinks,
   User,
 } from "@diamondlightsource/sci-react-ui";
+import { useUserAuth } from "../context/userAuth/useUserAuth";
 
 function WaffleNavbar() {
+  const user = useUserAuth();
   return (
     <Navbar
       logo="theme"
@@ -40,9 +42,10 @@ function WaffleNavbar() {
             onLogout={() => {
               console.log("logging out");
             }}
-            // user={user.person == null || user.person == undefined
-            //     ? null
-            //     : { fedid: user.person }}  // Need to wrap provider around and set up hook
+            user={user.person == null || user.person == undefined
+                ? null
+                : { fedid: user.person }
+              }
             colour="white"
           />
           <ColourSchemeButton />
