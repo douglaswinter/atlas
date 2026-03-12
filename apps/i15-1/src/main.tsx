@@ -54,8 +54,8 @@ enableMocking().then(() => {
           <QueryClientProvider client={queryClient}>
             <UserAuthProvider>
               <BlueapiProvider api={api}>
-              <RouterProvider router={router} />
-            </BlueapiProvider>
+                <RouterProvider router={router} />
+              </BlueapiProvider>
             </UserAuthProvider>
           </QueryClientProvider>
         </ThemeProvider>
