@@ -41,7 +41,7 @@ function WaffleNavbar() {
               console.log("logging out");
             }}
             user={{ fedid: "aaa0000", name: "Nonloso" }}
-            color="white"
+            colour="white"
           />
           <ColourSchemeButton />
         </Box>
@@ -49,5 +49,6 @@ function WaffleNavbar() {
     />
   );
 }
+
 
 export default WaffleNavbar;
