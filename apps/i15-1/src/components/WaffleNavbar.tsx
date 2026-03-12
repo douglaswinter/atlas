@@ -40,7 +40,9 @@ function WaffleNavbar() {
             onLogout={() => {
               console.log("logging out");
             }}
-            user={{ fedid: "aaa0000", name: "Nonloso" }}
+            // user={user.person == null || user.person == undefined
+            //     ? null
+            //     : { fedid: user.person }}  // Need to wrap provider around and set up hook
             colour="white"
           />
           <ColourSchemeButton />
