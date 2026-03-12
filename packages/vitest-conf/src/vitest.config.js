@@ -13,5 +13,17 @@ export default defineConfig({
     include: ["**/*.test.{ts,tsx}"],
     css: false,
     reporters: ["verbose"],
+    coverage: {
+      reporter: ["lcov", "json-summary", "text"],
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: [
+        "**/*.d.ts",
+        "**/main.tsx",
+        "**/index.ts",
+        "**/types.ts",
+        "**/mocks/**",
+        "**/*.graphql.ts",
+      ],
+    },
   },
 });
