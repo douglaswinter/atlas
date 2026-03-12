@@ -20,6 +20,6 @@ export const handlers = [
   }),
 
   http.get("/oauth2/userinfo", () => {
-    return HttpResponse.json({});
+    return HttpResponse.json({ preferredUsername: "test user" });
   }),
 ];
