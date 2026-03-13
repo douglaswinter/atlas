@@ -18,7 +18,6 @@ const RunPlanButton = ({
   instrumentSession,
   buttonText = "Run",
 }: RunPlanButtonProps) => {
-
   const user = useUserAuth();
 
   const submitTask = useSubmitTask();
@@ -26,7 +25,7 @@ const RunPlanButton = ({
   const submitAndRunTask = async (task: TaskRequest) => {
     await submitTask
       .mutateAsync(task)
-      .then(response => startTask.mutateAsync(response.task_id));
+      .then((response) => startTask.mutateAsync(response.task_id));
   };
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -42,7 +41,8 @@ const RunPlanButton = ({
   };
 
   const isButtonDisabled = () => {
-    const disable = user.person == null || user.person == undefined ? true : false;
+    const disable =
+      user.person == null || user.person == undefined ? true : false;
     return disable;
   };
 
@@ -52,7 +52,7 @@ const RunPlanButton = ({
       loading={loading}
       sx={{ width: "150px" }}
       onClick={handleClick}
-      disabled={isButtonDisabled}
+      disabled={isButtonDisabled()}
     >
       {buttonText}
     </Button>
