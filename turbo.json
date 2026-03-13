@@ -15,6 +15,10 @@
     },
     "test": {
       "inputs": ["src/**", "vitest.config.*"]
+    },
+    "coverage": {
+      "inputs": ["src/**", "vitest.config.ts"],
+      "outputs": ["coverage/**"]
     }
   }
 }
