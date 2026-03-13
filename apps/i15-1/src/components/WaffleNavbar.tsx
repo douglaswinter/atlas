@@ -12,8 +12,8 @@ import { useUserAuth } from "../context/userAuth/useUserAuth";
 function WaffleNavbar() {
   const user = useUserAuth();
 
-  const handleLogIn = window.location.assign("/oauth2/sign_in");
-  const handleLogOut = window.location.assign("/oauth2/sign_out");
+  const handleLogIn = () => window.location.assign("/oauth2/sign_in");
+  const handleLogOut = () => window.location.assign("/oauth2/sign_out");
   // const handleLogIn = () => {
   //   console.log("Logging in");
   //   window.location.assign("/oauth2/sign_in");
