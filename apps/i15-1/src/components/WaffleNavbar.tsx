@@ -14,15 +14,6 @@ function WaffleNavbar() {
 
   const handleLogIn = () => window.location.assign("/oauth2/sign_in");
   const handleLogOut = () => window.location.assign("/oauth2/sign_out");
-  // const handleLogIn = () => {
-  //   console.log("Logging in");
-  //   window.location.assign("/oauth2/sign_in");
-  // }
-
-  // const handleLogOut = () => {
-  //   console.log("Logging Out");
-  //   window.location.assign("/oauth2/sign_out");
-  // }
 
   return (
     <Navbar
