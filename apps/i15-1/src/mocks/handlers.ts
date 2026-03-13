@@ -20,9 +20,11 @@ export const handlers = [
     return HttpResponse.json("IDLE");
   }),
 
+  http.put("/oauth2/sign_in", () => {}),
+
+  http.put("/oauth2/sign_out", () => {}),
+
   http.get("/oauth2/userinfo", (request) => {
-    // const user: Person = {identifier: "nonloso", accepted_orca_eula: true};
-    // return HttpResponse.json(user);
     const auth = request.request.headers.get("authorization");
 
     if (auth && auth.startsWith("Bearer ")) {

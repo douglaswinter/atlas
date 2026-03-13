@@ -12,15 +12,17 @@ import { useUserAuth } from "../context/userAuth/useUserAuth";
 function WaffleNavbar() {
   const user = useUserAuth();
 
-  const handleLogIn = () => {
-    console.log("Logging in");
-    window.location.assign("/oauth2/sign_in");
-  }
+  const handleLogIn = window.location.assign("/oauth2/sign_in");
+  const handleLogOut = window.location.assign("/oauth2/sign_out");
+  // const handleLogIn = () => {
+  //   console.log("Logging in");
+  //   window.location.assign("/oauth2/sign_in");
+  // }
 
-  const handleLogOut = () => {
-    console.log("Logging Out");
-    window.location.assign("/oauth2/sign_out");
-  }
+  // const handleLogOut = () => {
+  //   console.log("Logging Out");
+  //   window.location.assign("/oauth2/sign_out");
+  // }
 
   return (
     <Navbar
@@ -49,10 +51,11 @@ function WaffleNavbar() {
           <User
             onLogin={handleLogIn}
             onLogout={handleLogOut}
-            user={user.person == null || user.person == undefined
+            user={
+              user.person == null || user.person == undefined
                 ? null
                 : { fedid: user.person }
-              }
+            }
             colour="white"
           />
           <ColourSchemeButton />
@@ -61,6 +64,5 @@ function WaffleNavbar() {
     />
   );
 }
-
 
 export default WaffleNavbar;
