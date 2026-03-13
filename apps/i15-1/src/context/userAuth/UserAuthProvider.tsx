@@ -5,8 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
 
 export const UserAuthProvider = ({ children }: { children: ReactNode }) => {
-
-    const query = useQuery({
+  const query = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
     retry: (failureCount, error: AxiosError) => {
@@ -45,11 +44,15 @@ export const UserAuthProvider = ({ children }: { children: ReactNode }) => {
   } else {
     if (query.data) {
       response = {
-        person: query.data.identifier,
-        person_status: "OK"
+        person: query.data.preferredUsername,
+        person_status: "OK",
       };
     }
   }
 
-    return(<UserAuthContext.Provider value={response}>{children}</UserAuthContext.Provider>);
-}
+  return (
+    <UserAuthContext.Provider value={response}>
+      {children}
+    </UserAuthContext.Provider>
+  );
+};
