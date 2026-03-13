@@ -7,7 +7,7 @@ import { useUserAuth } from "../context/userAuth/useUserAuth";
 
 type RunPlanButtonProps = {
   name: string;
-  params: object;
+  params?: object;
   instrumentSession: string;
   buttonText?: string;
 };
