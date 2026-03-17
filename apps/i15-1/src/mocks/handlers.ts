@@ -20,11 +20,9 @@ export const handlers = [
     return HttpResponse.json("IDLE");
   }),
 
-  // http.get("/oauth2/sign_in", () => {}),
-
   // http.get("/oauth2/sign_out", () => {}),
 
   http.get("/oauth2/userinfo", () => {
-    return new HttpResponse({ preferredUsername: "nonloso" });
+    return HttpResponse.json({ preferredUsername: "nonloso" });
   }),
 ];
