@@ -6,6 +6,10 @@ ui-base:
     repository: ghcr.io/diamondlightsource/atlas/i15-1
     tag: # Updated by CI job with latest release version
 
+  oauth2-proxy:
+    ingress:
+      enabled: true
+
   upstreams:
     - id: blueapi
       path: /api/
