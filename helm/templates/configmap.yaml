@@ -13,3 +13,4 @@ data:
     skip_auth_routes = ["GET=^/$","GET=^/assets",]
     api_routes = ["^/oauth2"]
     skip_provider_button = true
+    skip_auth_preflight = true
