@@ -24,6 +24,6 @@ export const handlers = [
   // }),
 
   http.get("/oauth2/userinfo", () => {
-    return HttpResponse.json({ preferredUsername: "nonloso" });
+    return HttpResponse.json({ preferredUsername: "abc123456" });
   }),
 ];
