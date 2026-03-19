@@ -33,15 +33,15 @@ oauth2-proxy:
     show-debug-on-error: "true"
 
   ingress:
-    enabled: false
+    enabled: true
 
   config:
     existingSecret: ui-keycloak-secret
     existingConfig: oauth2-proxy-config
-  
+
   alphaConfig:
     enabled: true
     existingSecret: ui-oauth2-alpha-secret
-  
+
   service:
     portNumber: 4180

@@ -6,14 +6,14 @@ ui-base:
     repository: ghcr.io/diamondlightsource/atlas/i15-1
     tag: # Updated by CI job with latest release version
 
-  oauth2-proxy:
-    ingress:
-      enabled: true
-      pathType: Prefix
-      hostname: i15-1.diamond.ac.uk
-      hosts:
-        - i15-1.diamond.ac.uk
-      path: /
+  # oauth2-proxy:
+  #   ingress:
+  #     enabled: true
+  #     pathType: Prefix
+  #     hostname: i15-1.diamond.ac.uk
+  #     hosts:
+  #       - i15-1.diamond.ac.uk
+  #     path: /
 
   upstreams:
     - id: blueapi
