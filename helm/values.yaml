@@ -33,7 +33,7 @@ oauth2-proxy:
     show-debug-on-error: "true"
 
   ingress:
-    enabled: true
+    enabled: false
 
   config:
     existingSecret: ui-keycloak-secret
