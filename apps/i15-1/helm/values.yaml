@@ -9,6 +9,11 @@ ui-base:
   oauth2-proxy:
     ingress:
       enabled: true
+      pathType: Prefix
+      hostname: i15-1.diamond.ac.uk
+      hosts:
+        - i15-1.diamond.ac.uk
+      path: /
 
   upstreams:
     - id: blueapi

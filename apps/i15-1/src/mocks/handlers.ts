@@ -1,5 +1,4 @@
-import { http, HttpResponse, graphql } from "msw";
-// import type { Person } from "../context/userAuth/authUtils";
+import { http, HttpResponse } from "msw";
 
 const fakeTaskId = "7304e8e0-81c6-4978-9a9d-9046ab79ce3c";
 
@@ -20,7 +19,9 @@ export const handlers = [
     return HttpResponse.json("IDLE");
   }),
 
-  // http.get("/oauth2/sign_out", () => {}),
+  // http.get("/oauth2/sign_out", () => {
+  //   return HttpResponse.json({ preferredUsername: null });
+  // }),
 
   http.get("/oauth2/userinfo", () => {
     return HttpResponse.json({ preferredUsername: "nonloso" });
