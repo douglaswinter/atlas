@@ -18,8 +18,8 @@ declare global {
 import { createApi } from "@atlas/blueapi";
 import { BlueapiProvider } from "@atlas/blueapi-query";
 import { UserAuthProvider } from "./context/userAuth/UserAuthProvider.tsx";
-import { ErrorBoundary } from "react-error-boundary";
-import { AuthFallbackScreen } from "./routes/Fallback.tsx";
+// import { ErrorBoundary } from "react-error-boundary";
+// import { AuthFallbackScreen } from "./routes/Fallback.tsx";
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -55,11 +55,11 @@ enableMocking().then(() => {
         <ThemeProvider theme={DiamondTheme} defaultMode="light">
           <QueryClientProvider client={queryClient}>
             <UserAuthProvider>
-              <ErrorBoundary fallback={<AuthFallbackScreen />}>
-                <BlueapiProvider api={api}>
-                  <RouterProvider router={router} />
-                </BlueapiProvider>
-              </ErrorBoundary>
+              {/* <ErrorBoundary fallback={<AuthFallbackScreen />}> */}
+              <BlueapiProvider api={api}>
+                <RouterProvider router={router} />
+              </BlueapiProvider>
+              {/* </ErrorBoundary> */}
             </UserAuthProvider>
           </QueryClientProvider>
         </ThemeProvider>

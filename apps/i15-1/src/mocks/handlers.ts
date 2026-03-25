@@ -19,10 +19,6 @@ export const handlers = [
     return HttpResponse.json("IDLE");
   }),
 
-  // http.get("/oauth2/sign_out", () => {
-  //   return HttpResponse.json({ preferredUsername: null });
-  // }),
-
   http.get("/oauth2/userinfo", () => {
     return HttpResponse.json({ preferredUsername: "abc123456" });
   }),
