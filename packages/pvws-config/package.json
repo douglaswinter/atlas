@@ -11,13 +11,12 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@diamondlightsource/cs-web-lib": "0.9.5"
+    "@diamondlightsource/cs-web-lib": "0.9.5",
+    "@mui/material": "<7.0.0",
+    "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
     "@atlas/vitest-conf": "workspace:*",
     "vitest": "*"
-  },
-  "peerDependencies": {
-    "react-error-boundary": "^6.0.0"
   }
 }
