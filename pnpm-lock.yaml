@@ -238,6 +238,9 @@ importers:
       '@diamondlightsource/cs-web-lib':
         specifier: 0.9.5
         version: 0.9.5(@types/react@18.3.28)(graphql@16.13.1)(mapbox-gl@1.13.3)(react-dom@18.3.1(react@18.3.1))(react-redux@7.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-router-dom@7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.105.4)
+      react-error-boundary:
+        specifier: ^6.0.0
+        version: 6.1.1(react@18.3.1)
     devDependencies:
       '@atlas/vitest-conf':
         specifier: workspace:*

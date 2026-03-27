@@ -16,5 +16,8 @@
   "devDependencies": {
     "@atlas/vitest-conf": "workspace:*",
     "vitest": "*"
+  },
+  "peerDependencies": {
+    "react-error-boundary": "^6.0.0"
   }
 }
