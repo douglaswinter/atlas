@@ -1,5 +1,4 @@
 import { type CsWebLibConfig } from "@diamondlightsource/cs-web-lib";
-import { useEffect, useState } from "react";
 
 const configFile = "/pvwsconfig.json";
 const defaultConfig = {
