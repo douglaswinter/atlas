@@ -13,3 +13,7 @@ ui-base:
       target:
         external:
           uri: http://i15-1-blueapi.diamond.ac.uk
+
+  authConfigFlags: |
+    skip_auth_routes = ["GET=^/$", "GET=^/assets"]
+    api_routes = ["^/oauth2", "^/api"]
