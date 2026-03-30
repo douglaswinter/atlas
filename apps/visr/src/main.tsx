@@ -22,6 +22,7 @@ import { RelayEnvironmentProvider } from "react-relay";
 import { RelayEnvironment } from "./RelayEnvironment.ts";
 import { createApi } from "@atlas/blueapi";
 import { BlueapiProvider } from "@atlas/blueapi-query";
+import Tomography from "./routes/Tomography.tsx";
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "spectroscopy",
         element: <Spectroscopy />,
+      },
+      {
+        path: "tomography",
+        element: <Tomography />,
       },
       {
         path: "plans",
