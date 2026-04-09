@@ -2,7 +2,6 @@ import { type CsWebLibConfig } from "@diamondlightsource/cs-web-lib";
 
 const configFile = "/pvwsconfig.json";
 const defaultConfig = {
-  storeMode: "PROD",
   PVWS_SOCKET: "pvws.diamond.ac.uk",
   PVWS_SSL: true,
   THROTTLE_PERIOD: 100,

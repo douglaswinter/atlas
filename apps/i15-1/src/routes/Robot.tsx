@@ -3,6 +3,7 @@ import { Box, Typography, Stack } from "@mui/material";
 import { useState } from "react";
 import { NumberInput } from "../components/NumberInput";
 import RunPlanButton from "../components/RunPlanButton";
+import { ReadOnlyPv } from "@atlas/pvws-config";
 
 type RobotSampleFormData = {
   puck: number;
@@ -52,6 +53,10 @@ function Robot() {
               }}
             />
           </Box>
+          <ReadOnlyPv
+            label="Current Sample"
+            pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX"
+          />
           <RunPlanButton
             name="robot_load"
             params={formData}
