@@ -14,6 +14,7 @@ function PvComponent(props: ParsePvProps): JSX.Element {
       }}
       label={props.label}
       value={latestValue}
+      variant="standard"
     />
   );
 }

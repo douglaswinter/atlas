@@ -5,9 +5,8 @@ export function PvwsFallback(): ReactNode {
   const errorMsg = <b>Error Connecting!</b>;
   return (
     <TextField
-      color="error"
       slotProps={{
-        input: { readOnly: true },
+        input: { readOnly: true, color: "error" },
       }}
       defaultValue={errorMsg}
     />
