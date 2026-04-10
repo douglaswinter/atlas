@@ -21,6 +21,7 @@ import { createApi } from "@atlas/blueapi";
 import { BlueapiProvider } from "@atlas/blueapi-query";
 import { loadPvwsConfig } from "@atlas/pvws-config";
 import { Store } from "@mui/icons-material";
+import { UserAuthProvider } from "./context/userAuth/UserAuthProvider.tsx";
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -60,9 +61,11 @@ function App() {
   return (
     <Provider store={store(config)}>
       <QueryClientProvider client={queryClient}>
-        <BlueapiProvider api={api}>
-          <RouterProvider router={router} />
-        </BlueapiProvider>
+        <UserAuthProvider>
+          <BlueapiProvider api={api}>
+            <RouterProvider router={router} />
+          </BlueapiProvider>
+        </UserAuthProvider>
       </QueryClientProvider>
     </Provider>
   );
