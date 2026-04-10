@@ -12,9 +12,9 @@ function PvComponent(props: ParsePvProps): JSX.Element {
       slotProps={{
         input: { readOnly: true },
       }}
-    >
-      <b>{props.label}:</b> {latestValue}
-    </TextField>
+      label={props.label}
+      value={latestValue}
+    />
   );
 }
 
