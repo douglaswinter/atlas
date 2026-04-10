@@ -1,9 +1,10 @@
 import { useInstrumentSession } from "../context/instrumentSession/useInstrumentSession";
-import { Box, Typography, Stack } from "@mui/material";
+import { Box, Typography, Stack, useTheme } from "@mui/material";
 import { useState } from "react";
 import { NumberInput } from "../components/NumberInput";
 import RunPlanButton from "../components/RunPlanButton";
 import { ReadOnlyPv } from "@atlas/pvws-config";
+import { StatusCard } from "../components/StatusCard";
 
 type RobotSampleFormData = {
   puck: number;
@@ -11,6 +12,7 @@ type RobotSampleFormData = {
 };
 
 function Robot() {
+  const theme = useTheme();
   const { instrumentSession, setInstrumentSession } = useInstrumentSession();
   const [formData, setFormData] = useState<RobotSampleFormData>({
     puck: 1,
@@ -53,10 +55,6 @@ function Robot() {
               }}
             />
           </Box>
-          <ReadOnlyPv
-            label="Current Sample"
-            pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX"
-          />
           <RunPlanButton
             name="robot_load"
             params={formData}
@@ -68,6 +66,13 @@ function Robot() {
             instrumentSession={instrumentSession}
             buttonText="Unload Sample"
           />
+          <StatusCard
+            title="Currently loaded"
+            cardColor={theme.palette.primary.main}
+          >
+            <ReadOnlyPv label="Sample" pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX" />
+            <ReadOnlyPv label="Puck" pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
+          </StatusCard>
         </Stack>
       </Box>
     </>
