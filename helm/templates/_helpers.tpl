@@ -80,3 +80,10 @@ http://{{ .target.service.name }}.{{ .Release.Namespace }}.svc.cluster.local:{{ 
 
 {{- index $providers $provider -}}
 {{- end -}}
+
+{{/*
+App-level oauth2proxy config options
+*/}}
+{{- define "ui-base.extraConfig" -}}
+{{- .Values.authConfigFlags | default "" -}}
+{{- end -}}
