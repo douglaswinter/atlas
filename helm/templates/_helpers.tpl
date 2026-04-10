@@ -85,5 +85,5 @@ http://{{ .target.service.name }}.{{ .Release.Namespace }}.svc.cluster.local:{{ 
 App-level oauth2proxy config options
 */}}
 {{- define "ui-base.extraConfig" -}}
-{{- index .Values "ui-base" "authConfigFlags" | default "" -}}
+{{- .Values.authConfigFlags | default "" -}}
 {{- end -}}
