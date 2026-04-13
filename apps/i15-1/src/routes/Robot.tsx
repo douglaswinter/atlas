@@ -18,31 +18,42 @@ type RobotSampleFormData = {
   position: number;
 };
 
-function StatusSideBar() {
-  const theme = useTheme();
-  return (
-    <Stack spacing={2} sx={{ mt: 3, mr: 3 }}>
-      <StatusCard
-        title="Currently loaded"
-        cardColor={theme.palette.primary.main}
-      >
-        <ReadOnlyPv label="Sample" pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX" />
-        <ReadOnlyPv label="Puck" pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
-      </StatusCard>
-    </Stack>
-  );
-}
-
 function Robot() {
-  const { instrumentSession, setInstrumentSession } = useInstrumentSession();
+  const { instrumentSession } = useInstrumentSession();
   const [formData, setFormData] = useState<RobotSampleFormData>({
     puck: 1,
     position: 1,
   });
+  const theme = useTheme();
   return (
-    <Grid container spacing={2}>
-      <Grid size={9.5} justifyContent={"center"}>
-        <Box display={"flex"} justifyContent={"center"} sx={{ mt: 3 }}>
+    <Grid
+      container
+      spacing={5}
+      sx={{ flexGrow: 1, mt: 5, ml: 5, justifyContent: "space-evenly" }}
+    >
+      <Grid size={12}>
+        <Stack direction={"row"} spacing={2}>
+          <StatusCard
+            title="Currently loaded"
+            bgColor={theme.palette.info.light}
+            cardColor={theme.palette.primary.main}
+          >
+            <ReadOnlyPv label="Sample" pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX" />
+            <ReadOnlyPv label="Puck" pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
+          </StatusCard>
+        </Stack>
+      </Grid>
+      <Grid size={6}>
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          sx={{
+            padding: 5,
+            borderRadius: 1,
+            border: "1px solid",
+            borderColor: theme.palette.primary.main,
+          }}
+        >
           <Stack direction={"column"} spacing={3} alignItems={"center"}>
             <Typography component="h1" variant="h5">
               Sample Position
@@ -90,9 +101,6 @@ function Robot() {
             />
           </Stack>
         </Box>
-      </Grid>
-      <Grid size={2.5}>
-        <StatusSideBar />
       </Grid>
     </Grid>
   );
