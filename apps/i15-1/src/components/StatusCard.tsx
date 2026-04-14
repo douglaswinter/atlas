@@ -32,7 +32,7 @@ export function StatusCard(props: StatusCardProps) {
             <Typography
               variant="body1"
               sx={{
-                fontSize: 14,
+                fontSize: 18,
                 fontStyle: "italic",
                 fontWeight: "bold",
                 color: cardColor,

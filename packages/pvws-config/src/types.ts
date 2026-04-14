@@ -15,4 +15,5 @@ export type ParsePvProps = PvDescription & {
   parseNumeric?: boolean;
   decimals?: number;
   scaleFactor?: number;
+  units?: string;
 };
