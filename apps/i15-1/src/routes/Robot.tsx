@@ -18,6 +18,27 @@ type RobotSampleFormData = {
   position: number;
 };
 
+function StatusSidebar() {
+  const theme = useTheme();
+  return (
+    <Box sx={{ ml: 5 }}>
+      <Stack direction={"column"} spacing={2}>
+        <StatusCard
+          title="Currently loaded"
+          bgColor={theme.palette.info.light}
+          cardColor={theme.palette.primary.main}
+        >
+          <ReadOnlyPv
+            label="Sample N."
+            pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX"
+          />
+          <ReadOnlyPv label="Puck N." pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
+        </StatusCard>
+      </Stack>
+    </Box>
+  );
+}
+
 function Robot() {
   const { instrumentSession } = useInstrumentSession();
   const [formData, setFormData] = useState<RobotSampleFormData>({
@@ -26,83 +47,61 @@ function Robot() {
   });
   const theme = useTheme();
   return (
-    <Grid
-      container
-      spacing={5}
-      sx={{ flexGrow: 1, mt: 5, ml: 5, justifyContent: "space-evenly" }}
+    <Box
+      // component={"section"}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        mt: 3,
+        mr: 5,
+        ml: 5,
+      }}
     >
-      <Grid size={12}>
-        <Stack direction={"row"} spacing={2}>
-          <StatusCard
-            title="Currently loaded"
-            bgColor={theme.palette.info.light}
-            cardColor={theme.palette.primary.main}
-          >
-            <ReadOnlyPv label="Sample" pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX" />
-            <ReadOnlyPv label="Puck" pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
-          </StatusCard>
-        </Stack>
-      </Grid>
-      <Grid size={6}>
-        <Box
-          display={"flex"}
-          justifyContent={"center"}
-          sx={{
-            padding: 5,
-            borderRadius: 1,
-            border: "1px solid",
-            borderColor: theme.palette.primary.main,
-          }}
-        >
-          <Stack direction={"column"} spacing={3} alignItems={"center"}>
-            <Typography component="h1" variant="h5">
-              Sample Position
-            </Typography>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  sm: "1fr 1fr",
-                  md: "1fr 1fr 1fr",
-                },
-                gap: 3,
-                flexGrow: 1,
+      <Box
+        sx={{
+          padding: 5,
+          borderRadius: 1,
+          border: "1px solid",
+          borderColor: theme.palette.primary.main,
+        }}
+      >
+        <Stack direction={"column"} spacing={3} alignItems={"center"}>
+          <Typography component="h1" variant="h5">
+            Sample Position
+          </Typography>
+          <Stack direction={"row"} spacing={3} alignItems={"center"}>
+            <NumberInput
+              label="Puck"
+              numberMode="natural"
+              defaultValue={formData["puck"]}
+              onCommit={(parsedValue) => {
+                setFormData({ ...formData, ["puck"]: parsedValue });
               }}
-            >
-              <NumberInput
-                label="Puck"
-                numberMode="natural"
-                defaultValue={formData["puck"]}
-                onCommit={(parsedValue) => {
-                  setFormData({ ...formData, ["puck"]: parsedValue });
-                }}
-              />
-              <NumberInput
-                label="Position"
-                numberMode="natural"
-                defaultValue={formData["position"]}
-                onCommit={(parsedValue) => {
-                  setFormData({ ...formData, ["position"]: parsedValue });
-                }}
-              />
-            </Box>
-            <RunPlanButton
-              name="robot_load"
-              params={formData}
-              instrumentSession={instrumentSession}
-              buttonText="Load Sample"
             />
-            <RunPlanButton
-              name="robot_unload"
-              instrumentSession={instrumentSession}
-              buttonText="Unload Sample"
+            <NumberInput
+              label="Position"
+              numberMode="natural"
+              defaultValue={formData["position"]}
+              onCommit={(parsedValue) => {
+                setFormData({ ...formData, ["position"]: parsedValue });
+              }}
             />
           </Stack>
-        </Box>
-      </Grid>
-    </Grid>
+          <RunPlanButton
+            name="robot_load"
+            params={formData}
+            instrumentSession={instrumentSession}
+            buttonText="Load Sample"
+          />
+          <RunPlanButton
+            name="robot_unload"
+            instrumentSession={instrumentSession}
+            buttonText="Unload Sample"
+          />
+        </Stack>
+      </Box>
+      <StatusSidebar />
+    </Box>
   );
 }
 

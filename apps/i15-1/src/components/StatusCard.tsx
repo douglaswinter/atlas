@@ -20,7 +20,12 @@ export function StatusCard(props: StatusCardProps) {
     return (
       <Card
         variant="outlined"
-        sx={{ minWidth: 250, bgcolor: bgColor, borderColor: cardColor }}
+        sx={{
+          minWidth: 250,
+          maxHeight: 200,
+          bgcolor: bgColor,
+          borderColor: cardColor,
+        }}
       >
         <CardContent>
           <Stack spacing={1}>
