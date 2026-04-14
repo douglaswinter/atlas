@@ -28,11 +28,29 @@ function StatusSidebar() {
           bgColor={theme.palette.info.light}
           cardColor={theme.palette.primary.main}
         >
+          <ReadOnlyPv label="Puck" pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
           <ReadOnlyPv
-            label="Sample N."
+            label="Sample Pin"
             pv="ca://BL15J-EA-LOC-01:SAMPLE:INDEX"
           />
-          <ReadOnlyPv label="Puck N." pv="ca://BL15J-EA-LOC-01:PUCK:INDEX" />
+        </StatusCard>
+        <StatusCard
+          title="Ring status"
+          bgColor={theme.palette.success.light}
+          cardColor={theme.palette.primary.main}
+        >
+          <ReadOnlyPv
+            label="Ring Current"
+            pv="ca://SR-DI-DCCT-01:SIGNAL"
+            parseNumeric
+            units="mA"
+          />
+          <ReadOnlyPv
+            label="Ring Energy"
+            pv="ca://CS-CS-MSTAT-01:BEAMENERGY"
+            parseNumeric
+            units="GeV"
+          />
         </StatusCard>
       </Stack>
     </Box>
