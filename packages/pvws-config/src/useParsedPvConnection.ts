@@ -1,7 +1,7 @@
 import { parseNumericPV, parseStringPv, ReadPvRawValue } from "./readPv";
 import type { ParsePvProps } from "./types";
 
-export function useParsedPvConnection(props: ParsePvProps): number | string {
+export function useParsedPvConnection(props: ParsePvProps): string {
   const rawValue = ReadPvRawValue({ label: props.label, pv: props.pv });
   const numericPv = props.parseNumeric ? props.parseNumeric : false;
   let returnValue;

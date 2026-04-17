@@ -17,3 +17,12 @@ export type ParsePvProps = PvDescription & {
   scaleFactor?: number;
   units?: string;
 };
+
+type RenderPvComponent = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) => JSX.Element;
+export type RenderPvProps = ParsePvProps & { render?: RenderPvComponent };
