@@ -1,7 +1,11 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 
-import { useSetActiveTask, useSubmitTask } from "@atlas/blueapi-query";
+import {
+  useGetWorkerState,
+  useSetActiveTask,
+  useSubmitTask,
+} from "@atlas/blueapi-query";
 import type { TaskRequest } from "@atlas/blueapi";
 import { useUserAuth } from "../context/userAuth/useUserAuth";
 
@@ -41,8 +45,11 @@ const RunPlanButton = ({
   };
 
   const isButtonDisabled = () => {
+    const workerState = useGetWorkerState();
     const disable =
-      user.person == null || user.person == undefined ? true : false;
+      user.person == null ||
+      user.person == undefined ||
+      workerState.data !== "IDLE";
     return disable;
   };
 
