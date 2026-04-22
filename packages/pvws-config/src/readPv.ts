@@ -32,6 +32,14 @@ export function parseStringPv(value: RawValue | string | number): string {
   return displayValue;
 }
 
+function scaleAndApprox(
+  value: number,
+  decimals: number,
+  scale: number,
+): string {
+  return (value * scale).toFixed(decimals);
+}
+
 export function parseNumericPV(
   value: RawValue | string | number,
   decimals?: number,
@@ -40,21 +48,22 @@ export function parseNumericPV(
   let displayValue: string;
   const decimalsToUse = decimals ? decimals : 2;
   const scaleToUse = scaleFactor ? scaleFactor : 1;
-  if (value != "not connected" && value != undefined) {
+  if (value === "not connected") {
+    displayValue = "not connected";
+  } else if (value === "undefined") {
+    displayValue = "undefined";
+  } else {
     if (typeof (value as DType)["getStringValue"] === "function") {
       const numValue = (value as DType).getDoubleValue();
       if (!numValue) {
         displayValue = "undefined";
       } else {
-        displayValue = (numValue * scaleToUse).toFixed(decimalsToUse);
+        displayValue = scaleAndApprox(numValue, decimalsToUse, scaleToUse);
       }
     } else {
-      displayValue = value.toString();
+      const val = typeof value === "string" ? parseFloat(value) : Number(value);
+      displayValue = scaleAndApprox(val, decimalsToUse, scaleToUse);
     }
-  } else if (value === "not connected") {
-    displayValue = "not connected";
-  } else {
-    displayValue = "undefined";
   }
   return displayValue;
 }
