@@ -18,7 +18,13 @@ function renderValueWithUnits({
   }
 }
 
-function DefaultPvBox({ label, value }: { label: string; value: string }) {
+export function DefaultPvBox({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
   const theme = useTheme();
   return (
     <Box>
