@@ -3,11 +3,9 @@ import TomographyView from "../components/tomography/TomographyView";
 
 function Tomography() {
   return (
-    <>
-      <Box display={"flex"} justifyContent={"center"} sx={{ mt: 3 }}>
-        <TomographyView />
-      </Box>
-    </>
+    <Box sx={{ width: "100%", height: "100%" }}>
+      <TomographyView />
+    </Box>
   );
 }
 
