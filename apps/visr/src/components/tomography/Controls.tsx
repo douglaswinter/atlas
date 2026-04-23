@@ -4,18 +4,15 @@ import {
   LinearProgress,
   Stack,
   TextField,
-  ToggleButton,
 } from "@mui/material";
 
 interface Props {
   onRun: () => void;
   onReset: () => void;
   progress: number;
-  revolve: boolean;
-  onRevolveChange: (revolve: boolean) => void;
 }
 
-export default function Controls({ onRun, onReset, progress, revolve, onRevolveChange }: Props) {
+export default function Controls({ onRun, onReset, progress }: Props) {
   return (
     <Box
       sx={{

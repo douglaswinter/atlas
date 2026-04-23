@@ -41,7 +41,7 @@
 import { Canvas, invalidate } from '@react-three/fiber'
 // import { useFrame } from '@react-three/fiber' // for revolve
 import { OrbitControls } from '@react-three/drei'
-import React, { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useRef, type CSSProperties } from 'react'
 import * as THREE from 'three'
 import { vertexShader, fragmentShader } from './VolumeShader'
 
@@ -67,7 +67,7 @@ function VolumeMesh({ volumeData, volumeShape, steps, opacityScale, threshold }:
     threshold:     { value: threshold },
     opacityScale:  { value: opacityScale },
     steps:         { value: steps },
-  }), [])
+  }), []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Sync scalar uniforms when props change
   useEffect(() => { uniforms.threshold.value    = threshold },    [threshold,    uniforms])
@@ -135,7 +135,7 @@ export interface VolumeRendererProps {
   steps?: number
   opacityScale?: number
   threshold?: number
-  style?: React.CSSProperties
+  style?: CSSProperties
 }
 
 export default function VolumeRenderer({

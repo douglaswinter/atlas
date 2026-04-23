@@ -70,7 +70,7 @@ function TomographyView() {
         </Box>
       </Box>
 
-      <Controls onRun={handleRun} onReset={handleReset} progress={progress} revolve={false} onRevolveChange={() => {}} />
+      <Controls onRun={handleRun} onReset={handleReset} progress={progress} />
     </Box>
   );
 }
