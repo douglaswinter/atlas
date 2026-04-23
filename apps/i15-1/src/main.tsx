@@ -17,6 +17,7 @@ declare global {
 
 import { createApi } from "@atlas/blueapi";
 import { BlueapiProvider } from "@atlas/blueapi-query";
+import { UserAuthProvider } from "./context/userAuth/UserAuthProvider.tsx";
 
 async function enableMocking() {
   if (import.meta.env.DEV) {
@@ -51,9 +52,11 @@ enableMocking().then(() => {
       <StrictMode>
         <ThemeProvider theme={DiamondTheme} defaultMode="light">
           <QueryClientProvider client={queryClient}>
-            <BlueapiProvider api={api}>
-              <RouterProvider router={router} />
-            </BlueapiProvider>
+            <UserAuthProvider>
+              <BlueapiProvider api={api}>
+                <RouterProvider router={router} />
+              </BlueapiProvider>
+            </UserAuthProvider>
           </QueryClientProvider>
         </ThemeProvider>
       </StrictMode>

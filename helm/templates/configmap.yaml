@@ -10,3 +10,4 @@ data:
     cookie_expire = "168h"
     cookie_refresh = "45s"
     cookie_name = "{{ include "oauth2-proxy.fullname" . }}-cookie"
+{{ include "ui-base.extraConfig" . | indent 4 }}
