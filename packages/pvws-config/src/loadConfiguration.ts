@@ -1,4 +1,5 @@
 import { type CsWebLibConfig } from "@diamondlightsource/cs-web-lib";
+import { useEffect, useState } from "react";
 
 const configFile = "/pvwsconfig.json";
 const defaultConfig = {
@@ -23,4 +24,14 @@ export const loadPvwsConfig = async (): Promise<CsWebLibConfig> => {
   }
 
   return config as CsWebLibConfig;
+};
+
+export const useLoadPvwsConfig = () => {
+  const [config, setConfig] = useState<CsWebLibConfig>();
+  useEffect(() => {
+    loadPvwsConfig().then((config) => {
+      setConfig(config);
+    });
+  }, []);
+  return config;
 };
