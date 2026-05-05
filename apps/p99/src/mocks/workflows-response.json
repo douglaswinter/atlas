@@ -1,0 +1,22 @@
+{
+  "data": {
+    "workflowTemplate": {
+      "name": "visr",
+      "maintainer": "visr-group",
+      "title": "visr",
+      "description": "Data processing for the Visible Light Spectroscopy beamline (ViSR).\n",
+      "arguments": {
+        "properties": {
+          "input-file-path": {
+            "default": "",
+            "type": "string"
+          }
+        },
+        "required": ["input-file-path"],
+        "type": "object"
+      },
+      "uiSchema": null,
+      "repository": null
+    }
+  }
+}
