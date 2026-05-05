@@ -1,7 +1,7 @@
-# ViSR Science UI
+# P99 Science UI
 
 ## Releasing
 
 This app is released using tags of the form:
 
-`visr@x.y.z`
+`P99@x.y.z`

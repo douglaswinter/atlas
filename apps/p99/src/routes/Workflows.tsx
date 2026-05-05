@@ -14,7 +14,7 @@ const Workflows: React.FC = () => {
           mb={10}
         >
           <Suspense>
-            <TemplateView templateName={"visr"} />
+            <TemplateView templateName={"p99"} />
           </Suspense>
         </Box>
       </Container>

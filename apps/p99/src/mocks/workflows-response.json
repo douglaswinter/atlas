@@ -1,10 +1,10 @@
 {
   "data": {
     "workflowTemplate": {
-      "name": "visr",
-      "maintainer": "visr-group",
-      "title": "visr",
-      "description": "Data processing for the Visible Light Spectroscopy beamline (ViSR).\n",
+      "name": "p99",
+      "maintainer": "p99-group",
+      "title": "p99",
+      "description": "Data processing for the Visible Light Spectroscopy beamline (p99).\n",
       "arguments": {
         "properties": {
           "input-file-path": {
