@@ -89,7 +89,7 @@ jobs:
           while read project; do
             name=$(echo "$project" | sed 's/@atlas\///')
             if [ -f "apps/$name/package.json" ] || [ -f "packages/$name/package.json" ]; then
-              pnpm turbo run coverage --filter=$project --force --no-daemon || true
+              pnpm turbo run coverage --filter=$project --force --no-daemon
             fi
           done < affected.txt
 
