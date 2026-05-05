@@ -12,12 +12,10 @@ import {
   SvgIcon,
   type SvgIconProps,
 } from "@mui/material";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import ArticleIcon from "@mui/icons-material/Article";
 import FeedIcon from "@mui/icons-material/Feed";
 import AddchartIcon from "@mui/icons-material/Addchart";
-import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import { Link } from "react-router-dom";
 import InstrumentSessionView from "../components/InstrumentSessionSelection/InstrumentSessionView";
 
