@@ -86,8 +86,12 @@ jobs:
         if: env.has_affected == 'true'
         # notice both times we --force turbo to ignore cache and execute tasks fresh
         run: |
-          FILTERS=$(awk '{print "--filter="$0}' affected.txt | xargs)
-          pnpm turbo run coverage $FILTERS --force --no-daemon
+          while read project; do
+            name=$(echo "$project" | sed 's/@atlas\///')
+            if [ -d "apps/$name" ] || [ -d "packages/$name" ]; then
+              pnpm turbo run coverage --filter=$project --force --no-daemon
+            fi
+          done < affected.txt
 
       - name: Save coverage (main affected)
         if: env.has_affected == 'true'
