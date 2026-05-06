@@ -14,13 +14,6 @@ ui-base:
         external:
           uri: https://p99-blueapi.diamond.ac.uk/
 
-    - id: workflows
-      path: /api/workflows
-      rewriteTarget: /graphql
-      target:
-        external:
-          uri: https://workflows.diamond.ac.uk
-
     - id: supergraph
       path: /api/graphql
       rewriteTarget: /
@@ -28,5 +21,3 @@ ui-base:
         external:
           uri: https://graph-nightly.diamond.ac.uk
       passHostHeader: false
-
-  identityProvider: legacy
