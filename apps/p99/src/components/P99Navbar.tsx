@@ -24,9 +24,6 @@ function P99Navbar() {
           }}
         >
           <NavLinks>
-            <NavLink to="/tomography" linkComponent={Link}>
-              Tomography
-            </NavLink>
             <NavLink to="/plans" linkComponent={Link}>
               Plans
             </NavLink>
