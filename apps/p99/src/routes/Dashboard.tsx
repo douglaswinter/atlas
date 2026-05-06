@@ -1,6 +1,5 @@
 import { Container, Typography, Button, Stack } from "@mui/material";
 import FeedIcon from "@mui/icons-material/Feed";
-import AddchartIcon from "@mui/icons-material/Addchart";
 import { Link } from "react-router-dom";
 import InstrumentSessionView from "../components/InstrumentSessionSelection/InstrumentSessionView";
 
@@ -21,15 +20,6 @@ function Dashboard() {
               sx={{ width: 150, height: 50 }}
             >
               <Typography sx={{ mt: "4px" }}>Plans</Typography>
-            </Button>
-            <Button
-              component={Link}
-              to="/workflows"
-              variant="contained"
-              startIcon={<AddchartIcon />}
-              sx={{ width: 150, height: 50, gap: "0.5rem" }}
-            >
-              <Typography sx={{ mt: "4px" }}>Workflows</Typography>
             </Button>
           </Stack>
           {/* <InstrumentSessionView sessionsList={GetInstrumentSessions()} /> */}

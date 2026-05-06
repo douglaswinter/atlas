@@ -16,7 +16,6 @@ declare global {
 }
 
 window.global ||= window;
-import Workflows from "./routes/Workflows.tsx";
 import { RelayEnvironmentProvider } from "react-relay";
 import { RelayEnvironment } from "./RelayEnvironment.ts";
 import { createApi } from "@atlas/blueapi";
@@ -42,10 +41,6 @@ const router = createBrowserRouter([
       {
         path: "plans",
         element: <JsonFormsPlans />,
-      },
-      {
-        path: "/workflows",
-        element: <Workflows />,
       },
     ],
   },
