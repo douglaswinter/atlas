@@ -21,14 +21,6 @@ ui-base:
         external:
           uri: https://workflows.diamond.ac.uk
 
-    - id: data
-      path: /api/data/
-      rewriteTarget: /
-      target:
-        service:
-          name: dataserver
-          port: 8000
-
     - id: supergraph
       path: /api/graphql
       rewriteTarget: /
