@@ -6,7 +6,7 @@ import type {
   SubmissionGraphQLErrorMessage,
   SubmissionNetworkErrorMessage,
   SubmissionSuccessMessage,
-} from "../../utils/types";
+} from "../../utils/workflow";
 import { type Visit, visitToText } from "@diamondlightsource/sci-react-ui";
 import SubmissionForm from "./SubmissionForm";
 import type { TemplateViewQuery as TemplateViewQueryType } from "./__generated__/TemplateViewQuery.graphql";

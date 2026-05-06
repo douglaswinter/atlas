@@ -14,7 +14,7 @@ import type {
   SubmissionGraphQLErrorMessage,
   SubmissionNetworkErrorMessage,
   SubmissionSuccessMessage,
-} from "../../utils/types";
+} from "../../utils/workflow";
 
 const renderSubmittedMessage = (
   r:

@@ -11,7 +11,7 @@ import { JsonForms } from "@jsonforms/react";
 import React, { useState } from "react";
 import { Divider, Snackbar, Stack, Typography, useTheme } from "@mui/material";
 import type { ErrorObject } from "ajv";
-import type { JSONObject, Visit } from "../../utils/types";
+import type { JSONObject, Visit } from "../../utils/workflow";
 import { VisitInput } from "@diamondlightsource/sci-react-ui";
 
 interface TemplateSubmissionFormProps {

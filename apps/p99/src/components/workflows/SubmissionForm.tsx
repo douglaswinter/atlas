@@ -1,5 +1,5 @@
 import { useFragment } from "react-relay";
-import { type JSONObject, type Visit } from "../../utils/types";
+import { type JSONObject, type Visit } from "../../utils/workflow";
 import type { JsonSchema, UISchemaElement } from "@jsonforms/core";
 import type { workflowTemplateFragment$key } from "../../graphql/__generated__/workflowTemplateFragment.graphql";
 import { workflowTemplateFragment } from "../../graphql/workflowTemplateFragment";
