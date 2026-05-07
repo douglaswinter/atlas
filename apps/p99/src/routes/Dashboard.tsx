@@ -1,32 +1,17 @@
-import { Container, Typography, Button, Stack } from "@mui/material";
-import FeedIcon from "@mui/icons-material/Feed";
-import { Link } from "react-router-dom";
-import InstrumentSessionView from "../components/InstrumentSessionSelection/InstrumentSessionView";
+import { Box, Container, Typography } from "@mui/material";
 
 function Dashboard() {
   return (
-    <>
-      <Container maxWidth="sm" sx={{ mt: 5, mb: 4 }}>
-        <Stack direction={"column"} alignItems={"center"} spacing={3}>
-          <Typography variant="h4" component="h1" textAlign={"center"}>
-            P99
-          </Typography>
-          <Stack direction={"row"} spacing={5}>
-            <Button
-              component={Link}
-              to="/plans"
-              variant="contained"
-              startIcon={<FeedIcon />}
-              sx={{ width: 150, height: 50 }}
-            >
-              <Typography sx={{ mt: "4px" }}>Plans</Typography>
-            </Button>
-          </Stack>
-          {/* <InstrumentSessionView sessionsList={GetInstrumentSessions()} /> */}
-          <InstrumentSessionView sessionsList={["cm44186-1", "cm44186-2"]} />
-        </Stack>
-      </Container>
-    </>
+    <Container maxWidth="sm" sx={{ mt: 5, mb: 4 }}>
+      <Box textAlign="center">
+        <Typography variant="h4" component="h1">
+          P99
+        </Typography>
+        <Typography variant="body1" sx={{ mt: 2 }}>
+          Minimal P99
+        </Typography>
+      </Box>
+    </Container>
   );
 }
 
