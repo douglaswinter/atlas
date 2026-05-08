@@ -11,7 +11,9 @@
   "dependencies": {
     "@atlas/blueapi": "workspace:*",
     "@atlas/blueapi-query": "workspace:*",
+    "@atlas/pvws-config": "workspace:*",
     "@diamondlightsource/sci-react-ui": "^0.4.0",
+    "@diamondlightsource/cs-web-lib": "0.9.5",
     "@mui/icons-material": "^6.5.0",
     "@mui/material": "<7.0.0",
     "@tanstack/react-query": "^5.90.21",
@@ -23,7 +25,9 @@
     "@vitejs/plugin-react-swc": "^3.11.0",
     "msw": "^2.10.4",
     "react-router-dom": "^7.7.1",
+    "react-redux": "^7.2.9",
     "typescript": "~5.9.3",
+    "@types/react-redux": "7.1.34",
     "vite": "^7.3.1",
     "vite-plugin-relay": "^2.1.0",
     "vitest": "*"

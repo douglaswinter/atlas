@@ -8,6 +8,7 @@ import {
   User,
 } from "@diamondlightsource/sci-react-ui";
 import { useUserAuth } from "../context/userAuth/useUserAuth";
+import React from "react";
 
 function WaffleNavbar() {
   const user = useUserAuth();
@@ -19,24 +20,6 @@ function WaffleNavbar() {
     <Navbar
       logo="theme"
       containerWidth={false}
-      leftSlot={
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            width: "100%",
-            flexWrap: "nowrap",
-            overflow: "hidden",
-          }}
-        >
-          <NavLinks>
-            <NavLink to="/robot" linkComponent={Link}>
-              Robot
-            </NavLink>
-          </NavLinks>
-        </Box>
-      }
       rightSlot={
         <Box sx={{ marginLeft: 4 }}>
           <User
@@ -52,7 +35,15 @@ function WaffleNavbar() {
           <ColourSchemeButton />
         </Box>
       }
-    />
+    >
+      <React.Fragment>
+        <NavLinks>
+          <NavLink to="/robot" linkComponent={Link}>
+            Robot
+          </NavLink>
+        </NavLinks>
+      </React.Fragment>
+    </Navbar>
   );
 }
 
