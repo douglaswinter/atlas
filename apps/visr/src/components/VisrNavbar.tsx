@@ -27,6 +27,9 @@ function VisrNavbar() {
             <NavLink to="/spectroscopy" linkComponent={Link}>
               Spectroscopy
             </NavLink>
+            <NavLink to="/tomography" linkComponent={Link}>
+              Tomography
+            </NavLink>
             <NavLink to="/plans" linkComponent={Link}>
               Plans
             </NavLink>

@@ -17,6 +17,15 @@ function Dashboard() {
           <Stack direction={"row"} spacing={5}>
             <Button
               component={Link}
+              to="/tomography"
+              variant="contained"
+              startIcon={<ArticleIcon />}
+              sx={{ width: 150, height: 50 }}
+            >
+              <Typography sx={{ mt: "4px" }}>Tomography</Typography>
+            </Button>
+            <Button
+              component={Link}
               to="/spectroscopy"
               variant="contained"
               startIcon={<ArticleIcon />}
