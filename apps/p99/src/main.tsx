@@ -7,8 +7,8 @@ import Dashboard from "./routes/Dashboard.tsx";
 import { Layout } from "./routes/Layout.tsx";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { createApi } from "@atlas/blueapi";
 import { BlueapiProvider } from "@atlas/blueapi-query";
+import { api } from "./api";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +24,6 @@ const router = createBrowserRouter([
 ]);
 
 const queryClient = new QueryClient();
-export const api = createApi("/api");
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider theme={DiamondTheme} defaultMode="system">

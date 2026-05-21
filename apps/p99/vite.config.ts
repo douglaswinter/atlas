@@ -8,15 +8,15 @@ export default defineConfig({
   define: {
     global: {},
   },
-  // redirect API calls to the backend during development
-  // server: {
-  //   proxy: {
-  //     "/api": {
-  //       target: "https://p99-blueapi.diamond.ac.uk",
-  //       changeOrigin: true,
-  //       secure: false,
-  //       rewrite: path => path.replace(/^\/api/, ""),
-  //     },
-  //   },
-  // },
+  server: {
+    proxy: {
+      "/api": {
+        //target: "https://p99-blueapi.diamond.ac.uk",
+        target: "http://localhost:8000",
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

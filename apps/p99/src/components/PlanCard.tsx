@@ -1,94 +1,181 @@
+import { useState } from "react";
 import {
   Card,
   CardContent,
+  Stack,
   Typography,
   Chip,
-  Stack,
   Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  TextField,
+  MenuItem,
+  Box,
+  Button,
+  CircularProgress,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CodeIcon from "@mui/icons-material/Code";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import type { Plan } from "@atlas/blueapi";
+import { api } from "../api";
 
-export const PlanCard = ({ plan }: { plan: any }) => {
+interface PlanCardProps {
+  plan: Plan;
+  devicesData: any;
+  isWorkerRunning: boolean;
+  onSuccess: (msg: string) => void;
+  onError: (msg: string) => void;
+}
+
+export function PlanCard({
+  plan,
+  devicesData,
+  isWorkerRunning,
+  onSuccess,
+  onError,
+}: PlanCardProps) {
+  const [formValues, setFormValues] = useState<Record<string, any>>({});
+  const [submitting, setSubmitting] = useState(false);
+
+  const cleanDescription = plan.description?.split(/parameters/i)[0].trim();
+  const properties = (plan.schema as any)?.properties || {};
+  const requiredFields = (plan.schema as any)?.required || [];
+
+  const handleInputChange = (paramName: string, value: any) => {
+    setFormValues(prev => ({ ...prev, [paramName]: value }));
+  };
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      const submitResult = await api.tasks.submit({
+        name: plan.name,
+        params: formValues,
+        instrument_session: "p99-session-01",
+      });
+
+      await api.worker.setActiveTask(submitResult.task_id);
+      onSuccess(`Plan ${plan.name} started successfully!`);
+    } catch (err: any) {
+      onError(
+        err.response?.data?.detail || `Execution failed for ${plan.name}.`,
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
-    <Card sx={{ mb: 2, borderLeft: "5px solid #1976d2" }}>
-      <CardContent>
+    <Card
+      elevation={2}
+      sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+    >
+      <CardContent sx={{ flexGrow: 1 }}>
         <Stack
           direction="row"
           justifyContent="space-between"
-          alignItems="center"
+          alignItems="flex-start"
         >
           <Typography
-            variant="h6"
-            sx={{ fontFamily: "monospace", fontWeight: "bold" }}
+            variant="h5"
+            sx={{
+              fontFamily: "monospace",
+              color: "primary.main",
+              fontWeight: "bold",
+            }}
           >
-            {plan.name}()
+            {plan.name}
           </Typography>
-          <Chip
-            label="Python Plan"
-            size="small"
-            color="primary"
-            variant="outlined"
-          />
+          <Chip label="Python" size="small" variant="outlined" />
         </Stack>
 
         <Typography
           variant="body2"
-          color="text.secondary"
-          sx={{ mt: 1, fontStyle: "italic" }}
+          sx={{ mt: 1.5, mb: 2, minHeight: "3em", color: "text.secondary" }}
         >
-          {plan.description || "No description provided."}
+          {cleanDescription || "No documentation available."}
         </Typography>
 
-        <Divider sx={{ my: 2 }} />
+        <Divider sx={{ my: 1 }} />
 
-        {/* This section handles the "Python-like" function arguments */}
-        <Accordion elevation={0} sx={{ "&:before": { display: "none" } }}>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Accordion
+          defaultExpanded={false}
+          elevation={0}
+          sx={{ bgcolor: "transparent" }}
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />} sx={{ px: 0 }}>
             <Stack direction="row" spacing={1} alignItems="center">
-              <CodeIcon fontSize="small" />
-              <Typography variant="subtitle2">
-                Parameters ({Object.keys(plan.schema?.properties || {}).length})
+              <CodeIcon fontSize="small" color="action" />
+              <Typography variant="subtitle2" fontWeight="bold">
+                Configuration
               </Typography>
             </Stack>
           </AccordionSummary>
-          <AccordionDetails>
-            <Stack spacing={1}>
-              {Object.entries(plan.schema?.properties || {}).map(
-                ([key, value]: [string, any]) => (
-                  <Stack
+          <AccordionDetails sx={{ px: 0 }}>
+            <Stack spacing={2}>
+              {Object.entries(properties).map(([key, value]: [string, any]) => {
+                const isRequired = requiredFields.includes(key);
+                const isDevice =
+                  key.toLowerCase().includes("device") ||
+                  key.toLowerCase().includes("detector");
+
+                return (
+                  <TextField
                     key={key}
-                    direction="row"
-                    spacing={2}
-                    justifyContent="space-between"
+                    label={key}
+                    select={isDevice}
+                    fullWidth
+                    size="small"
+                    required={isRequired}
+                    type={
+                      value.type === "number" || value.type === "integer"
+                        ? "number"
+                        : "text"
+                    }
+                    value={formValues[key] ?? ""}
+                    onChange={e => handleInputChange(key, e.target.value)}
+                    helperText={value.description}
+                    slotProps={{
+                      inputLabel: { shrink: true },
+                    }}
                   >
-                    <Typography
-                      variant="body2"
-                      sx={{ fontWeight: "600", color: "#d32f2f" }}
-                    >
-                      {key}
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      sx={{
-                        color: "#666",
-                        bgcolor: "#f5f5f5",
-                        px: 1,
-                        borderRadius: 1,
-                      }}
-                    >
-                      {value.type}
-                    </Typography>
-                  </Stack>
-                ),
-              )}
+                    {isDevice
+                      ? devicesData?.devices?.map((d: any) => (
+                          <MenuItem key={d.name} value={d.name}>
+                            {d.name}
+                          </MenuItem>
+                        ))
+                      : null}
+                  </TextField>
+                );
+              })}
             </Stack>
           </AccordionDetails>
         </Accordion>
       </CardContent>
+
+      <Box
+        sx={{
+          p: 2,
+          borderTop: "1px solid",
+          borderColor: "divider",
+          bgcolor: "grey.50",
+        }}
+      >
+        <Button
+          variant="contained"
+          fullWidth
+          startIcon={
+            submitting ? <CircularProgress size={20} /> : <PlayArrowIcon />
+          }
+          onClick={handleSubmit}
+          disabled={submitting || isWorkerRunning}
+        >
+          {submitting ? "Running..." : `Run ${plan.name}`}
+        </Button>
+      </Box>
     </Card>
   );
-};
+}
