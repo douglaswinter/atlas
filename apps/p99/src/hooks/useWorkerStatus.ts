@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { api } from "../api";
 
-// Blueapi Hooks & Types
+// Blueapi
 
 import type { WorkerState } from "@atlas/blueapi";
 
@@ -20,7 +20,7 @@ export function useWorkerStatus() {
         } else {
           setActiveTaskId(null);
         }
-      } catch (err) {
+      } catch {
         setWorkerState("UNKNOWN");
         setActiveTaskId(null);
       }
