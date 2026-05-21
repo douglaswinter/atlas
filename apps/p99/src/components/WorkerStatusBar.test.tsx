@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from "@atlas/vitest-conf";
 import { DiamondTheme, ThemeProvider } from "@diamondlightsource/sci-react-ui";
 import { WorkerStatusBar } from "./WorkerStatusBar";
-import type { WorkerState } from "@atlas/blueapi";
 import { describe, it, expect, vi } from "vitest";
 
 describe("WorkerStatusBar", () => {
