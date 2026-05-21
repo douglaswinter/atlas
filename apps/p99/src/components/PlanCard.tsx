@@ -35,6 +35,7 @@ interface PydanticValidationError {
 interface PlanCardProps {
   plan: Plan;
   isWorkerRunning: boolean;
+  instrumentSession: string;
   onSuccess: (msg: string) => void;
   onError: (msg: string) => void;
 }
@@ -42,6 +43,7 @@ interface PlanCardProps {
 export function PlanCard({
   plan,
   isWorkerRunning,
+  instrumentSession,
   onSuccess,
   onError,
 }: PlanCardProps) {
@@ -52,7 +54,7 @@ export function PlanCard({
 
   const cleanDescription = plan.description?.split(/parameters/i)[0].trim();
 
-  // Safely cast out the JSON Schema blocks from the generic Plan type object
+  // JSON Schema blocks from the generic Plan type object
   const planSchema = plan.schema as
     | { properties?: Record<string, SchemaProperty>; required?: string[] }
     | undefined;
@@ -95,7 +97,7 @@ export function PlanCard({
       const submitResult = await api.tasks.submit({
         name: plan.name || "",
         params: processedParams,
-        instrument_session: "p99-session-01",
+        instrument_session: instrumentSession,
       });
 
       await api.worker.setActiveTask(submitResult.task_id);

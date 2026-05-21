@@ -50,6 +50,7 @@ describe("PlanCard", () => {
         <PlanCard
           plan={mockPlan}
           isWorkerRunning={false}
+          instrumentSession="test-session"
           onSuccess={mockOnSuccess}
           onError={mockOnError}
         />
@@ -66,6 +67,7 @@ describe("PlanCard", () => {
         <PlanCard
           plan={mockPlan}
           isWorkerRunning={false}
+          instrumentSession="test-session"
           onSuccess={mockOnSuccess}
           onError={mockOnError}
         />
@@ -81,6 +83,7 @@ describe("PlanCard", () => {
         <PlanCard
           plan={mockPlan}
           isWorkerRunning={false}
+          instrumentSession="test-session"
           onSuccess={mockOnSuccess}
           onError={mockOnError}
         />
@@ -104,6 +107,7 @@ describe("PlanCard", () => {
         <PlanCard
           plan={mockPlan}
           isWorkerRunning={false}
+          instrumentSession="test-session"
           onSuccess={mockOnSuccess}
           onError={mockOnError}
         />
@@ -121,6 +125,7 @@ describe("PlanCard", () => {
         <PlanCard
           plan={mockPlan}
           isWorkerRunning={true}
+          instrumentSession="test-session"
           onSuccess={mockOnSuccess}
           onError={mockOnError}
         />
@@ -138,6 +143,7 @@ describe("PlanCard", () => {
         <PlanCard
           plan={mockPlan}
           isWorkerRunning={false}
+          instrumentSession="test-session"
           onSuccess={mockOnSuccess}
           onError={mockOnError}
         />

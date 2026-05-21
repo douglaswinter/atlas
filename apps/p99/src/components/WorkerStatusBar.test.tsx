@@ -5,6 +5,7 @@ import { describe, it, expect, vi } from "vitest";
 
 describe("WorkerStatusBar", () => {
   const mockOnSync = vi.fn();
+  const mockOnSessionChange = vi.fn();
 
   it("renders the title and subtitle", () => {
     render(
@@ -14,6 +15,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -30,6 +33,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -45,6 +50,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId="task-123"
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -61,6 +68,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -76,6 +85,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -91,6 +102,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -106,6 +119,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -122,6 +137,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={true}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -138,6 +155,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );
@@ -158,6 +177,8 @@ describe("WorkerStatusBar", () => {
           activeTaskId={null}
           isFetching={false}
           onSync={mockOnSync}
+          instrumentSession="p99-session-01"
+          onInstrumentSessionChange={mockOnSessionChange}
         />
       </ThemeProvider>,
     );

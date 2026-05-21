@@ -5,6 +5,7 @@ import {
   Button,
   CircularProgress,
   Paper,
+  TextField,
 } from "@mui/material";
 import LoopIcon from "@mui/icons-material/Loop";
 
@@ -15,6 +16,8 @@ interface WorkerStatusBarProps {
   activeTaskId: string | null;
   isFetching: boolean;
   onSync: () => void;
+  instrumentSession: string;
+  onInstrumentSessionChange: (session: string) => void;
 }
 
 const getStatusColor = (state: WorkerState) => {
@@ -37,6 +40,8 @@ export function WorkerStatusBar({
   activeTaskId,
   isFetching,
   onSync,
+  instrumentSession,
+  onInstrumentSessionChange,
 }: WorkerStatusBarProps) {
   const statusStyle = getStatusColor(workerState);
   return (
@@ -70,6 +75,15 @@ export function WorkerStatusBar({
         </Box>
 
         <Stack direction="row" alignItems="center" spacing={2}>
+          <TextField
+            label="Session ID"
+            size="small"
+            value={instrumentSession}
+            onChange={e => onInstrumentSessionChange(e.target.value)}
+            sx={{ minWidth: 180, bgcolor: "background.paper" }}
+            InputLabelProps={{ shrink: true }}
+          />
+
           <Box
             sx={{
               bgcolor: statusStyle.bg,

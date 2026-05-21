@@ -19,6 +19,7 @@ function Dashboard() {
   const { workerState, activeTaskId } = useWorkerStatus();
 
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
+  const [instrumentSession, setInstrumentSession] = useState("p99-session-01");
 
   return (
     <Box sx={{ bgcolor: "background.default", minHeight: "100vh", pb: 6 }}>
@@ -28,6 +29,8 @@ function Dashboard() {
         activeTaskId={activeTaskId}
         isFetching={isFetching}
         onSync={refetch}
+        instrumentSession={instrumentSession}
+        onInstrumentSessionChange={setInstrumentSession}
       />
 
       {/* Sticky Global Feedback Alert Wrapper */}
@@ -70,6 +73,7 @@ function Dashboard() {
                   <PlanCard
                     plan={plan}
                     isWorkerRunning={workerState === "RUNNING"}
+                    instrumentSession={instrumentSession}
                     onSuccess={(msg: string) =>
                       setFeedback({ type: "success", msg })
                     }
