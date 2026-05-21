@@ -10,15 +10,23 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
 
+interface DeviceInfo {
+  name: string;
+  [key: string]: unknown;
+}
+
 interface DevicePanelProps {
-  devicesData: any;
+  devicesData:
+    | {
+        devices?: DeviceInfo[];
+      }
+    | undefined;
 }
 
 export function DevicePanel({ devicesData }: DevicePanelProps) {
   const devices = devicesData?.devices || [];
 
   return (
-    // Cleaned up container: Just a standard block wrapper now
     <Box sx={{ width: "100%" }}>
       <Accordion
         defaultExpanded
@@ -54,7 +62,7 @@ export function DevicePanel({ devicesData }: DevicePanelProps) {
                 p: 0.5,
               }}
             >
-              {devices.map((device: any) => (
+              {devices.map((device: DeviceInfo) => (
                 <Chip
                   key={device.name}
                   label={device.name}

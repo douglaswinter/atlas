@@ -20,9 +20,20 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import type { Plan } from "@atlas/blueapi";
 import { api } from "../api";
 
+interface SchemaProperty {
+  type?: string;
+  title?: string;
+  description?: string;
+}
+
+interface PydanticValidationError {
+  loc?: (string | number)[];
+  msg: string;
+  type: string;
+}
+
 interface PlanCardProps {
   plan: Plan;
-  devicesData: any;
   isWorkerRunning: boolean;
   onSuccess: (msg: string) => void;
   onError: (msg: string) => void;
@@ -30,35 +41,43 @@ interface PlanCardProps {
 
 export function PlanCard({
   plan,
-  devicesData,
   isWorkerRunning,
   onSuccess,
   onError,
 }: PlanCardProps) {
-  const [formValues, setFormValues] = useState<Record<string, any>>({});
+  const [formValues, setFormValues] = useState<Record<string, string | number>>(
+    {},
+  );
   const [submitting, setSubmitting] = useState(false);
 
   const cleanDescription = plan.description?.split(/parameters/i)[0].trim();
-  const properties = (plan.schema as any)?.properties || {};
-  const requiredFields = (plan.schema as any)?.required || [];
 
-  const handleInputChange = (paramName: string, value: any) => {
+  // Safely cast out the JSON Schema blocks from the generic Plan type object
+  const planSchema = plan.schema as
+    | { properties?: Record<string, SchemaProperty>; required?: string[] }
+    | undefined;
+  const properties = planSchema?.properties || {};
+  const requiredFields = planSchema?.required || [];
+
+  const handleInputChange = (paramName: string, value: string) => {
     setFormValues(prev => ({ ...prev, [paramName]: value }));
   };
 
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      const processedParams: Record<string, any> = {};
+      const processedParams: Record<
+        string,
+        string | number | (string | number)[]
+      > = {};
 
-      Object.entries(properties).map(([key, value]: [string, any]) => {
+      Object.entries(properties).forEach(([key, value]) => {
         const userValue = formValues[key];
+
         if (userValue === undefined || userValue === "") return;
 
-        // Handle parameters expecting an Array (e.g., detectors: ["det1", "det2"])
         if (value.type === "array") {
           if (typeof userValue === "string") {
-            // Splits by commas and cleans up whitespace: "det1, det2" -> ["det1", "det2"]
             processedParams[key] = userValue
               .split(",")
               .map(item => item.trim())
@@ -74,28 +93,30 @@ export function PlanCard({
       });
 
       const submitResult = await api.tasks.submit({
-        name: plan.name,
+        name: plan.name || "",
         params: processedParams,
         instrument_session: "p99-session-01",
       });
 
       await api.worker.setActiveTask(submitResult.task_id);
       onSuccess(`Plan ${plan.name} started successfully!`);
-    } catch (err: any) {
-      const errorData = err.response?.data?.detail;
+    } catch (err: unknown) {
+      // Safe, strongly typed error wrapper instead of raw 'any' parsing
+      const axiosError = err as {
+        response?: { data?: { detail?: string | PydanticValidationError[] } };
+      };
+      const errorData = axiosError.response?.data?.detail;
       let userFriendlyMessage = `Execution failed for ${plan.name}.`;
 
       if (typeof errorData === "string") {
         userFriendlyMessage = errorData;
       } else if (Array.isArray(errorData)) {
         userFriendlyMessage = errorData
-          .map((e: any) => {
+          .map((e: PydanticValidationError) => {
             const field = e.loc ? e.loc[e.loc.length - 1] : "Parameter";
             return `${field}: ${e.msg}`;
           })
           .join(" | ");
-      } else if (errorData && typeof errorData === "object") {
-        userFriendlyMessage = errorData.msg || JSON.stringify(errorData);
       }
 
       onError(userFriendlyMessage);
@@ -177,7 +198,7 @@ export function PlanCard({
                 </Box>
               )}
 
-              {Object.entries(properties).map(([key, value]: [string, any]) => {
+              {Object.entries(properties).map(([key, value]) => {
                 const isRequired = requiredFields.includes(key);
                 const isDevice =
                   key.toLowerCase().includes("device") ||
@@ -198,12 +219,20 @@ export function PlanCard({
                     value={formValues[key] ?? ""}
                     onChange={e => handleInputChange(key, e.target.value)}
                     helperText={
-                      isDevice
-                        ? `Enter device ID (e.g., det1). ${value.description || ""}`
-                        : value.description
+                      value.type === "array"
+                        ? `Enter values separated by commas (e.g. det1, det2). ${value.description || ""}`
+                        : isDevice
+                          ? `Enter device ID (e.g. motor_x). ${value.description || ""}`
+                          : value.description
                     }
                     InputLabelProps={{ shrink: true }}
-                    placeholder={isDevice ? "e.g., detector_a" : ""}
+                    placeholder={
+                      value.type === "array"
+                        ? "det1, det2"
+                        : isDevice
+                          ? "e.g., detector_a"
+                          : ""
+                    }
                     sx={{
                       ...(isRequired && {
                         "& .MuiInputLabel-root": {
@@ -214,9 +243,7 @@ export function PlanCard({
                           "& fieldset": {
                             borderColor: "rgba(237, 108, 2, 0.5)",
                           },
-                          "&:hover fieldset": {
-                            borderColor: "warning.main",
-                          },
+                          "&:hover fieldset": { borderColor: "warning.main" },
                         },
                       }),
                     }}

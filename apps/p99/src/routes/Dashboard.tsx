@@ -3,21 +3,22 @@ import { Box, Container, Alert, Grid } from "@mui/material";
 import { usePlans, useDevices } from "@atlas/blueapi-query";
 import type { Plan } from "@atlas/blueapi";
 
-// Components & Hooks
 import { useWorkerStatus } from "../hooks/useWorkerStatus";
 import { WorkerStatusBar } from "../components/WorkerStatusBar";
 import { DevicePanel } from "../components/DevicePanel";
 import { PlanCard } from "../components/PlanCard";
+
+interface FeedbackState {
+  type: "success" | "error";
+  msg: string;
+}
 
 function Dashboard() {
   const { data: plansData, isFetching, isError, refetch } = usePlans();
   const { data: devicesData } = useDevices();
   const { workerState, activeTaskId } = useWorkerStatus();
 
-  const [feedback, setFeedback] = useState<{
-    type: "success" | "error";
-    msg: string;
-  } | null>(null);
+  const [feedback, setFeedback] = useState<FeedbackState | null>(null);
 
   return (
     <Box sx={{ bgcolor: "background.default", minHeight: "100vh", pb: 6 }}>
@@ -63,23 +64,25 @@ function Dashboard() {
           {/* LEFT COLUMN: Scrollable Plans Library */}
           <Grid item xs={12} md={8} lg={9}>
             <Grid container spacing={3}>
-              {plansData?.plans?.map((plan: Plan) => (
-                <Grid item xs={12} lg={6} key={plan.name}>
+              {/* Added a fallback array check to satisfy mapping safety rules */}
+              {(plansData?.plans || []).map((plan: Plan) => (
+                <Grid item xs={12} lg={6} key={plan.name || "unknown-plan"}>
                   <PlanCard
                     plan={plan}
-                    devicesData={devicesData}
                     isWorkerRunning={workerState === "RUNNING"}
-                    onSuccess={msg => setFeedback({ type: "success", msg })}
-                    onError={msg => setFeedback({ type: "error", msg })}
+                    onSuccess={(msg: string) =>
+                      setFeedback({ type: "success", msg })
+                    }
+                    onError={(msg: string) =>
+                      setFeedback({ type: "error", msg })
+                    }
                   />
                 </Grid>
               ))}
             </Grid>
           </Grid>
 
-          {/* RIGHT COLUMN: Persistent Device Panel
-              FIX: We apply sticky properties directly to the grid column item.
-          */}
+          {/* RIGHT COLUMN: Persistent Device Panel */}
           <Grid
             item
             xs={12}
@@ -92,7 +95,11 @@ function Dashboard() {
               transition: "top 0.2s ease-in-out",
             }}
           >
-            <DevicePanel devicesData={devicesData} />
+            <DevicePanel
+              devicesData={
+                devicesData as { devices?: { name: string }[] } | undefined
+              }
+            />
           </Grid>
         </Grid>
       </Container>
