@@ -10,7 +10,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   TextField,
-  MenuItem,
   Box,
   Button,
   CircularProgress,
@@ -50,18 +49,56 @@ export function PlanCard({
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
+      const processedParams: Record<string, any> = {};
+
+      Object.entries(properties).map(([key, value]: [string, any]) => {
+        const userValue = formValues[key];
+        if (userValue === undefined || userValue === "") return;
+
+        // Handle parameters expecting an Array (e.g., detectors: ["det1", "det2"])
+        if (value.type === "array") {
+          if (typeof userValue === "string") {
+            // Splits by commas and cleans up whitespace: "det1, det2" -> ["det1", "det2"]
+            processedParams[key] = userValue
+              .split(",")
+              .map(item => item.trim())
+              .filter(item => item !== "");
+          } else {
+            processedParams[key] = [userValue];
+          }
+        } else if (value.type === "number" || value.type === "integer") {
+          processedParams[key] = Number(userValue);
+        } else {
+          processedParams[key] = userValue;
+        }
+      });
+
       const submitResult = await api.tasks.submit({
         name: plan.name,
-        params: formValues,
+        params: processedParams,
         instrument_session: "p99-session-01",
       });
 
       await api.worker.setActiveTask(submitResult.task_id);
       onSuccess(`Plan ${plan.name} started successfully!`);
     } catch (err: any) {
-      onError(
-        err.response?.data?.detail || `Execution failed for ${plan.name}.`,
-      );
+      const errorData = err.response?.data?.detail;
+      let userFriendlyMessage = `Execution failed for ${plan.name}.`;
+
+      if (typeof errorData === "string") {
+        userFriendlyMessage = errorData;
+      } else if (Array.isArray(errorData)) {
+        userFriendlyMessage = errorData
+          .map((e: any) => {
+            const field = e.loc ? e.loc[e.loc.length - 1] : "Parameter";
+            return `${field}: ${e.msg}`;
+          })
+          .join(" | ");
+      } else if (errorData && typeof errorData === "object") {
+        userFriendlyMessage = errorData.msg || JSON.stringify(errorData);
+      }
+
+      onError(userFriendlyMessage);
     } finally {
       setSubmitting(false);
     }
@@ -76,7 +113,7 @@ export function PlanCard({
         <Stack
           direction="row"
           justifyContent="space-between"
-          alignItems="flex-start"
+          alignItems="center"
         >
           <Typography
             variant="h5"
@@ -91,14 +128,7 @@ export function PlanCard({
           <Chip label="Python" size="small" variant="outlined" />
         </Stack>
 
-        <Typography
-          variant="body2"
-          sx={{ mt: 1.5, mb: 2, minHeight: "3em", color: "text.secondary" }}
-        >
-          {cleanDescription || "No documentation available."}
-        </Typography>
-
-        <Divider sx={{ my: 1 }} />
+        <Divider sx={{ mt: 2 }} />
 
         <Accordion
           defaultExpanded={false}
@@ -109,12 +139,44 @@ export function PlanCard({
             <Stack direction="row" spacing={1} alignItems="center">
               <CodeIcon fontSize="small" color="action" />
               <Typography variant="subtitle2" fontWeight="bold">
-                Configuration
+                Configure & View Details
               </Typography>
             </Stack>
           </AccordionSummary>
+
           <AccordionDetails sx={{ px: 0 }}>
-            <Stack spacing={2}>
+            <Stack spacing={2.5}>
+              {cleanDescription && (
+                <Box
+                  sx={{
+                    p: 1.5,
+                    bgcolor: "grey.50",
+                    borderRadius: 1,
+                    borderLeft: "3px solid",
+                    borderColor: "primary.light",
+                  }}
+                >
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{
+                      display: "block",
+                      mb: 0.5,
+                      fontWeight: "bold",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Protocol Documentation:
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{ color: "text.secondary", lineHeight: 1.5 }}
+                  >
+                    {cleanDescription}
+                  </Typography>
+                </Box>
+              )}
+
               {Object.entries(properties).map(([key, value]: [string, any]) => {
                 const isRequired = requiredFields.includes(key);
                 const isDevice =
@@ -124,8 +186,7 @@ export function PlanCard({
                 return (
                   <TextField
                     key={key}
-                    label={key}
-                    select={isDevice}
+                    label={isRequired ? `${key} (Required)` : key}
                     fullWidth
                     size="small"
                     required={isRequired}
@@ -136,19 +197,30 @@ export function PlanCard({
                     }
                     value={formValues[key] ?? ""}
                     onChange={e => handleInputChange(key, e.target.value)}
-                    helperText={value.description}
-                    slotProps={{
-                      inputLabel: { shrink: true },
+                    helperText={
+                      isDevice
+                        ? `Enter device ID (e.g., det1). ${value.description || ""}`
+                        : value.description
+                    }
+                    InputLabelProps={{ shrink: true }}
+                    placeholder={isDevice ? "e.g., detector_a" : ""}
+                    sx={{
+                      ...(isRequired && {
+                        "& .MuiInputLabel-root": {
+                          color: "warning.main",
+                          fontWeight: "bold",
+                        },
+                        "& .MuiOutlinedInput-root": {
+                          "& fieldset": {
+                            borderColor: "rgba(237, 108, 2, 0.5)",
+                          },
+                          "&:hover fieldset": {
+                            borderColor: "warning.main",
+                          },
+                        },
+                      }),
                     }}
-                  >
-                    {isDevice
-                      ? devicesData?.devices?.map((d: any) => (
-                          <MenuItem key={d.name} value={d.name}>
-                            {d.name}
-                          </MenuItem>
-                        ))
-                      : null}
-                  </TextField>
+                  />
                 );
               })}
             </Stack>

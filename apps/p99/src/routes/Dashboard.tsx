@@ -1,16 +1,17 @@
 import { useState } from "react";
-import { Box, Container, Alert, Grid2 } from "@mui/material";
+import { Box, Container, Alert, Grid } from "@mui/material";
 import { usePlans, useDevices } from "@atlas/blueapi-query";
 import type { Plan } from "@atlas/blueapi";
 
+// Components & Hooks
 import { useWorkerStatus } from "../hooks/useWorkerStatus";
 import { WorkerStatusBar } from "../components/WorkerStatusBar";
+import { DevicePanel } from "../components/DevicePanel";
 import { PlanCard } from "../components/PlanCard";
 
 function Dashboard() {
   const { data: plansData, isFetching, isError, refetch } = usePlans();
   const { data: devicesData } = useDevices();
-
   const { workerState, activeTaskId } = useWorkerStatus();
 
   const [feedback, setFeedback] = useState<{
@@ -20,6 +21,7 @@ function Dashboard() {
 
   return (
     <Box sx={{ bgcolor: "background.default", minHeight: "100vh", pb: 6 }}>
+      {/* Sticky Global Status Header */}
       <WorkerStatusBar
         workerState={workerState}
         activeTaskId={activeTaskId}
@@ -27,17 +29,29 @@ function Dashboard() {
         onSync={refetch}
       />
 
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
-        {feedback && (
+      {/* Sticky Global Feedback Alert Wrapper */}
+      {feedback && (
+        <Box
+          sx={{
+            position: "sticky",
+            top: "74px",
+            zIndex: 1050,
+            px: 3,
+            pt: 1.5,
+            bgcolor: "background.default",
+          }}
+        >
           <Alert
             severity={feedback.type}
-            sx={{ mb: 3 }}
             onClose={() => setFeedback(null)}
+            elevation={3}
           >
             {feedback.msg}
           </Alert>
-        )}
+        </Box>
+      )}
 
+      <Container maxWidth="xl" sx={{ mt: 3 }}>
         {isError && (
           <Alert severity="error" sx={{ mb: 3 }}>
             Unauthorized or Service Unreachable. Check proxy configs or Keycloak
@@ -45,19 +59,42 @@ function Dashboard() {
           </Alert>
         )}
 
-        <Grid2 container spacing={3}>
-          {plansData?.plans?.map((plan: Plan) => (
-            <Grid2 size={{ xs: 12, md: 6 }} key={plan.name}>
-              <PlanCard
-                plan={plan}
-                devicesData={devicesData}
-                isWorkerRunning={workerState === "RUNNING"}
-                onSuccess={msg => setFeedback({ type: "success", msg })}
-                onError={msg => setFeedback({ type: "error", msg })}
-              />
-            </Grid2>
-          ))}
-        </Grid2>
+        <Grid container spacing={3} alignItems="flex-start">
+          {/* LEFT COLUMN: Scrollable Plans Library */}
+          <Grid item xs={12} md={8} lg={9}>
+            <Grid container spacing={3}>
+              {plansData?.plans?.map((plan: Plan) => (
+                <Grid item xs={12} lg={6} key={plan.name}>
+                  <PlanCard
+                    plan={plan}
+                    devicesData={devicesData}
+                    isWorkerRunning={workerState === "RUNNING"}
+                    onSuccess={msg => setFeedback({ type: "success", msg })}
+                    onError={msg => setFeedback({ type: "error", msg })}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+
+          {/* RIGHT COLUMN: Persistent Device Panel
+              FIX: We apply sticky properties directly to the grid column item.
+          */}
+          <Grid
+            item
+            xs={12}
+            md={4}
+            lg={3}
+            sx={{
+              position: "sticky",
+              top: feedback ? "150px" : "90px",
+              zIndex: 1000,
+              transition: "top 0.2s ease-in-out",
+            }}
+          >
+            <DevicePanel devicesData={devicesData} />
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );
