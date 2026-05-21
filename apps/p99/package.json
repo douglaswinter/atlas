@@ -22,6 +22,7 @@
     "@mui/icons-material": "^6.5.0",
     "@mui/material": "<7.0.0",
     "@tanstack/react-query": "^5.90.21",
+    "@testing-library/react": "^15.0.7",
     "react-router-dom": "^7.7.1",
     "vite-plugin-relay": "^2.1.0"
   },
