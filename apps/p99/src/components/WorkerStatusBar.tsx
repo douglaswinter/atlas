@@ -81,7 +81,7 @@ export function WorkerStatusBar({
             value={instrumentSession}
             onChange={e => onInstrumentSessionChange(e.target.value)}
             sx={{ minWidth: 180, bgcolor: "background.paper" }}
-            InputLabelProps={{ shrink: true }}
+            slotProps={{ inputLabel: { shrink: true } }}
           />
 
           <Box

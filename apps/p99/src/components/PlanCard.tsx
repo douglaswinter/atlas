@@ -103,7 +103,6 @@ export function PlanCard({
       await api.worker.setActiveTask(submitResult.task_id);
       onSuccess(`Plan ${plan.name} started successfully!`);
     } catch (err: unknown) {
-      // Safe, strongly typed error wrapper instead of raw 'any' parsing
       const axiosError = err as {
         response?: { data?: { detail?: string | PydanticValidationError[] } };
       };
@@ -227,7 +226,7 @@ export function PlanCard({
                           ? `Enter device ID (e.g. motor_x). ${value.description || ""}`
                           : value.description
                     }
-                    InputLabelProps={{ shrink: true }}
+                    slotProps={{ inputLabel: { shrink: true } }}
                     placeholder={
                       value.type === "array"
                         ? "det1, det2"
