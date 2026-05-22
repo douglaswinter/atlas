@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { Box, Container, Alert, Grid2 } from "@mui/material";
-import { usePlans, useDevices } from "@atlas/blueapi-query";
+import {
+  usePlans,
+  useDevices,
+  useGetWorkerState,
+  useActiveTask,
+} from "@atlas/blueapi-query";
 import type { Plan } from "@atlas/blueapi";
 
-import { useWorkerStatus } from "../hooks/useWorkerStatus";
 import { WorkerStatusBar } from "../components/WorkerStatusBar";
 import { DevicePanel } from "../components/DevicePanel";
 import { PlanCard } from "../components/PlanCard";
@@ -14,9 +18,15 @@ interface FeedbackState {
 }
 
 function Dashboard() {
-  const { data: plansData, isFetching, isError, refetch } = usePlans();
+  const { data: plansData, isError } = usePlans();
   const { data: devicesData } = useDevices();
-  const { workerState, activeTaskId } = useWorkerStatus();
+  const {
+    data: workerState,
+    isFetching: isWorkerFetching,
+    refetch: refetchWorkerState,
+  } = useGetWorkerState();
+  const { data: activeTask } = useActiveTask();
+  const activeTaskId = activeTask?.task_id ?? null;
 
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
   const [instrumentSession, setInstrumentSession] = useState("p99-session-01");
@@ -25,10 +35,10 @@ function Dashboard() {
     <Box sx={{ bgcolor: "background.default", minHeight: "100vh", pb: 6 }}>
       {/* Sticky Global Status Header */}
       <WorkerStatusBar
-        workerState={workerState}
+        workerState={workerState ?? "UNKNOWN"}
         activeTaskId={activeTaskId}
-        isFetching={isFetching}
-        onSync={refetch}
+        isFetching={isWorkerFetching}
+        onSync={refetchWorkerState}
         instrumentSession={instrumentSession}
         onInstrumentSessionChange={setInstrumentSession}
       />
