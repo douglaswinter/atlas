@@ -18,8 +18,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CodeIcon from "@mui/icons-material/Code";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import type { Plan } from "@atlas/blueapi";
-//import { api } from "../api";
-
 import {
   useGetWorkerState,
   useSetActiveTask,
