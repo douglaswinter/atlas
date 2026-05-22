@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Container, Alert, Grid } from "@mui/material";
+import { Box, Container, Alert, Grid2 } from "@mui/material";
 import { usePlans, useDevices } from "@atlas/blueapi-query";
 import type { Plan } from "@atlas/blueapi";
 
@@ -63,13 +63,15 @@ function Dashboard() {
           </Alert>
         )}
 
-        <Grid container spacing={3} alignItems="flex-start">
+        <Grid2 container spacing={3} alignItems="flex-start">
           {/* LEFT COLUMN: Scrollable Plans Library */}
-          <Grid item xs={12} md={8} lg={9}>
-            <Grid container spacing={3}>
-              {/* Added a fallback array check to satisfy mapping safety rules */}
+          <Grid2 size={{ xs: 12, md: 8, lg: 9 }}>
+            <Grid2 container spacing={3}>
               {(plansData?.plans || []).map((plan: Plan) => (
-                <Grid item xs={12} lg={6} key={plan.name || "unknown-plan"}>
+                <Grid2
+                  size={{ xs: 12, lg: 6 }}
+                  key={plan.name || "unknown-plan"}
+                >
                   <PlanCard
                     plan={plan}
                     isWorkerRunning={workerState === "RUNNING"}
@@ -81,17 +83,14 @@ function Dashboard() {
                       setFeedback({ type: "error", msg })
                     }
                   />
-                </Grid>
+                </Grid2>
               ))}
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
 
           {/* RIGHT COLUMN: Persistent Device Panel */}
-          <Grid
-            item
-            xs={12}
-            md={4}
-            lg={3}
+          <Grid2
+            size={{ xs: 12, md: 4, lg: 3 }}
             sx={{
               position: "sticky",
               top: feedback ? "150px" : "90px",
@@ -104,8 +103,8 @@ function Dashboard() {
                 devicesData as { devices?: { name: string }[] } | undefined
               }
             />
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
     </Box>
   );
