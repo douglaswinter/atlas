@@ -18,7 +18,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CodeIcon from "@mui/icons-material/Code";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import type { Plan } from "@atlas/blueapi";
-import { api } from "../api";
+//import { api } from "../api";
+
+import {
+  useGetWorkerState,
+  useSetActiveTask,
+  useSubmitTask,
+} from "@atlas/blueapi-query";
 
 interface SchemaProperty {
   type?: string;
@@ -51,6 +57,9 @@ export function PlanCard({
     {},
   );
   const [submitting, setSubmitting] = useState(false);
+  const submitTask = useSubmitTask();
+  const startTask = useSetActiveTask();
+  const workerState = useGetWorkerState();
 
   const cleanDescription = plan.description?.split(/parameters/i)[0].trim();
 
@@ -94,13 +103,13 @@ export function PlanCard({
         }
       });
 
-      const submitResult = await api.tasks.submit({
+      const submitResult = await submitTask.mutateAsync({
         name: plan.name || "",
         params: processedParams,
         instrument_session: instrumentSession,
       });
 
-      await api.worker.setActiveTask(submitResult.task_id);
+      await startTask.mutateAsync(submitResult.task_id);
       onSuccess(`Plan ${plan.name} started successfully!`);
     } catch (err: unknown) {
       const axiosError = err as {
@@ -271,7 +280,7 @@ export function PlanCard({
             submitting ? <CircularProgress size={20} /> : <PlayArrowIcon />
           }
           onClick={handleSubmit}
-          disabled={submitting || isWorkerRunning}
+          disabled={submitting || workerState.data !== "IDLE"}
         >
           {submitting ? "Running..." : `Run ${plan.name}`}
         </Button>
