@@ -84,7 +84,6 @@ function Dashboard() {
                 >
                   <PlanCard
                     plan={plan}
-                    isWorkerRunning={workerState === "RUNNING"}
                     instrumentSession={instrumentSession}
                     onSuccess={(msg: string) =>
                       setFeedback({ type: "success", msg })

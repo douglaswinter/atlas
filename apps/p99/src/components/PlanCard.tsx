@@ -40,7 +40,6 @@ interface PydanticValidationError {
 
 interface PlanCardProps {
   plan: Plan;
-  isWorkerRunning: boolean;
   instrumentSession: string;
   onSuccess: (msg: string) => void;
   onError: (msg: string) => void;
@@ -48,7 +47,6 @@ interface PlanCardProps {
 
 export function PlanCard({
   plan,
-  isWorkerRunning,
   instrumentSession,
   onSuccess,
   onError,
