@@ -24,6 +24,7 @@
     "axios": "^1.13.4",
     "graphql": "^16.14.2",
     "lucide-react": "^1.17.0",
+    "material-react-table": "^3.2.1",
     "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
