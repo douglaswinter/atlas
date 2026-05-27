@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
 import { useMemo } from "react";
 import {
   MaterialReactTable,
@@ -17,16 +17,28 @@ function extractDataFromQueue(): QueueTableData[] {
       instrumentSession: task.experiment_definition.instrument_session,
       sampleId: task.experiment_definition.sample_id,
       planRunning: task.experiment_definition.plan_name,
-      // parameters: task.experiment_definition.params,
+      //   parameters: task.experiment_definition.params,
       status: task.status,
     }),
   );
   return data;
 }
 
+function getChipColorMap() {
+  return {
+    Waiting: "default",
+    Claimed: "warning",
+    "In progress": "info",
+    Success: "success",
+    Error: "error",
+    Cancelled: "warning",
+  };
+}
+
 export function QueueView() {
   const queueStatus = useGetQueueState();
   let data = extractDataFromQueue();
+  const colorMap = getChipColorMap();
 
   // NOTE doesn't seem to like that params inevitable ends up being an object
   const columns = useMemo<MRT_ColumnDef<QueueTableData>[]>(
@@ -39,8 +51,19 @@ export function QueueView() {
       },
       { accessorKey: "sampleId", header: "Sample ID", size: 150 },
       { accessorKey: "planRunning", header: "Plan", size: 150 },
-      // { accessorKey: "parameters", header: "Plan params", size: 150 },
-      { accessorKey: "status", header: "Status", size: 150 },
+      //   { accessorKey: "parameters", header: "Plan params", size: 150 },
+      {
+        accessorKey: "status",
+        header: "Status",
+        size: 150,
+        Cell: ({ cell }) => (
+          <Chip
+            label={cell.getValue<string>()}
+            // @ts-ignore
+            color={colorMap[cell.getValue<string>()]}
+          ></Chip>
+        ),
+      },
     ],
     [],
   );
