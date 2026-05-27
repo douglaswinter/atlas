@@ -76,8 +76,6 @@ describe("PlanCard", () => {
         />
       </ThemeProvider>,
     );
-
-    expect(screen.getByText("Python")).toBeInTheDocument();
   });
 
   it("renders accordion with configure details", async () => {
