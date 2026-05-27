@@ -1,5 +1,4 @@
 import { render, screen, waitFor } from "@atlas/vitest-conf";
-import { DiamondTheme, ThemeProvider } from "@diamondlightsource/sci-react-ui";
 import { WorkerStatusBar } from "./WorkerStatusBar";
 import { describe, it, expect, vi } from "vitest";
 
@@ -9,16 +8,14 @@ describe("WorkerStatusBar", () => {
 
   it("renders the title and subtitle", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="IDLE"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="IDLE"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText("P99 Control")).toBeInTheDocument();
@@ -27,16 +24,14 @@ describe("WorkerStatusBar", () => {
 
   it("displays worker state as IDLE", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="IDLE"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="IDLE"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText(/STATE: IDLE/)).toBeInTheDocument();
@@ -44,16 +39,14 @@ describe("WorkerStatusBar", () => {
 
   it("displays worker state as RUNNING", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="RUNNING"
-          activeTaskId="task-123"
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="RUNNING"
+        activeTaskId="task-123"
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText(/STATE: RUNNING/)).toBeInTheDocument();
@@ -62,16 +55,14 @@ describe("WorkerStatusBar", () => {
 
   it("displays worker state as PAUSED", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="PAUSED"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="PAUSED"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText(/STATE: PAUSED/)).toBeInTheDocument();
@@ -79,16 +70,14 @@ describe("WorkerStatusBar", () => {
 
   it("displays PANICKED state", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="PANICKED"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="PANICKED"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText(/STATE: PANICKED/)).toBeInTheDocument();
@@ -96,16 +85,14 @@ describe("WorkerStatusBar", () => {
 
   it("displays ABORTING state", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="ABORTING"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="ABORTING"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText(/STATE: ABORTING/)).toBeInTheDocument();
@@ -113,16 +100,14 @@ describe("WorkerStatusBar", () => {
 
   it("renders sync button", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="IDLE"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="IDLE"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     const syncButton = screen.getByRole("button", { name: /sync/i });
@@ -131,16 +116,14 @@ describe("WorkerStatusBar", () => {
 
   it("disables sync button when fetching", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="IDLE"
-          activeTaskId={null}
-          isFetching={true}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="IDLE"
+        activeTaskId={null}
+        isFetching={true}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     const syncButton = screen.getByRole("button", { name: /sync/i });
@@ -149,16 +132,14 @@ describe("WorkerStatusBar", () => {
 
   it("calls onSync when sync button is clicked", async () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="IDLE"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="IDLE"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     const syncButton = screen.getByRole("button", { name: /sync/i });
@@ -171,16 +152,14 @@ describe("WorkerStatusBar", () => {
 
   it("displays UNKNOWN state", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <WorkerStatusBar
-          workerState="UNKNOWN"
-          activeTaskId={null}
-          isFetching={false}
-          onSync={mockOnSync}
-          instrumentSession="p99-session-01"
-          onInstrumentSessionChange={mockOnSessionChange}
-        />
-      </ThemeProvider>,
+      <WorkerStatusBar
+        workerState="UNKNOWN"
+        activeTaskId={null}
+        isFetching={false}
+        onSync={mockOnSync}
+        instrumentSession="p99-session-01"
+        onInstrumentSessionChange={mockOnSessionChange}
+      />,
     );
 
     expect(screen.getByText(/STATE: UNKNOWN/)).toBeInTheDocument();
