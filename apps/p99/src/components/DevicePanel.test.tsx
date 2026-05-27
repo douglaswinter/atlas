@@ -1,6 +1,5 @@
 import { render, screen } from "@atlas/vitest-conf";
 import { DevicePanel } from "./DevicePanel";
-import { describe, it, expect } from "vitest";
 
 const mockDevicesData = {
   devices: [

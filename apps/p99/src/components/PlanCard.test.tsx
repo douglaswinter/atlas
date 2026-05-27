@@ -2,7 +2,6 @@ import { render, screen, waitFor } from "@atlas/vitest-conf";
 import { fireEvent } from "@testing-library/react";
 import { PlanCard } from "./PlanCard";
 import type { Plan } from "@atlas/blueapi";
-import { vi, describe, it, expect, beforeEach } from "vitest";
 
 const mockUseGetWorkerState = vi.fn(() => ({ data: "IDLE" }));
 const mockSubmitTask = {
