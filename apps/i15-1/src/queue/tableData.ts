@@ -5,6 +5,7 @@ export type QueueTableData = {
   instrumentSession: string;
   sampleId: string;
   planRunning: string;
+  parameters: string;
   //   parameters: PlanParameters;
   status: TaskStatus;
 };
