@@ -142,9 +142,6 @@ importers:
       '@testing-library/react':
         specifier: ^15.0.7
         version: 15.0.7(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-router-dom:
-        specifier: ^7.7.1
-        version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vite-plugin-relay:
         specifier: ^2.1.0
         version: 2.1.0(babel-plugin-relay@20.1.1)(vite@7.3.1(@types/node@25.3.3)(terser@5.46.1))
@@ -167,6 +164,9 @@ importers:
       globals:
         specifier: ^16.3.0
         version: 16.5.0
+      react-router-dom:
+        specifier: ^7.8.0
+        version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vite:
         specifier: ^7.1.2
         version: 7.3.1(@types/node@25.3.3)(terser@5.46.1)
