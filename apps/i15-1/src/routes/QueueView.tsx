@@ -1,59 +1,46 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { useInstrumentSession } from "../context/instrumentSession/useInstrumentSession";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
+import { useGetQueuedTasks, useGetQueueState } from "../queue/queueService";
+import type { QueueTableData } from "../queue/tableData";
 
-type ExperimentDefinition = {
-  plan_name: string;
-  sample_id: number;
-  //   params: object;  // NOTE: Can't use objects in here!!!
-  instrument_session: string;
-};
+function extractDataFromQueue(): QueueTableData[] {
+  const queuedTasks = useGetQueuedTasks();
+  let data: QueueTableData[] = [];
+  queuedTasks.data?.map((task) =>
+    data.push({
+      position: task.position,
+      instrumentSession: task.experiment_definition.instrument_session,
+      sampleId: task.experiment_definition.sample_id,
+      planRunning: task.experiment_definition.plan_name,
+      // parameters: task.experiment_definition.params,
+      status: task.status,
+    }),
+  );
+  return data;
+}
 
-// TODO use react-query for filling table
 export function QueueView() {
-  const { instrumentSession } = useInstrumentSession();
-  const data: ExperimentDefinition[] = [
-    {
-      plan_name: "sleep",
-      sample_id: 1,
-      //   params: { time: 10 },
-      instrument_session: instrumentSession,
-    },
-    {
-      plan_name: "load",
-      sample_id: 2,
-      //   params: {},
-      instrument_session: instrumentSession,
-    },
-    {
-      plan_name: "sleep",
-      sample_id: 3,
-      //   params: { time: 5 },
-      instrument_session: instrumentSession,
-    },
-    {
-      plan_name: "unload",
-      sample_id: 4,
-      //   params: {},
-      instrument_session: instrumentSession,
-    },
-  ];
+  const queueStatus = useGetQueueState();
+  let data = extractDataFromQueue();
 
-  const columns = useMemo<MRT_ColumnDef<ExperimentDefinition>[]>(
+  // NOTE doesn't seem to like that params inevitable ends up being an object
+  const columns = useMemo<MRT_ColumnDef<QueueTableData>[]>(
     () => [
+      { accessorKey: "position", header: "Position", size: 150 },
       {
-        accessorKey: "instrument_session",
+        accessorKey: "instrumentSession",
         header: "Instrument Session",
         size: 150,
       },
-      { accessorKey: "plan_name", header: "Plan", size: 150 },
-      { accessorKey: "sample_id", header: "Sample ID", size: 150 },
-      //   { accessorKey: "params", header: "Parameters", size: 150 },
+      { accessorKey: "sampleId", header: "Sample ID", size: 150 },
+      { accessorKey: "planRunning", header: "Plan", size: 150 },
+      // { accessorKey: "parameters", header: "Plan params", size: 150 },
+      { accessorKey: "status", header: "Status", size: 150 },
     ],
     [],
   );
@@ -62,8 +49,8 @@ export function QueueView() {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
       <Stack direction={"column"} spacing={4} alignItems={"center"}>
-        <Typography component={"h1"} variant="h5">
-          Example queue table
+        <Typography component={"h2"} variant="h5">
+          Queue status: {queueStatus.data?.paused ? "paused" : "running"}
         </Typography>
         <MaterialReactTable table={table} />
       </Stack>

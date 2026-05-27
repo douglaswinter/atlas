@@ -1,4 +1,8 @@
-type TaskStatus =
+export interface QueueStatus {
+  paused: boolean;
+}
+
+export type TaskStatus =
   | "Waiting"
   | "Claimed"
   | "In progress"
@@ -12,13 +16,31 @@ type TaskResult = {
   type?: string;
 };
 
-type PlanParameters = {};
+// Temporary parameters to see if things work in the first instance
+type LoadParameters = {
+  puck: number;
+  position: number;
+};
+
+type SleepParameters = {
+  time: number;
+};
+
+type StaticCollectionParameters = {
+  frames: number;
+  exposure_time: number;
+};
+
+export type PlanParameters =
+  | LoadParameters
+  | SleepParameters
+  | StaticCollectionParameters;
 
 export type ExperimentDefinition = {
   plan_name: string;
   sample_id: string;
   params: PlanParameters;
-  intrument_session: string;
+  instrument_session: string;
 };
 
 export interface QueueElement {
@@ -33,6 +55,4 @@ export interface QueueElement {
   position: number; // position in the queue
 }
 
-export interface QueuedTasks {
-  tasks: QueueElement[];
-}
+export type QueuedTasks = QueueElement[];

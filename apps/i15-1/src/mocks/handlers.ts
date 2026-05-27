@@ -41,6 +41,65 @@ const fakeExperiments = {
 
 const fakePvws = ws.link("wss://pvws.diamond.ac.uk/pvws/pv");
 
+const fakeQueue = [
+  {
+    experiment_definition: {
+      plan_name: "sleep",
+      sample_id: "1",
+      params: {
+        time: 10,
+      },
+      instrument_session: "cm12345-1",
+    },
+    id: "aaa",
+    status: "Success",
+    time_started: "",
+    time_completed: "",
+    errors: [],
+    result: { outcome: "success" },
+    blueapi_id: fakeTaskId,
+    position: 1,
+  },
+  {
+    experiment_definition: {
+      plan_name: "robot_load",
+      sample_id: "1",
+      params: {
+        puck: 1,
+        position: 1,
+      },
+      instrument_session: "cm12345-1",
+    },
+    id: "bbb",
+    status: "In progress",
+    time_started: null,
+    time_completed: null,
+    errors: [],
+    result: { outcome: "success" },
+    blueapi_id: null,
+    position: 2,
+  },
+  {
+    experiment_definition: {
+      plan_name: "static_collection_plan",
+      sample_id: "1",
+      params: {
+        frames: 10,
+        exposure_time: 0.5,
+      },
+      instrument_session: "cm12345-1",
+    },
+    id: "ccc",
+    status: "Waiting",
+    time_started: null,
+    time_completed: null,
+    errors: [],
+    result: null,
+    blueapi_id: null,
+    position: 3,
+  },
+];
+
 export const handlers = [
   http.put("/api/blueapi/worker/task", () => {
     workerStatus.status = "RUNNING";
@@ -81,5 +140,13 @@ export const handlers = [
 
   http.get("/api/blueapi/plans", () => {
     return HttpResponse.json(plansResponse);
+  }),
+
+  http.get("/api/daq-queue/queue/state", () => {
+    return HttpResponse.json({ paused: true });
+  }),
+
+  http.get("/api/daq-queue/queue", () => {
+    return HttpResponse.json(fakeQueue);
   }),
 ];

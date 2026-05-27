@@ -16,7 +16,7 @@ ui-base:
           uri: https://i15-1-blueapi.diamond.ac.uk
 
     - id: daq-queue
-      path: /api/queue/
+      path: /api/daq-queue/
       rewriteTarget: /
       target:
         external:
