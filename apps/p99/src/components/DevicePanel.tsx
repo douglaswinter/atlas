@@ -68,11 +68,10 @@ export function DevicePanel({ devicesData }: DevicePanelProps) {
                   label={device.name}
                   variant="outlined"
                   size="small"
-                  color="primary"
                   sx={{
                     fontFamily: "monospace",
                     fontWeight: 500,
-                    bgcolor: "grey.50",
+                    bgcolor: "background.paper",
                   }}
                 />
               ))}

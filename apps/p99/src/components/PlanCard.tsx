@@ -4,7 +4,6 @@ import {
   CardContent,
   Stack,
   Typography,
-  Chip,
   Divider,
   Accordion,
   AccordionSummary,
@@ -152,7 +151,6 @@ export function PlanCard({
           >
             {plan.name}
           </Typography>
-          <Chip label="Python" size="small" variant="outlined" />
         </Stack>
 
         <Divider sx={{ mt: 2 }} />
@@ -177,7 +175,7 @@ export function PlanCard({
                 <Box
                   sx={{
                     p: 1.5,
-                    bgcolor: "grey.50",
+                    bgcolor: "background.paper",
                     borderRadius: 1,
                     borderLeft: "3px solid",
                     borderColor: "primary.light",
@@ -266,7 +264,7 @@ export function PlanCard({
           p: 2,
           borderTop: "1px solid",
           borderColor: "divider",
-          bgcolor: "grey.50",
+          bgcolor: "background.paper",
         }}
       >
         <Button
