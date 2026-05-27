@@ -107,11 +107,7 @@ function Dashboard() {
               transition: "top 0.2s ease-in-out",
             }}
           >
-            <DevicePanel
-              devicesData={
-                devicesData as { devices?: { name: string }[] } | undefined
-              }
-            />
+            <DevicePanel devices={devicesData?.devices || []} />
           </Grid2>
         </Grid2>
       </Container>

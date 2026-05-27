@@ -9,23 +9,9 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
+import type { DeviceResponse, Device } from "@atlas/blueapi";
 
-interface DeviceInfo {
-  name: string;
-  [key: string]: unknown;
-}
-
-interface DevicePanelProps {
-  devicesData:
-    | {
-        devices?: DeviceInfo[];
-      }
-    | undefined;
-}
-
-export function DevicePanel({ devicesData }: DevicePanelProps) {
-  const devices = devicesData?.devices || [];
-
+export function DevicePanel({ devices }: DeviceResponse) {
   return (
     <Box sx={{ width: "100%" }}>
       <Accordion
@@ -62,7 +48,7 @@ export function DevicePanel({ devicesData }: DevicePanelProps) {
                 p: 0.5,
               }}
             >
-              {devices.map((device: DeviceInfo) => (
+              {devices.map((device: Device) => (
                 <Chip
                   key={device.name}
                   label={device.name}
