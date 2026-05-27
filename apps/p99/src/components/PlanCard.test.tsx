@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from "@atlas/vitest-conf";
 import { fireEvent } from "@testing-library/react";
-import { DiamondTheme, ThemeProvider } from "@diamondlightsource/sci-react-ui";
 import { PlanCard } from "./PlanCard";
 import type { Plan } from "@atlas/blueapi";
 import { vi, describe, it, expect, beforeEach } from "vitest";
@@ -51,14 +50,12 @@ describe("PlanCard", () => {
 
   it("renders the plan name and description", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <PlanCard
-          plan={mockPlan}
-          instrumentSession="test-session"
-          onSuccess={mockOnSuccess}
-          onError={mockOnError}
-        />
-      </ThemeProvider>,
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
     );
 
     expect(screen.getByText("test-plan")).toBeInTheDocument();
@@ -67,27 +64,23 @@ describe("PlanCard", () => {
 
   it("displays Python chip", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <PlanCard
-          plan={mockPlan}
-          instrumentSession="test-session"
-          onSuccess={mockOnSuccess}
-          onError={mockOnError}
-        />
-      </ThemeProvider>,
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
     );
   });
 
   it("renders accordion with configure details", async () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <PlanCard
-          plan={mockPlan}
-          instrumentSession="test-session"
-          onSuccess={mockOnSuccess}
-          onError={mockOnError}
-        />
-      </ThemeProvider>,
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
     );
 
     // Click accordion to expand
@@ -103,14 +96,12 @@ describe("PlanCard", () => {
 
   it("enables submit button when worker is idle", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <PlanCard
-          plan={mockPlan}
-          instrumentSession="test-session"
-          onSuccess={mockOnSuccess}
-          onError={mockOnError}
-        />
-      </ThemeProvider>,
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
     );
 
     const buttons = screen.getAllByRole("button");
@@ -122,14 +113,12 @@ describe("PlanCard", () => {
     mockUseGetWorkerState.mockReturnValue({ data: "RUNNING" });
 
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <PlanCard
-          plan={mockPlan}
-          instrumentSession="test-session"
-          onSuccess={mockOnSuccess}
-          onError={mockOnError}
-        />
-      </ThemeProvider>,
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
     );
 
     const buttons = screen.getAllByRole("button");
@@ -139,14 +128,12 @@ describe("PlanCard", () => {
 
   it("shows configure & view details button", () => {
     render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <PlanCard
-          plan={mockPlan}
-          instrumentSession="test-session"
-          onSuccess={mockOnSuccess}
-          onError={mockOnError}
-        />
-      </ThemeProvider>,
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
     );
 
     const configButton = screen.getByRole("button", {

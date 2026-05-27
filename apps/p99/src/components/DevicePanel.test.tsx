@@ -1,5 +1,4 @@
 import { render, screen } from "@atlas/vitest-conf";
-import { DiamondTheme, ThemeProvider } from "@diamondlightsource/sci-react-ui";
 import { DevicePanel } from "./DevicePanel";
 import { describe, it, expect } from "vitest";
 
@@ -13,31 +12,19 @@ const mockDevicesData = {
 
 describe("DevicePanel", () => {
   it("renders the devices panel with title", () => {
-    render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <DevicePanel devicesData={mockDevicesData} />
-      </ThemeProvider>,
-    );
+    render(<DevicePanel devicesData={mockDevicesData} />);
 
     expect(screen.getByText(/Connected Devices/)).toBeInTheDocument();
   });
 
   it("displays the correct device count", () => {
-    render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <DevicePanel devicesData={mockDevicesData} />
-      </ThemeProvider>,
-    );
+    render(<DevicePanel devicesData={mockDevicesData} />);
 
     expect(screen.getByText(/Connected Devices \(3\)/)).toBeInTheDocument();
   });
 
   it("renders all devices as chips", () => {
-    render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <DevicePanel devicesData={mockDevicesData} />
-      </ThemeProvider>,
-    );
+    render(<DevicePanel devicesData={mockDevicesData} />);
 
     expect(screen.getByText("detector-1")).toBeInTheDocument();
     expect(screen.getByText("motor-x")).toBeInTheDocument();
@@ -45,11 +32,7 @@ describe("DevicePanel", () => {
   });
 
   it("shows empty state when no devices are present", () => {
-    render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <DevicePanel devicesData={{ devices: [] }} />
-      </ThemeProvider>,
-    );
+    render(<DevicePanel devicesData={{ devices: [] }} />);
 
     expect(screen.getByText(/Connected Devices \(0\)/)).toBeInTheDocument();
     expect(
@@ -58,11 +41,7 @@ describe("DevicePanel", () => {
   });
 
   it("handles undefined devicesData gracefully", () => {
-    render(
-      <ThemeProvider theme={DiamondTheme} defaultMode="light">
-        <DevicePanel devicesData={undefined} />
-      </ThemeProvider>,
-    );
+    render(<DevicePanel devicesData={undefined} />);
 
     expect(screen.getByText(/Connected Devices \(0\)/)).toBeInTheDocument();
     expect(
