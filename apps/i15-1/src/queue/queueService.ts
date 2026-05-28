@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const QUEUE_SOCKET: string = "/api/daq-queue";
 
@@ -20,6 +20,26 @@ export function useGetQueueState() {
     queryFn: getQueueState,
     staleTime: 0,
     refetchInterval: 1000,
+  });
+}
+
+export const patchQueueState = async (
+  new_state: boolean,
+): Promise<QueueStatus> => {
+  const response = await axios.patch<QueueStatus>(
+    QUEUE_SOCKET + "/queue/state",
+    { paused: new_state },
+  );
+  return response.data;
+};
+
+export function usePatchQueueState() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: patchQueueState,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["state"] });
+    },
   });
 }
 
