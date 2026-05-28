@@ -57,32 +57,32 @@ export type BasicAuthentication = {
 };
 
 /**
- * BlueapiCall
+ * BlueapiCallResponse
  */
-export type BlueapiCall = {
+export type BlueapiCallResponse = {
     task_request: TaskRequest;
     /**
      * Parent Task Id
      */
-    parent_task_id?: string | null;
-    status?: CallStatus;
+    parent_task_id: string | null;
+    status: CallStatus;
     /**
      * Time Started
      */
-    time_started?: string | null;
+    time_started: string | null;
     /**
      * Time Completed
      */
-    time_completed?: string | null;
-    result?: TaskResult | null;
+    time_completed: string | null;
+    result: TaskResult | null;
     /**
      * Errors
      */
-    errors?: Array<string | TaskError>;
+    errors: Array<string | TaskError>;
     /**
      * Blueapi Id
      */
-    blueapi_id?: string | null;
+    blueapi_id: string | null;
 };
 
 /**
@@ -407,11 +407,11 @@ export type ScratchRepository = {
      */
     remote_url?: string;
     /**
-     * Branch
+     * Target Revision
      *
-     * Branch of repo to check out - defaults to remote's default when cloning and the existing branch when the repo already exists
+     * Revision (branch or tag) to check out when cloning - defaults to remote's HEAD. If a tag is used, the repo will be left in a 'detached head' state.
      */
-    branch?: string;
+    target_revision?: string;
 };
 
 /**
@@ -451,22 +451,6 @@ export type StompConfig = {
      * Auth information for communicating with STOMP broker, if required
      */
     auth?: BasicAuthentication | null;
-};
-
-/**
- * Task
- */
-export type Task = {
-    experiment_definition: ExperimentDefinition;
-    /**
-     * Id
-     */
-    id?: string;
-    /**
-     * Blueapi Calls
-     */
-    blueapi_calls?: Array<BlueapiCall>;
-    readonly status: Status;
 };
 
 /**
@@ -559,16 +543,16 @@ export type TaskWithPosition = {
     /**
      * Id
      */
-    id?: string;
+    id: string;
+    status: Status;
     /**
      * Blueapi Calls
      */
-    blueapi_calls?: Array<BlueapiCall>;
+    blueapi_calls: Array<BlueapiCallResponse>;
     /**
      * Position
      */
     position: number | null;
-    readonly status: Status;
 };
 
 /**
@@ -681,40 +665,6 @@ export type ServiceAccountWritable = {
      * Service account client secret
      */
     client_secret?: string;
-};
-
-/**
- * Task
- */
-export type TaskWritable = {
-    experiment_definition: ExperimentDefinition;
-    /**
-     * Id
-     */
-    id?: string;
-    /**
-     * Blueapi Calls
-     */
-    blueapi_calls?: Array<BlueapiCall>;
-};
-
-/**
- * TaskWithPosition
- */
-export type TaskWithPositionWritable = {
-    experiment_definition: ExperimentDefinition;
-    /**
-     * Id
-     */
-    id?: string;
-    /**
-     * Blueapi Calls
-     */
-    blueapi_calls?: Array<BlueapiCall>;
-    /**
-     * Position
-     */
-    position: number | null;
 };
 
 /**
@@ -949,7 +899,7 @@ export type CancelTasksQueueTasksDeleteResponses = {
      *
      * Successful Response
      */
-    200: Array<Task>;
+    200: Array<TaskWithPosition>;
 };
 
 export type CancelTasksQueueTasksDeleteResponse = CancelTasksQueueTasksDeleteResponses[keyof CancelTasksQueueTasksDeleteResponses];
@@ -1103,10 +1053,14 @@ export type GetCallQueueCallQueueGetData = {
 
 export type GetCallQueueCallQueueGetResponses = {
     /**
+     * Response Get Call Queue Call Queue Get
+     *
      * Successful Response
      */
-    200: unknown;
+    200: Array<BlueapiCallResponse>;
 };
+
+export type GetCallQueueCallQueueGetResponse = GetCallQueueCallQueueGetResponses[keyof GetCallQueueCallQueueGetResponses];
 
 export type GetCallHistoryCallHistoryGetData = {
     body?: never;
@@ -1117,10 +1071,14 @@ export type GetCallHistoryCallHistoryGetData = {
 
 export type GetCallHistoryCallHistoryGetResponses = {
     /**
+     * Response Get Call History Call History Get
+     *
      * Successful Response
      */
-    200: unknown;
+    200: Array<BlueapiCallResponse>;
 };
+
+export type GetCallHistoryCallHistoryGetResponse = GetCallHistoryCallHistoryGetResponses[keyof GetCallHistoryCallHistoryGetResponses];
 
 export type StreamEventsEventsGetData = {
     body?: never;
