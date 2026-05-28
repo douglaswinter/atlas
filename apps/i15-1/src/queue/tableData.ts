@@ -1,11 +1,13 @@
+import type { BlueapiCallResponse, Status } from "./generated";
 import type { PlanParameters, TaskStatus } from "./tasks";
 
 export type QueueTableData = {
-  position: number;
+  position: number | null;
   instrumentSession: string;
   sampleId: string;
   planRunning: string;
   parameters: string;
   //   parameters: PlanParameters;
-  status: TaskStatus;
+  status: Status;
+  blueapi_tasks: BlueapiCallResponse[];
 };

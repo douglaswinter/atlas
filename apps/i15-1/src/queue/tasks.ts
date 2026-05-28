@@ -1,3 +1,5 @@
+import type { BlueapiCallResponse, TaskWithPosition } from "./generated";
+
 export interface QueueStatus {
   paused: boolean;
 }
@@ -55,4 +57,4 @@ export interface QueueElement {
   position: number; // position in the queue
 }
 
-export type QueuedTasks = QueueElement[];
+export type QueuedTasks = TaskWithPosition[];

@@ -1,12 +1,13 @@
-import { Box, Chip, Stack, Typography, useTheme } from "@mui/material";
+import { Box, Chip, Stack } from "@mui/material";
 import { useMemo } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
-import { useGetQueuedTasks, useGetQueueState } from "../queue/queueService";
+import { useGetQueuedTasks } from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
+import { QueueStatusBar } from "../queue/pauseButton";
 
 function extractDataFromQueue(): QueueTableData[] {
   const queuedTasks = useGetQueuedTasks();
@@ -20,6 +21,7 @@ function extractDataFromQueue(): QueueTableData[] {
       parameters: JSON.stringify(task.experiment_definition.params),
       //   parameters: task.experiment_definition.params,
       status: task.status,
+      blueapi_tasks: task.blueapi_calls,
     }),
   );
   return data;
@@ -31,13 +33,13 @@ function getChipColorMap() {
     Claimed: "warning",
     "In progress": "info",
     Success: "success",
+    Complete: "success",
     Error: "error",
     Cancelled: "warning",
   };
 }
 
 export function QueueView() {
-  const queueStatus = useGetQueueState();
   let data = extractDataFromQueue();
   const colorMap = getChipColorMap();
 
@@ -68,6 +70,7 @@ export function QueueView() {
           ></Chip>
         ),
       },
+      { accessorKey: "calls", header: "BlueAPI tasks", size: 150 },
     ],
     [],
   );
@@ -76,9 +79,7 @@ export function QueueView() {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
       <Stack direction={"column"} spacing={4} alignItems={"center"}>
-        <Typography component={"h2"} variant="h5">
-          Queue status: {queueStatus.data?.paused ? "paused" : "running"}
-        </Typography>
+        <QueueStatusBar></QueueStatusBar>
         <MaterialReactTable table={table} />
       </Stack>
     </Box>

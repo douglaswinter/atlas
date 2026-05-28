@@ -43,6 +43,23 @@ export function usePatchQueueState() {
   });
 }
 
+export function useToggleQueueState() {
+  const { data } = useGetQueueState();
+  const mutation = usePatchQueueState();
+
+  const toggle = async () => {
+    if (data == null) return;
+    return mutation.mutateAsync(!data.paused);
+  };
+
+  return {
+    paused: data?.paused ?? false,
+    isLoading: mutation.isPending,
+    toggle,
+    isDisabled: mutation.isPending || data == null,
+  };
+}
+
 const getQueuedTasks = async (): Promise<QueuedTasks> => {
   const response = await axios.get<QueuedTasks>(QUEUE_SOCKET + "/queue");
   return response.data;
