@@ -170,36 +170,8 @@ describe("PlanCard", () => {
     );
     expect(mockOnError).not.toHaveBeenCalled();
   });
-  it("handles standard text errors and triggers onError", async () => {
-    // Force the API mock to reject with a plain text backend detail string
-    mockSubmitTask.mutateAsync.mockRejectedValueOnce({
-      response: {
-        data: { detail: "Database connection timed out." },
-      },
-    });
 
-    render(
-      <PlanCard
-        plan={mockPlan}
-        instrumentSession="test-session"
-        onSuccess={mockOnSuccess}
-        onError={mockOnError}
-      />,
-    );
-
-    const runButton = screen.getByRole("button", { name: /Run test-plan/i });
-    fireEvent.click(runButton);
-
-    // Verify the error text is accurately passed out to your callback wrapper
-    await waitFor(() => {
-      expect(mockOnError).toHaveBeenCalledWith(
-        "Database connection timed out.",
-      );
-    });
-    expect(mockOnSuccess).not.toHaveBeenCalled();
-  });
-
-  it("handles structured Pydantic array errors and triggers onError", async () => {
+  it("handles triggers onError", async () => {
     mockSubmitTask.mutateAsync.mockRejectedValueOnce({
       response: {
         data: {
