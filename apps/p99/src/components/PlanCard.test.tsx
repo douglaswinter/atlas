@@ -61,17 +61,6 @@ describe("PlanCard", () => {
     expect(screen.getByText(/Test plan description/)).toBeInTheDocument();
   });
 
-  it("displays Python chip", () => {
-    render(
-      <PlanCard
-        plan={mockPlan}
-        instrumentSession="test-session"
-        onSuccess={mockOnSuccess}
-        onError={mockOnError}
-      />,
-    );
-  });
-
   it("renders accordion with configure details", async () => {
     render(
       <PlanCard
@@ -139,5 +128,108 @@ describe("PlanCard", () => {
       name: /Configure & View Details/i,
     });
     expect(configButton).toBeInTheDocument();
+  });
+
+  it("submits the form successfully and triggers onSuccess", async () => {
+    render(
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
+    );
+    const accordionButton = screen.getByRole("button", {
+      name: /Configure & View Details/i,
+    });
+    fireEvent.click(accordionButton);
+
+    const param1Input = screen.getByLabelText(/param1/i);
+    const param2Input = screen.getByLabelText(/param2/i);
+
+    fireEvent.change(param1Input, { target: { value: "kupo" } });
+    fireEvent.change(param2Input, { target: { value: "42" } });
+
+    const runButton = screen.getByRole("button", { name: /Run test-plan/i });
+    fireEvent.click(runButton);
+
+    await waitFor(() => {
+      expect(mockSubmitTask.mutateAsync).toHaveBeenCalledWith({
+        name: "test-plan",
+        params: {
+          param1: "kupo",
+          param2: 42,
+        },
+        instrument_session: "test-session",
+      });
+    });
+    expect(mockStartTask.mutateAsync).toHaveBeenCalledWith("task-1");
+
+    expect(mockOnSuccess).toHaveBeenCalledWith(
+      "Plan test-plan started successfully!",
+    );
+    expect(mockOnError).not.toHaveBeenCalled();
+  });
+  it("handles standard text errors and triggers onError", async () => {
+    // Force the API mock to reject with a plain text backend detail string
+    mockSubmitTask.mutateAsync.mockRejectedValueOnce({
+      response: {
+        data: { detail: "Database connection timed out." },
+      },
+    });
+
+    render(
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
+    );
+
+    const runButton = screen.getByRole("button", { name: /Run test-plan/i });
+    fireEvent.click(runButton);
+
+    // Verify the error text is accurately passed out to your callback wrapper
+    await waitFor(() => {
+      expect(mockOnError).toHaveBeenCalledWith(
+        "Database connection timed out.",
+      );
+    });
+    expect(mockOnSuccess).not.toHaveBeenCalled();
+  });
+
+  it("handles structured Pydantic array errors and triggers onError", async () => {
+    mockSubmitTask.mutateAsync.mockRejectedValueOnce({
+      response: {
+        data: {
+          detail: [
+            {
+              loc: ["body", "params", "param2"],
+              msg: "value is not a valid integer",
+              type: "type_error.integer",
+            },
+          ],
+        },
+      },
+    });
+
+    render(
+      <PlanCard
+        plan={mockPlan}
+        instrumentSession="test-session"
+        onSuccess={mockOnSuccess}
+        onError={mockOnError}
+      />,
+    );
+
+    const runButton = screen.getByRole("button", { name: /Run test-plan/i });
+    fireEvent.click(runButton);
+    await waitFor(() => {
+      expect(mockOnError).toHaveBeenCalledWith(
+        "param2: value is not a valid integer",
+      );
+    });
+    expect(mockOnSuccess).not.toHaveBeenCalled();
   });
 });
