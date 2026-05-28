@@ -52,13 +52,26 @@ const fakeQueue = [
       instrument_session: "cm12345-1",
     },
     id: "aaa",
-    status: "Success",
-    time_started: "",
-    time_completed: "",
-    errors: [],
-    result: { outcome: "success" },
-    blueapi_id: fakeTaskId,
-    position: 1,
+    status: "Complete",
+    blueapi_calls: [
+      {
+        task_request: {
+          name: "sleep",
+          params: {
+            time: 10,
+          },
+          instrument_session: "cm12345-1",
+        },
+        status: "Success",
+        parent_task_id: "aaa",
+        result: { outcome: "success" },
+        errors: [],
+        time_started: "2026-05-28T15:09:29.507128",
+        time_completed: "2026-05-28T15:09:39.561053",
+        blueapi_id: fakeTaskId,
+      },
+    ],
+    position: 0,
   },
   {
     experiment_definition: {
@@ -72,12 +85,26 @@ const fakeQueue = [
     },
     id: "bbb",
     status: "In progress",
-    time_started: null,
-    time_completed: null,
-    errors: [],
-    result: { outcome: "success" },
-    blueapi_id: null,
-    position: 2,
+    blueapi_calls: [
+      {
+        task_request: {
+          name: "robot_load",
+          params: {
+            puck: 1,
+            position: 1,
+          },
+          instrument_session: "cm12345-1",
+        },
+        status: "In progress",
+        parent_task_id: "bbb",
+        result: null,
+        errors: [],
+        time_started: "2026-05-28T15:09:39.812345",
+        time_completed: null,
+        blueapi_id: fakeTaskId,
+      },
+    ],
+    position: 1,
   },
   {
     experiment_definition: {
@@ -90,13 +117,27 @@ const fakeQueue = [
       instrument_session: "cm12345-1",
     },
     id: "ccc",
-    status: "Waiting",
-    time_started: null,
-    time_completed: null,
-    errors: [],
-    result: null,
-    blueapi_id: null,
-    position: 3,
+    status: "Queued",
+    blueapi_calls: [
+      {
+        task_request: {
+          name: "Queued",
+          params: {
+            frames: 10,
+            exposure_time: 0.5,
+          },
+          instrument_session: "cm12345-1",
+        },
+        status: "Waiting",
+        parent_task_id: "ccc",
+        result: null,
+        errors: [],
+        time_started: null,
+        time_completed: null,
+        blueapi_id: fakeTaskId,
+      },
+    ],
+    position: 2,
   },
 ];
 
