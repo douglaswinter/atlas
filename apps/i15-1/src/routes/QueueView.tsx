@@ -1,11 +1,15 @@
-import { Box, Chip, Stack } from "@mui/material";
+import { Box, Button, Chip, Stack } from "@mui/material";
 import { useMemo } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
-import { useGetQueuedTasks, useQueueEvents } from "../queue/queueService";
+import {
+  cancelTasks,
+  useGetQueuedTasks,
+  useQueueEvents,
+} from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
 import { QueueStatusBar } from "../queue/pauseButton";
 
@@ -91,7 +95,26 @@ export function QueueView() {
         ),
       },
       { accessorKey: "calls", header: "BlueAPI tasks", size: 150 },
-      { accessorKey: "cancel", header: "Cancel", size: 150 },
+      {
+        accessorKey: "cancel",
+        header: "Actions",
+        size: 150,
+        Cell: ({ row }) => {
+          const task = row.original;
+          const isDisabled = task.status != "Queued";
+          return (
+            <Button
+              variant="contained"
+              color="error"
+              size="small"
+              disabled={isDisabled}
+              onClick={() => cancelTasks([task.id])}
+            >
+              Cancel
+            </Button>
+          );
+        },
+      },
     ],
     [],
   );

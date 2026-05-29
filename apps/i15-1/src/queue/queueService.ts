@@ -5,7 +5,11 @@ const QUEUE_SOCKET: string = "http://127.0.0.1:8001";
 
 import axios, { type AxiosInstance } from "axios";
 import { useEffect, useState } from "react";
-import type { QueueState, TaskWithPosition } from "./generated";
+import type {
+  QueueState,
+  TaskCancelRequest,
+  TaskWithPosition,
+} from "./generated";
 import type { QueuedTasks } from "./tasks";
 
 export function createQueueApiClient(baseURL: string): AxiosInstance {
@@ -121,5 +125,28 @@ export function useGetQueuedTasks() {
     queryFn: getQueuedTasks,
     staleTime: Infinity,
     refetchInterval: false,
+  });
+}
+
+export const cancelTasks = async (task_ids: string[]): Promise<QueuedTasks> => {
+  const response = await axios.delete<QueuedTasks>(
+    QUEUE_SOCKET + "/queue/tasks",
+    {
+      data: {
+        task_ids: task_ids,
+      } as TaskCancelRequest,
+    },
+  );
+
+  return response.data;
+};
+
+export function useCancelTasks() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: cancelTasks,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["queue"] });
+    },
   });
 }
