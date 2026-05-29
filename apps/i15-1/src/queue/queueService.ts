@@ -1,16 +1,66 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const QUEUE_SOCKET: string = "/api/daq-queue";
+// const QUEUE_SOCKET: string = "/api/daq-queue";
+const QUEUE_SOCKET: string = "http://127.0.0.1:8001";
 
 import axios, { type AxiosInstance } from "axios";
-import { type QueuedTasks, type QueueStatus } from "./tasks";
+import { useEffect, useState } from "react";
+import type { QueueState, TaskWithPosition } from "./generated";
+import type { QueuedTasks } from "./tasks";
 
 export function createQueueApiClient(baseURL: string): AxiosInstance {
   return axios.create({ baseURL });
 }
 
-const getQueueState = async (): Promise<QueueStatus> => {
-  const response = await axios.get<QueueStatus>(QUEUE_SOCKET + "/queue/state");
+export function useQueueEvents() {
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const source = new EventSource(QUEUE_SOCKET + "/events");
+
+    source.addEventListener("state_update", (event) => {
+      const data = JSON.parse((event as MessageEvent).data);
+      queryClient.setQueryData(["state"], data);
+    });
+
+    source.addEventListener("queue_update", (event) => {
+      const data = JSON.parse((event as MessageEvent).data);
+      queryClient.setQueryData(["queue"], data);
+    });
+
+    source.addEventListener("history_update", (event) => {
+      const data = JSON.parse((event as MessageEvent).data);
+      queryClient.setQueryData(["history"], data);
+    });
+
+    source.addEventListener("tasks_update", (event) => {
+      const data = JSON.parse((event as MessageEvent).data);
+      queryClient.setQueryData(["tasks"], data);
+    });
+
+    source.addEventListener("call_queue_update", (event) => {
+      const data = JSON.parse((event as MessageEvent).data);
+      queryClient.setQueryData(["call_queue"], data);
+    });
+
+    source.addEventListener("call_history_update", (event) => {
+      const data = JSON.parse((event as MessageEvent).data);
+      queryClient.setQueryData(["call_history"], data);
+    });
+
+    source.onerror = (err) => {
+      console.error("SSE error:", err);
+      source.close();
+    };
+
+    return () => {
+      source.close();
+    };
+  }, [queryClient]);
+}
+
+const getQueueState = async (): Promise<QueueState> => {
+  const response = await axios.get<QueueState>(QUEUE_SOCKET + "/queue/state");
   return response.data;
 };
 
@@ -18,15 +68,15 @@ export function useGetQueueState() {
   return useQuery({
     queryKey: ["state"],
     queryFn: getQueueState,
-    staleTime: 0,
-    refetchInterval: 1000,
+    staleTime: Infinity,
+    refetchInterval: false,
   });
 }
 
 export const patchQueueState = async (
   new_state: boolean,
-): Promise<QueueStatus> => {
-  const response = await axios.patch<QueueStatus>(
+): Promise<QueueState> => {
+  const response = await axios.patch<QueueState>(
     QUEUE_SOCKET + "/queue/state",
     { paused: new_state },
   );
@@ -69,7 +119,7 @@ export function useGetQueuedTasks() {
   return useQuery({
     queryKey: ["queue"],
     queryFn: getQueuedTasks,
-    staleTime: 0,
-    refetchInterval: 1000,
+    staleTime: Infinity,
+    refetchInterval: false,
   });
 }

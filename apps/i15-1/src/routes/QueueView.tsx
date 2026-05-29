@@ -5,7 +5,7 @@ import {
   useMaterialReactTable,
   type MRT_ColumnDef,
 } from "material-react-table";
-import { useGetQueuedTasks } from "../queue/queueService";
+import { useGetQueuedTasks, useQueueEvents } from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
 import { QueueStatusBar } from "../queue/pauseButton";
 
@@ -15,6 +15,7 @@ function extractDataFromQueue(): QueueTableData[] {
   queuedTasks.data?.map((task) =>
     data.push({
       position: task.position,
+      id: task.id,
       instrumentSession: task.experiment_definition.instrument_session,
       sampleId: task.experiment_definition.sample_id,
       planRunning: task.experiment_definition.plan_name,
@@ -40,6 +41,7 @@ function getChipColorMap() {
 }
 
 export function QueueView() {
+  useQueueEvents();
   let data = extractDataFromQueue();
   const colorMap = getChipColorMap();
 
@@ -50,6 +52,24 @@ export function QueueView() {
   const columns = useMemo<MRT_ColumnDef<QueueTableData>[]>(
     () => [
       { accessorKey: "position", header: "Position", size: 150 },
+      {
+        accessorKey: "id",
+        header: "ID",
+        size: 100,
+        Cell: ({ cell }) => (
+          <div
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              maxWidth: 100,
+            }}
+            title={cell.getValue<string>()}
+          >
+            {cell.getValue<string>()}
+          </div>
+        ),
+      },
       {
         accessorKey: "instrumentSession",
         header: "Instrument Session",
@@ -71,6 +91,7 @@ export function QueueView() {
         ),
       },
       { accessorKey: "calls", header: "BlueAPI tasks", size: 150 },
+      { accessorKey: "cancel", header: "Cancel", size: 150 },
     ],
     [],
   );

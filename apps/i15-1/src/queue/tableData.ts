@@ -3,6 +3,7 @@ import type { PlanParameters, TaskStatus } from "./tasks";
 
 export type QueueTableData = {
   position: number | null;
+  id: string;
   instrumentSession: string;
   sampleId: string;
   planRunning: string;

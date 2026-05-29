@@ -1,9 +1,5 @@
 import type { BlueapiCallResponse, TaskWithPosition } from "./generated";
 
-export interface QueueStatus {
-  paused: boolean;
-}
-
 export type TaskStatus =
   | "Waiting"
   | "Claimed"
