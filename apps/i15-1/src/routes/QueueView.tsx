@@ -7,30 +7,12 @@ import {
 } from "material-react-table";
 import {
   cancelTasks,
+  moveTask,
   useGetQueuedTasks,
   useQueueEvents,
 } from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
 import { QueueStatusBar } from "../queue/pauseButton";
-
-function extractDataFromQueue(): QueueTableData[] {
-  const queuedTasks = useGetQueuedTasks();
-  let data: QueueTableData[] = [];
-  queuedTasks.data?.map((task) =>
-    data.push({
-      position: task.position,
-      id: task.id,
-      instrumentSession: task.experiment_definition.instrument_session,
-      sampleId: task.experiment_definition.sample_id,
-      planRunning: task.experiment_definition.plan_name,
-      parameters: JSON.stringify(task.experiment_definition.params),
-      //   parameters: task.experiment_definition.params,
-      status: task.status,
-      blueapi_tasks: task.blueapi_calls,
-    }),
-  );
-  return data;
-}
 
 function getChipColorMap() {
   return {
@@ -46,13 +28,32 @@ function getChipColorMap() {
 
 export function QueueView() {
   useQueueEvents();
-  let data = extractDataFromQueue();
-  const colorMap = getChipColorMap();
+
+  const queuedTasks = useGetQueuedTasks();
+
+  const data = useMemo<QueueTableData[]>(() => {
+    return (
+      queuedTasks.data?.map((task) => ({
+        position: task.position,
+        id: task.id,
+        instrumentSession: task.experiment_definition.instrument_session,
+        sampleId: task.experiment_definition.sample_id,
+        planRunning: task.experiment_definition.plan_name,
+        parameters: JSON.stringify(task.experiment_definition.params),
+        //   parameters: task.experiment_definition.params,
+        status: task.status,
+        blueapi_tasks: task.blueapi_calls,
+      })) ?? []
+    );
+  }, [queuedTasks.data]);
+
+  const colorMap = useMemo(() => getChipColorMap(), []);
 
   // NOTE doesn't seem to like that params inevitable ends up being an object
   // A workaround for this is to have them as a string.
   // Could also iterate over them but typing this may become cumbersome with
   // the different plans
+
   const columns = useMemo<MRT_ColumnDef<QueueTableData>[]>(
     () => [
       { accessorKey: "position", header: "Position", size: 150 },
@@ -116,9 +117,30 @@ export function QueueView() {
         },
       },
     ],
-    [],
+    [colorMap],
   );
-  const table = useMaterialReactTable({ columns, data });
+  const table = useMaterialReactTable({
+    columns,
+    data,
+    enableRowOrdering: true,
+    enableRowDragging: true,
+    enableSorting: false,
+    muiRowDragHandleProps: ({ table }) => ({
+      onDragEnd: () => {
+        const draggedRow = table.getState().draggingRow;
+        const targetRow = table.getState().hoveredRow;
+
+        if (!draggedRow || !targetRow) return;
+
+        const draggedTask = draggedRow.original;
+        const newPosition = targetRow.index;
+
+        if (newPosition === undefined) return;
+
+        moveTask({ taskId: draggedTask.id, newPosition: newPosition });
+      },
+    }),
+  });
 
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>

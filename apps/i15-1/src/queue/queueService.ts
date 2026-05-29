@@ -128,12 +128,12 @@ export function useGetQueuedTasks() {
   });
 }
 
-export const cancelTasks = async (task_ids: string[]): Promise<QueuedTasks> => {
+export const cancelTasks = async (taskIds: string[]): Promise<QueuedTasks> => {
   const response = await axios.delete<QueuedTasks>(
     QUEUE_SOCKET + "/queue/tasks",
     {
       data: {
-        task_ids: task_ids,
+        task_ids: taskIds,
       } as TaskCancelRequest,
     },
   );
@@ -145,6 +145,37 @@ export function useCancelTasks() {
   const client = useQueryClient();
   return useMutation({
     mutationFn: cancelTasks,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["queue"] });
+    },
+  });
+}
+
+export const moveTask = async ({
+  taskId,
+  newPosition,
+}: {
+  taskId: string;
+  newPosition: number;
+}): Promise<number> => {
+  const response = await axios.post<number>(
+    QUEUE_SOCKET + "/queue/move",
+    null,
+    {
+      params: {
+        task_id: taskId,
+        new_position: newPosition,
+      },
+    },
+  );
+
+  return response.data;
+};
+
+export function useMoveTask() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: moveTask,
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["queue"] });
     },
