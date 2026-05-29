@@ -1,5 +1,12 @@
-import { Box, Button, Chip, Stack } from "@mui/material";
-import { useMemo } from "react";
+import {
+  Box,
+  Button,
+  Chip,
+  FormControlLabel,
+  Stack,
+  Switch,
+} from "@mui/material";
+import { useMemo, useState } from "react";
 import {
   MaterialReactTable,
   useMaterialReactTable,
@@ -7,12 +14,16 @@ import {
 } from "material-react-table";
 import {
   cancelTasks,
+  clearHistory,
   moveTask,
+  useGetAllTasks,
   useGetQueuedTasks,
   useQueueEvents,
 } from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
 import { QueueStatusBar } from "../queue/pauseButton";
+import type { QueuedTasks } from "../queue/tasks";
+import type { UseQueryResult } from "@tanstack/react-query";
 
 function getChipColorMap() {
   return {
@@ -30,10 +41,18 @@ export function QueueView() {
   useQueueEvents();
 
   const queuedTasks = useGetQueuedTasks();
+  const allTasks = useGetAllTasks();
+
+  const [showHistoric, setShowHistoric] = useState(false);
+
+  const tasksToDisplay = useMemo<UseQueryResult<QueuedTasks, Error>>(() => {
+    if (showHistoric) return allTasks;
+    else return queuedTasks;
+  }, [queuedTasks, allTasks, showHistoric]);
 
   const data = useMemo<QueueTableData[]>(() => {
     return (
-      queuedTasks.data?.map((task) => ({
+      tasksToDisplay.data?.map((task) => ({
         position: task.position,
         id: task.id,
         instrumentSession: task.experiment_definition.instrument_session,
@@ -45,7 +64,7 @@ export function QueueView() {
         blueapi_tasks: task.blueapi_calls,
       })) ?? []
     );
-  }, [queuedTasks.data]);
+  }, [tasksToDisplay.data]);
 
   const colorMap = useMemo(() => getChipColorMap(), []);
 
@@ -119,6 +138,7 @@ export function QueueView() {
     ],
     [colorMap],
   );
+
   const table = useMaterialReactTable({
     columns,
     data,
@@ -140,6 +160,22 @@ export function QueueView() {
         moveTask({ taskId: draggedTask.id, newPosition: newPosition });
       },
     }),
+    renderTopToolbarCustomActions: () => (
+      <Stack direction="row" spacing={2} alignItems="center">
+        <FormControlLabel
+          control={
+            <Switch
+              checked={showHistoric}
+              onChange={(e) => setShowHistoric(e.target.checked)}
+            ></Switch>
+          }
+          label="Show historic tasks"
+        ></FormControlLabel>
+        <Button variant="outlined" color="error" onClick={() => clearHistory()}>
+          Clear History
+        </Button>
+      </Stack>
+    ),
   });
 
   return (

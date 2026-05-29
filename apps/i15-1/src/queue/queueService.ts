@@ -128,6 +128,34 @@ export function useGetQueuedTasks() {
   });
 }
 
+const getAllTasks = async (): Promise<QueuedTasks> => {
+  const response = await axios.get<QueuedTasks>(QUEUE_SOCKET + "/tasks");
+  return response.data;
+};
+
+export function useGetAllTasks() {
+  return useQuery({
+    queryKey: ["tasks"],
+    queryFn: getAllTasks,
+    staleTime: Infinity,
+    refetchInterval: false,
+  });
+}
+
+const getHistoricTasks = async (): Promise<QueuedTasks> => {
+  const response = await axios.get<QueuedTasks>(QUEUE_SOCKET + "/history");
+  return response.data;
+};
+
+export function useGetHistoricTasks() {
+  return useQuery({
+    queryKey: ["history"],
+    queryFn: getHistoricTasks,
+    staleTime: Infinity,
+    refetchInterval: false,
+  });
+}
+
 export const cancelTasks = async (taskIds: string[]): Promise<QueuedTasks> => {
   const response = await axios.delete<QueuedTasks>(
     QUEUE_SOCKET + "/queue/tasks",
@@ -181,3 +209,9 @@ export function useMoveTask() {
     },
   });
 }
+
+export const clearHistory = async (): Promise<number> => {
+  const response = await axios.delete<number>(QUEUE_SOCKET + "/history");
+
+  return response.data;
+};
