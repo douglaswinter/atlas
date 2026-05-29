@@ -153,9 +153,16 @@ export function QueueView() {
         if (!draggedRow || !targetRow) return;
 
         const draggedTask = draggedRow.original;
-        const newPosition = targetRow.index;
+        const oldIndex = draggedRow.index;
+        const newIndex = targetRow.index;
 
-        if (newPosition === undefined) return;
+        if (newIndex === undefined || draggedRow.original.position === null)
+          return;
+
+        const newPosition = Math.max(
+          draggedRow.original.position + (newIndex - oldIndex),
+          0,
+        );
 
         moveTask({ taskId: draggedTask.id, newPosition: newPosition });
       },
