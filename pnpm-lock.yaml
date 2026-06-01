@@ -115,6 +115,12 @@ importers:
 
   apps/p99:
     dependencies:
+      '@atlas/blueapi':
+        specifier: workspace:*
+        version: link:../../packages/blueapi
+      '@atlas/blueapi-query':
+        specifier: workspace:*
+        version: link:../../packages/blueapi-query
       '@diamondlightsource/sci-react-ui':
         specifier: ^0.2.0
         version: 0.2.0(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react@18.3.1))(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.28)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
@@ -130,9 +136,18 @@ importers:
       '@mui/material':
         specifier: <7.0.0
         version: 6.5.0(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-router-dom:
-        specifier: ^7.7.1
-        version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tanstack/react-query':
+        specifier: ^5.90.21
+        version: 5.90.21(react@18.3.1)
+      '@testing-library/react':
+        specifier: ^15.0.7
+        version: 15.0.7(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      msw:
+        specifier: ^2.12.10
+        version: 2.12.10(@types/node@25.3.3)(typescript@5.9.3)
+      vite-plugin-relay:
+        specifier: ^2.1.0
+        version: 2.1.0(babel-plugin-relay@20.1.1)(vite@7.3.1(@types/node@25.3.3)(terser@5.46.1))
     devDependencies:
       '@atlas/vitest-conf':
         specifier: workspace:*
@@ -152,6 +167,9 @@ importers:
       globals:
         specifier: ^16.3.0
         version: 16.5.0
+      react-router-dom:
+        specifier: ^7.8.0
+        version: 7.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vite:
         specifier: ^7.1.2
         version: 7.3.1(@types/node@25.3.3)(terser@5.46.1)
@@ -4440,6 +4458,7 @@ packages:
 
   uuid@9.0.1:
     resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   validate.io-boolean@1.0.4:
