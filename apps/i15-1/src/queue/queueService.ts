@@ -77,12 +77,10 @@ export function useGetQueueState() {
   });
 }
 
-export const patchQueueState = async (
-  new_state: boolean,
-): Promise<QueueState> => {
+export const patchQueueState = async (paused: boolean): Promise<QueueState> => {
   const response = await axios.patch<QueueState>(
     QUEUE_SOCKET + "/queue/state",
-    { paused: new_state },
+    { paused: paused },
   );
   return response.data;
 };

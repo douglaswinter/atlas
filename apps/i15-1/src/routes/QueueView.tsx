@@ -178,7 +178,12 @@ export function QueueView() {
           }
           label="Show historic tasks"
         ></FormControlLabel>
-        <Button variant="outlined" color="error" onClick={() => clearHistory()}>
+        <Button
+          variant="outlined"
+          color="error"
+          disabled={!showHistoric}
+          onClick={() => clearHistory()}
+        >
           Clear History
         </Button>
       </Stack>
