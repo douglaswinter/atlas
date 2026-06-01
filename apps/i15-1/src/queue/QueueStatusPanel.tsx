@@ -24,7 +24,7 @@ export function QueueControlButton() {
   );
 }
 
-export function QueueStatusBar() {
+export function QueueStatusPanel() {
   const { paused } = useToggleQueueState();
 
   return (

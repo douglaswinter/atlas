@@ -21,7 +21,7 @@ import {
   useQueueEvents,
 } from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
-import { QueueStatusBar } from "../queue/pauseButton";
+import { QueueStatusPanel } from "../queue/QueueStatusPanel";
 import type { QueuedTasks } from "../queue/tasks";
 import type { UseQueryResult } from "@tanstack/react-query";
 
@@ -193,7 +193,7 @@ export function QueueView() {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
       <Stack direction={"column"} spacing={4} alignItems={"center"}>
-        <QueueStatusBar></QueueStatusBar>
+        <QueueStatusPanel />
         <MaterialReactTable table={table} />
       </Stack>
     </Box>
