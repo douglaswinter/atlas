@@ -19,37 +19,23 @@ export function createQueueApiClient(baseURL: string): AxiosInstance {
 export function useQueueEvents() {
   const queryClient = useQueryClient();
 
+  const handlers = {
+    state_update: "state",
+    queue_update: "queue",
+    history_update: "history",
+    tasks_update: "tasks",
+    call_queue_update: "call_queue",
+    call_history_update: "call_history",
+  };
+
   useEffect(() => {
     const source = new EventSource(QUEUE_SOCKET + "/events");
 
-    source.addEventListener("state_update", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      queryClient.setQueryData(["state"], data);
-    });
-
-    source.addEventListener("queue_update", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      queryClient.setQueryData(["queue"], data);
-    });
-
-    source.addEventListener("history_update", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      queryClient.setQueryData(["history"], data);
-    });
-
-    source.addEventListener("tasks_update", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      queryClient.setQueryData(["tasks"], data);
-    });
-
-    source.addEventListener("call_queue_update", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      queryClient.setQueryData(["call_queue"], data);
-    });
-
-    source.addEventListener("call_history_update", (event) => {
-      const data = JSON.parse((event as MessageEvent).data);
-      queryClient.setQueryData(["call_history"], data);
+    Object.entries(handlers).forEach(([eventName, queryKey]) => {
+      source.addEventListener(eventName, (event) => {
+        const data = JSON.parse((event as MessageEvent).data);
+        queryClient.setQueryData([queryKey], data);
+      });
     });
 
     source.onerror = (err) => {
