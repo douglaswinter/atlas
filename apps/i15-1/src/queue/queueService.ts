@@ -1,16 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-// const QUEUE_SOCKET: string = "/api/daq-queue";
-const QUEUE_SOCKET: string = "http://127.0.0.1:8001";
-
 import axios, { type AxiosInstance } from "axios";
-import { useEffect, useState } from "react";
-import type {
-  QueueState,
-  TaskCancelRequest,
-  TaskWithPosition,
-} from "./generated";
+import { useEffect } from "react";
+import type { QueueState, TaskCancelRequest } from "./generated";
 import type { QueuedTasks } from "./tasks";
+
+const QUEUE_MODE = import.meta.env.VITE_QUEUE_MODE;
+const QUEUE_SOCKET: string =
+  QUEUE_MODE === "local" ? "http://127.0.0.1:8001" : "/api/daq-queue";
 
 export function createQueueApiClient(baseURL: string): AxiosInstance {
   return axios.create({ baseURL });

@@ -7,6 +7,8 @@ The initial aim of this app to provide a science facing UI for the waffle projec
 To run this locally:
 
 1.  Start the devcontainer in VSCode
-1.  To make sure you have the most up-to-date environment either run `pnpm install` in the container or rebuild the container (via the Ctrl+Shift+P menu in VSCode)
-1.  Run `turbo dev --filter @atlas/i15-1`
-1.  Navigate to http://localhost:5173/
+2.  To make sure you have the most up-to-date environment either run `pnpm install` in the container or rebuild the container (via the Ctrl+Shift+P menu in VSCode)
+3.  In a terminal in this devcontainer run:
+    - `turbo dev --filter @atlas/i15-1` to use a mocked queue
+    - `VITE_QUEUE_MODE=local turbo dev --filter @atlas/i15-1` if running a local queue server. It is assumed the local queue server is running on http://127.0.0.1:8001
+4.  Navigate to http://localhost:5173/
