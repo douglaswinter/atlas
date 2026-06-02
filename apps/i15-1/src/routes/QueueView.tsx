@@ -61,9 +61,8 @@ export function QueueView() {
         sampleId: task.experiment_definition.sample_id,
         planRunning: task.experiment_definition.plan_name,
         parameters: JSON.stringify(task.experiment_definition.params),
-        //   parameters: task.experiment_definition.params,
         status: task.status,
-        blueapi_tasks: task.blueapi_calls,
+        blueapTasks: task.blueapi_calls,
       })) ?? []
     );
   }, [tasksToDisplay.data]);
@@ -77,25 +76,7 @@ export function QueueView() {
 
   const columns = useMemo<MRT_ColumnDef<QueueTableData>[]>(
     () => [
-      { accessorKey: "position", header: "Position", size: 150 },
-      {
-        accessorKey: "id",
-        header: "ID",
-        size: 100,
-        Cell: ({ cell }) => (
-          <div
-            style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-              maxWidth: 100,
-            }}
-            title={cell.getValue<string>()}
-          >
-            {cell.getValue<string>()}
-          </div>
-        ),
-      },
+      { accessorKey: "position", header: "Position", size: 100 },
       {
         accessorKey: "instrumentSession",
         header: "Instrument Session",

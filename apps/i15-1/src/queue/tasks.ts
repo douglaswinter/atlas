@@ -1,12 +1,4 @@
-import type { BlueapiCallResponse, TaskWithPosition } from "./generated";
-
-export type TaskStatus =
-  | "Waiting"
-  | "Claimed"
-  | "In progress"
-  | "Success"
-  | "Error"
-  | "Cancelled";
+import type { TaskWithPosition } from "./generated";
 
 type TaskResult = {
   outcome: string;
@@ -40,17 +32,5 @@ export type ExperimentDefinition = {
   params: PlanParameters;
   instrument_session: string;
 };
-
-export interface QueueElement {
-  experiment_definition: ExperimentDefinition;
-  id: string;
-  status: TaskStatus;
-  time_started: string;
-  time_completed: string;
-  errors: string[];
-  result: TaskResult;
-  blueapi_id: string;
-  position: number; // position in the queue
-}
 
 export type QueuedTasks = TaskWithPosition[];
