@@ -172,7 +172,7 @@ export function useCancelTasks() {
   return useMutation({
     mutationFn: cancelTasks,
     onSuccess: () => {
-      client.invalidateQueries({ queryKey: ["queue"] });
+      client.invalidateQueries({ queryKey: ["queue", "tasks"] });
     },
   });
 }
@@ -203,7 +203,7 @@ export function useMoveTask() {
   return useMutation({
     mutationFn: moveTask,
     onSuccess: () => {
-      client.invalidateQueries({ queryKey: ["queue"] });
+      client.invalidateQueries({ queryKey: ["queue", "tasks"] });
     },
   });
 }

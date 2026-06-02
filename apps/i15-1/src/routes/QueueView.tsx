@@ -15,9 +15,9 @@ import {
 import {
   cancelTasks,
   clearHistory,
-  moveTask,
   useGetAllTasks,
   useGetQueuedTasks,
+  useMoveTask,
   useQueueEvents,
 } from "../queue/queueService";
 import type { QueueTableData } from "../queue/tableData";
@@ -42,6 +42,8 @@ export function QueueView() {
 
   const queuedTasks = useGetQueuedTasks();
   const allTasks = useGetAllTasks();
+
+  const moveTaskMutation = useMoveTask();
 
   const [showHistoric, setShowHistoric] = useState(false);
 
@@ -145,28 +147,36 @@ export function QueueView() {
     enableRowOrdering: true,
     enableRowDragging: true,
     enableSorting: false,
-    muiRowDragHandleProps: ({ table }) => ({
-      onDragEnd: () => {
-        const draggedRow = table.getState().draggingRow;
-        const targetRow = table.getState().hoveredRow;
+    muiRowDragHandleProps: ({ row, table }) => {
+      const isDraggable = row.original.status === "Queued";
+      return {
+        draggable: isDraggable,
+        sx: !isDraggable ? { display: "none" } : undefined,
+        onDragEnd: () => {
+          const draggedRow = table.getState().draggingRow;
+          const targetRow = table.getState().hoveredRow;
 
-        if (!draggedRow || !targetRow) return;
+          if (!draggedRow || !targetRow) return;
 
-        const draggedTask = draggedRow.original;
-        const oldIndex = draggedRow.index;
-        const newIndex = targetRow.index;
+          const draggedTask = draggedRow.original;
+          const oldIndex = draggedRow.index;
+          const newIndex = targetRow.index;
 
-        if (newIndex === undefined || draggedRow.original.position === null)
-          return;
+          if (newIndex === undefined || draggedRow.original.position === null)
+            return;
 
-        const newPosition = Math.max(
-          draggedRow.original.position + (newIndex - oldIndex),
-          0,
-        );
+          const newPosition = Math.max(
+            draggedRow.original.position + (newIndex - oldIndex),
+            0,
+          );
 
-        moveTask({ taskId: draggedTask.id, newPosition: newPosition });
-      },
-    }),
+          moveTaskMutation.mutate({
+            taskId: draggedTask.id,
+            newPosition: newPosition,
+          });
+        },
+      };
+    },
     renderTopToolbarCustomActions: () => (
       <Stack direction="row" spacing={2} alignItems="center">
         <FormControlLabel
