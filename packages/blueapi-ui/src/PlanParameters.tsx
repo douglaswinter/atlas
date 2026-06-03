@@ -37,31 +37,35 @@ export const PlanParameters: React.FC<PlanParametersProps> = (
 
   return (
     <ErrorBoundary FallbackComponent={UIFallback} resetKeys={[props.plan.name]}>
-      <Typography
-        variant="h5"
-        component="h1"
-        sx={{ mb: 2, fontWeight: "bold" }}
-      >
-        {props.plan.name}
-      </Typography>
-      {props.plan.description && (
-        <Typography pt={2} pb={4}>
-          {props.plan.description}
+      <Box sx={{ mt: 2 }}>
+        <Typography
+          variant="h5"
+          component="h1"
+          sx={{ mb: 2, fontWeight: "bold" }}
+        >
+          {props.plan.name}
         </Typography>
-      )}
-      <JsonForms
-        schema={schema}
-        data={planParameters}
-        renderers={materialRenderers}
-        cells={materialCells}
-        onChange={({ data }) => setPlanParameters(data)}
-      />
-      <TextField
-        id="instrumentSession"
-        label="Instrument Session"
-        defaultValue={instrumentSession}
-        onChange={(e) => setInstrumentSession(e.target.value)}
-      ></TextField>
+        {props.plan.description && (
+          <Typography pt={2} pb={4}>
+            {props.plan.description}
+          </Typography>
+        )}
+        <JsonForms
+          schema={schema}
+          data={planParameters}
+          renderers={materialRenderers}
+          cells={materialCells}
+          onChange={({ data }) => setPlanParameters(data)}
+        />
+      </Box>
+      <Box sx={{ mt: 2 }}>
+        <TextField
+          id="instrumentSession"
+          label="Instrument Session"
+          defaultValue={instrumentSession}
+          onChange={(e) => setInstrumentSession(e.target.value)}
+        ></TextField>
+      </Box>
       <Box sx={{ mt: 2 }}>
         <RunPlanButton
           name={props.plan.name}
