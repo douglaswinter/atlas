@@ -364,6 +364,40 @@ importers:
         specifier: '*'
         version: 4.0.18(@types/node@25.3.3)(jsdom@26.1.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))(msw@2.12.10(@types/node@25.3.3)(typescript@5.9.3))(terser@5.46.1)
 
+  packages/blueapi-ui:
+    dependencies:
+      '@atlas/blueapi':
+        specifier: workspace:*
+        version: link:../blueapi
+      '@atlas/blueapi-query':
+        specifier: workspace:*
+        version: link:../blueapi-query
+      '@jsonforms/core':
+        specifier: 3.6.0
+        version: 3.6.0
+      '@jsonforms/material-renderers':
+        specifier: 3.6.0
+        version: 3.6.0(a2958437c922d885fd4a4f8b5e701907)
+      '@jsonforms/react':
+        specifier: 3.6.0
+        version: 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
+      '@tanstack/react-query':
+        specifier: ^5.90.21
+        version: 5.90.21(react@18.3.1)
+      react-error-boundary:
+        specifier: ^6.0.0
+        version: 6.1.1(react@18.3.1)
+    devDependencies:
+      '@atlas/vitest-conf':
+        specifier: workspace:*
+        version: link:../vitest-conf
+      '@mui/material':
+        specifier: ^6.5.0
+        version: 6.5.0(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react@18.3.1))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      vitest:
+        specifier: '*'
+        version: 4.0.18(@types/node@25.3.3)(jsdom@26.1.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))(msw@2.12.10(@types/node@25.3.3)(typescript@5.9.3))(terser@5.46.1)
+
   packages/pvws-config:
     dependencies:
       '@diamondlightsource/cs-web-lib':
