@@ -3,6 +3,8 @@ import type { Plan } from "@atlas/blueapi";
 import {
   Box,
   Container,
+  Divider,
+  Drawer,
   Grid2 as Grid,
   Paper,
   Typography,
@@ -19,9 +21,9 @@ export function PlanBrowser({ plans, renderPlan }: PlanBrowserProps) {
 
   return (
     <Container sx={{ height: "85vh", width: "80%" }}>
-      <Grid container spacing={1} sx={{ height: "100%" }}>
+      <Grid container spacing={0} sx={{ height: "100%" }}>
         <Grid size={{ xs: 4 }}>
-          <Paper elevation={2} sx={{ height: "100%" }}>
+          <Paper elevation={0} sx={{ height: "100%" }}>
             <SearchablePlanList
               plans={plans}
               selectedPlan={selectedPlan}
