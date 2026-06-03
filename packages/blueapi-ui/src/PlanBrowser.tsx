@@ -14,7 +14,7 @@ export type PlanBrowserProps = {
   renderPlan: (plan: Plan) => ReactNode;
 };
 
-export default function PlanBrowser({ plans, renderPlan }: PlanBrowserProps) {
+export function PlanBrowser({ plans, renderPlan }: PlanBrowserProps) {
   const [selectedPlan, setSelectedPlan] = useState<Plan | null>(null);
 
   return (

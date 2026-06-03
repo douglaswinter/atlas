@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Robot from "./routes/Robot";
 import Dashboard from "./routes/Dashboard";
+import Plans from "./routes/Plans";
 
 const navigation: SectionGroup[] = [
   {
@@ -61,7 +62,7 @@ const navigation: SectionGroup[] = [
           },
           {
             name: "Plans",
-            element: <div />,
+            element: <Plans />,
           },
         ],
       },

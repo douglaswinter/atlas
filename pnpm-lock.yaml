@@ -60,6 +60,9 @@ importers:
       '@atlas/blueapi-query':
         specifier: workspace:*
         version: link:../../packages/blueapi-query
+      '@atlas/blueapi-ui':
+        specifier: workspace:*
+        version: link:../../packages/blueapi-ui
       '@atlas/pvws-config':
         specifier: workspace:*
         version: link:../../packages/pvws-config

@@ -26,7 +26,7 @@ type PlanParametersProps = {
   plan: Plan;
 };
 
-const PlanParameters: React.FC<PlanParametersProps> = (
+export const PlanParameters: React.FC<PlanParametersProps> = (
   props: PlanParametersProps,
 ) => {
   const schema = sanitizeSchema(props.plan.schema);
@@ -72,5 +72,3 @@ const PlanParameters: React.FC<PlanParametersProps> = (
     </ErrorBoundary>
   );
 };
-
-export default PlanParameters;
