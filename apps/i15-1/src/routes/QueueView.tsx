@@ -60,6 +60,7 @@ export function QueueView() {
         instrumentSession: task.experiment_definition.instrument_session,
         sampleId: task.experiment_definition.sample_id,
         planRunning: task.experiment_definition.plan_name,
+        // Should investigate a nicer way to display params, see https://github.com/DiamondLightSource/atlas/issues/52
         parameters: JSON.stringify(task.experiment_definition.params),
         status: task.status,
         blueapTasks: task.blueapi_calls,
@@ -68,11 +69,6 @@ export function QueueView() {
   }, [tasksToDisplay.data]);
 
   const colorMap = useMemo(() => getChipColorMap(), []);
-
-  // NOTE doesn't seem to like that params inevitable ends up being an object
-  // A workaround for this is to have them as a string.
-  // Could also iterate over them but typing this may become cumbersome with
-  // the different plans
 
   const columns = useMemo<MRT_ColumnDef<QueueTableData>[]>(
     () => [
