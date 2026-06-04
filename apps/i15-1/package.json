@@ -42,7 +42,7 @@
     "typescript": "~5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-relay": "^2.1.0",
-    "vitest": "*"
+    "vitest": "^4.0.18"
   },
   "msw": {
     "workerDirectory": [
