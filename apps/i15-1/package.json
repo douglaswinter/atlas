@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "generate:queue": "npx @hey-api/openapi-ts -i https://raw.githubusercontent.com/DiamondLightSource/daq-queuing-service/main/docs/reference/rest_api.json -o /workspaces/atlas/apps/i15-1/apps/i15-1/src/queue/generated/"
+    "generate:queue": "npx @hey-api/openapi-ts -i https://raw.githubusercontent.com/DiamondLightSource/daq-queuing-service/main/docs/reference/rest_api.json -o /workspaces/atlas/apps/i15-1/apps/i15-1/src/queue/generated/",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@apollo/client": "^4.2.3",
