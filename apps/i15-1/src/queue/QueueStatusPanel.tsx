@@ -29,7 +29,7 @@ export function QueueControlButton() {
     <Button
       sx={{
         height: 28,
-        width: 160,
+        width: 100,
         alignItems: "center",
         "& .MuiButton-startIcon": {
           display: "flex",
@@ -42,7 +42,7 @@ export function QueueControlButton() {
       disabled={!connected}
       startIcon={icon}
     >
-      {paused ? "Resume" : "Pause"} Queue
+      {paused ? "Resume" : "Pause"}
     </Button>
   );
 }
