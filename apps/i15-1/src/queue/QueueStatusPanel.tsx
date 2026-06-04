@@ -64,7 +64,7 @@ export function QueueStatusPanel() {
           {!connected
             ? "Not Connected"
             : empty
-              ? "Empty"
+              ? "Finished"
               : paused
                 ? "Paused"
                 : "Running"}
