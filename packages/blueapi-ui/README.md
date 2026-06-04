@@ -1,6 +1,10 @@
 # @atlas/blueapi-ui
 
-Some description here.
+This package provides some basic UI components for interaction with blueapi, currently:
+
+- PlanBrowser
+- SearchablePlanList
+- RunPlanButton
 
 ## Installation
 
@@ -10,7 +14,9 @@ pnpm add -F myApp @atlas/blueapi-ui --workspace
 
 ## Usage
 
-Do a thing
+1. Once installed, you can use the PlanBrowser to display a searchable list of all plans available, and view plan details (currently rendered by JsonForms).
+
+Example:
 
 ```ts
 import { PlanBrowser } from "@atlas/blueapi-ui";
@@ -35,7 +41,7 @@ export default JsonFormsPlans;
 
 ```
 
-Add a mocked response and handler
+2. Add a mocked response and handler to provide a generic list of plans:
 
 ```ts
 import plansResponse from "@atlas/blueapi-ui";

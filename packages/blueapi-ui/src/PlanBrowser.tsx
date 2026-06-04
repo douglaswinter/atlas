@@ -3,8 +3,6 @@ import type { Plan } from "@atlas/blueapi";
 import {
   Box,
   Container,
-  Divider,
-  Drawer,
   Grid2 as Grid,
   Paper,
   Typography,

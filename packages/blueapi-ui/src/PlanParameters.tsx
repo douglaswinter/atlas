@@ -8,7 +8,6 @@ import {
 import sanitizeSchema from "./utils/schema";
 import type { Plan } from "@atlas/blueapi";
 import RunPlanButton from "./RunPlanButton";
-// import { useInstrumentSession } from "../../context/instrumentSession/useInstrumentSession";
 
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -32,7 +31,6 @@ export const PlanParameters: React.FC<PlanParametersProps> = (
   const schema = sanitizeSchema(props.plan.schema);
 
   const [planParameters, setPlanParameters] = useState({});
-  // const { instrumentSession, setInstrumentSession } = useInstrumentSession();
   const [instrumentSession, setInstrumentSession] = useState("cm12345-1");
 
   return (
