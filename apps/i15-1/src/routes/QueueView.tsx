@@ -15,7 +15,6 @@ import {
 import {
   cancelTasks,
   clearHistory,
-  useConnected,
   useGetAllTasks,
   useGetQueuedTasks,
   useMoveTask,
@@ -154,24 +153,33 @@ export function QueueView() {
       };
     },
     renderTopToolbarCustomActions: () => (
-      <Stack direction="row" spacing={2} alignItems="center">
-        <FormControlLabel
-          control={
-            <Switch
-              checked={showHistoric}
-              onChange={(e) => setShowHistoric(e.target.checked)}
-            ></Switch>
-          }
-          label="Show historic tasks"
-        ></FormControlLabel>
-        <Button
-          variant="outlined"
-          color="error"
-          disabled={!showHistoric}
-          onClick={() => clearHistory()}
-        >
-          Clear History
-        </Button>
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        justifyContent="space-between"
+        width="100%"
+      >
+        <div>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={showHistoric}
+                onChange={(e) => setShowHistoric(e.target.checked)}
+              ></Switch>
+            }
+            label="Show historic tasks"
+          ></FormControlLabel>
+          <Button
+            variant="outlined"
+            color="error"
+            disabled={!showHistoric}
+            onClick={() => clearHistory()}
+          >
+            Clear History
+          </Button>
+        </div>
+        <QueueStatusPanel />
       </Stack>
     ),
   });
@@ -179,7 +187,6 @@ export function QueueView() {
   return (
     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
       <Stack direction={"column"} spacing={4} alignItems={"center"}>
-        <QueueStatusPanel />
         <MaterialReactTable table={table} />
       </Stack>
     </Box>

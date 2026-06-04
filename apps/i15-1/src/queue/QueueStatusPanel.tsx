@@ -5,7 +5,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
 import {
   useConnected,
   useGetQueuedTasks,
@@ -13,18 +14,35 @@ import {
 } from "./queueService";
 
 export function QueueControlButton() {
-  const { paused, toggle, isLoading, isDisabled } = useToggleQueueState();
+  const { paused, toggle, isLoading } = useToggleQueueState();
   const { connected } = useConnected();
+
+  const icon = isLoading ? (
+    <CircularProgress size={16} />
+  ) : paused ? (
+    <PlayArrowIcon fontSize="small" />
+  ) : (
+    <PauseIcon fontSize="small" />
+  );
 
   return (
     <Button
+      sx={{
+        height: 28,
+        width: 160,
+        alignItems: "center",
+        "& .MuiButton-startIcon": {
+          display: "flex",
+          alignItems: "center",
+        },
+      }}
       variant="contained"
       color={!connected ? "error" : paused ? "warning" : "success"}
       onClick={toggle}
       disabled={!connected}
-      startIcon={isLoading ? <CircularProgress size={16} /> : undefined}
+      startIcon={icon}
     >
-      {paused ? "Resume Queue" : "Pause Queue"}
+      {paused ? "Resume" : "Pause"} Queue
     </Button>
   );
 }
@@ -38,14 +56,15 @@ export function QueueStatusPanel() {
   return (
     <Box
       sx={{
+        display: "flex",
         border: "1px solid",
         borderColor: !connected
           ? "error.main"
           : paused
             ? "warning.main"
             : "success.main",
-        borderRadius: 2,
-        padding: 2,
+        borderRadius: 1,
+        padding: 1,
       }}
     >
       <Stack direction="row" spacing={2} alignItems="center">
@@ -57,7 +76,8 @@ export function QueueStatusPanel() {
               : paused
                 ? "warning.main"
                 : "success.main",
-            fontWeight: 600,
+            fontWeight: 500,
+            fontSize: 17,
           }}
         >
           Queue{" "}
@@ -69,7 +89,6 @@ export function QueueStatusPanel() {
                 ? "Paused"
                 : "Running"}
         </Typography>
-
         <QueueControlButton />
       </Stack>
     </Box>

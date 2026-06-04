@@ -40,7 +40,9 @@ export function useQueueEvents() {
 
     source.onerror = (err) => {
       console.error("SSE error:", err);
-      source.close();
+    };
+    source.onopen = (ev) => {
+      console.log("Opened SSE connection", ev);
     };
 
     return () => {
