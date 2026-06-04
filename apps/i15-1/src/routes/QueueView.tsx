@@ -15,6 +15,7 @@ import {
 import {
   cancelTasks,
   clearHistory,
+  useConnected,
   useGetAllTasks,
   useGetQueuedTasks,
   useMoveTask,
@@ -42,9 +43,7 @@ export function QueueView() {
 
   const queuedTasks = useGetQueuedTasks();
   const allTasks = useGetAllTasks();
-
   const moveTaskMutation = useMoveTask();
-
   const [showHistoric, setShowHistoric] = useState(false);
 
   const tasksToDisplay = useMemo<UseQueryResult<QueuedTasks, Error>>(() => {

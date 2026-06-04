@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import axios, { type AxiosInstance } from "axios";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import type { QueueState, TaskCancelRequest } from "./generated";
 import type { QueuedTasks } from "./tasks";
 
@@ -9,29 +9,32 @@ const QUEUE_MODE = import.meta.env.VITE_QUEUE_MODE;
 const QUEUE_SOCKET: string =
   QUEUE_MODE === "local" ? "http://127.0.0.1:8001" : "/api/daq-queue";
 
+const handlers = {
+  state_update: "state",
+  queue_update: "queue",
+  history_update: "history",
+  tasks_update: "tasks",
+  call_queue_update: "call_queue",
+  call_history_update: "call_history",
+};
+
 export function createQueueApiClient(baseURL: string): AxiosInstance {
   return axios.create({ baseURL });
 }
 
 export function useQueueEvents() {
   const queryClient = useQueryClient();
-
-  const handlers = {
-    state_update: "state",
-    queue_update: "queue",
-    history_update: "history",
-    tasks_update: "tasks",
-    call_queue_update: "call_queue",
-    call_history_update: "call_history",
-  };
+  const { connected } = useConnected();
 
   useEffect(() => {
+    if (!connected) return;
+
     const source = new EventSource(QUEUE_SOCKET + "/events");
 
     Object.entries(handlers).forEach(([eventName, queryKey]) => {
       source.addEventListener(eventName, (event) => {
         const data = JSON.parse((event as MessageEvent).data);
-        queryClient.setQueryData([queryKey], data);
+        queryClient.setQueryData([queryKey], () => structuredClone(data));
       });
     });
 
@@ -43,7 +46,44 @@ export function useQueueEvents() {
     return () => {
       source.close();
     };
-  }, [queryClient]);
+  }, [connected, queryClient]);
+}
+
+const getQueueHealth = async (): Promise<QueueState> => {
+  const response = await axios.get<QueueState>(QUEUE_SOCKET + "/healthz");
+  return response.data;
+};
+
+export function useGetQueueHealth() {
+  return useQuery({
+    queryKey: ["connected"],
+    queryFn: getQueueHealth,
+    staleTime: 0,
+    refetchInterval: 500,
+    refetchOnReconnect: true,
+    retry: 1,
+    retryDelay: 300,
+  });
+}
+
+export function useConnected() {
+  const query = useGetQueueHealth();
+  const queryClient = useQueryClient();
+  const connected = query.status === "success";
+  const wasConnected = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    if (wasConnected.current === false && connected === true) {
+      queryClient.resetQueries({
+        predicate: (q) =>
+          Object.values(handlers).includes(q.queryKey[0] as string),
+      });
+    }
+
+    wasConnected.current = connected;
+  }, [connected, queryClient]);
+
+  return { connected, ...query };
 }
 
 const getQueueState = async (): Promise<QueueState> => {

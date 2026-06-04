@@ -6,17 +6,22 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useToggleQueueState } from "./queueService";
+import {
+  useConnected,
+  useGetQueuedTasks,
+  useToggleQueueState,
+} from "./queueService";
 
 export function QueueControlButton() {
   const { paused, toggle, isLoading, isDisabled } = useToggleQueueState();
+  const { connected } = useConnected();
 
   return (
     <Button
       variant="contained"
-      color={paused ? "warning" : "success"}
+      color={!connected ? "error" : paused ? "warning" : "success"}
       onClick={toggle}
-      disabled={isDisabled}
+      disabled={!connected}
       startIcon={isLoading ? <CircularProgress size={16} /> : undefined}
     >
       {paused ? "Resume Queue" : "Pause Queue"}
@@ -26,12 +31,19 @@ export function QueueControlButton() {
 
 export function QueueStatusPanel() {
   const { paused } = useToggleQueueState();
+  const queuedTasks = useGetQueuedTasks();
+  const empty = !queuedTasks.data || queuedTasks.data.length === 0;
+  const { connected } = useConnected();
 
   return (
     <Box
       sx={{
         border: "1px solid",
-        borderColor: paused ? "warning.main" : "success.main",
+        borderColor: !connected
+          ? "error.main"
+          : paused
+            ? "warning.main"
+            : "success.main",
         borderRadius: 2,
         padding: 2,
       }}
@@ -40,11 +52,22 @@ export function QueueStatusPanel() {
         <Typography
           variant="h6"
           sx={{
-            color: paused ? "warning.main" : "success.main",
+            color: !connected
+              ? "error.main"
+              : paused
+                ? "warning.main"
+                : "success.main",
             fontWeight: 600,
           }}
         >
-          Queue {paused ? "Paused" : "Running"}
+          Queue{" "}
+          {!connected
+            ? "Not Connected"
+            : empty
+              ? "Empty"
+              : paused
+                ? "Paused"
+                : "Running"}
         </Typography>
 
         <QueueControlButton />
