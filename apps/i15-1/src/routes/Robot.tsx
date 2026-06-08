@@ -2,7 +2,7 @@ import { useInstrumentSession } from "../context/instrumentSession/useInstrument
 import { Box, Typography, Stack, useTheme } from "@mui/material";
 import { useState } from "react";
 import { NumberInput } from "../components/NumberInput";
-import RunPlanButton from "../components/RunPlanButton";
+import RunPlanButton from "../../../../packages/blueapi-ui/src/RunPlanButton";
 import { ReadOnlyPv } from "@atlas/pvws-config";
 import { StatusCard } from "../components/StatusCard";
 
