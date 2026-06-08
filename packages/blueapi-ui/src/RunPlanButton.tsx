@@ -8,19 +8,19 @@ import {
 } from "@atlas/blueapi-query";
 import type { TaskRequest } from "@atlas/blueapi";
 
-type RunPlanButtonProps = {
+export type RunPlanButtonProps = {
   name: string;
   params?: object;
   instrumentSession: string;
   buttonText?: string;
 };
 
-const RunPlanButton = ({
+export function RunPlanButton({
   name,
   params,
   instrumentSession,
   buttonText = "Run",
-}: RunPlanButtonProps) => {
+}: RunPlanButtonProps) {
   const submitTask = useSubmitTask();
   const startTask = useSetActiveTask();
   const submitAndRunTask = async (task: TaskRequest) => {
@@ -58,6 +58,4 @@ const RunPlanButton = ({
       {buttonText}
     </Button>
   );
-};
-
-export default RunPlanButton;
+}

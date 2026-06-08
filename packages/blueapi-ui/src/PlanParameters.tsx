@@ -7,7 +7,7 @@ import {
 } from "@jsonforms/material-renderers";
 import sanitizeSchema from "./utils/schema";
 import type { Plan } from "@atlas/blueapi";
-import RunPlanButton from "./RunPlanButton";
+import { RunPlanButton } from "./RunPlanButton";
 
 import { ErrorBoundary } from "react-error-boundary";
 

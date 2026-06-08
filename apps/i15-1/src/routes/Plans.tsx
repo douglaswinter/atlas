@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { PlanBrowser } from "@atlas/blueapi-ui";
 import { PlanParameters } from "@atlas/blueapi-ui";
 import { usePlans } from "@atlas/blueapi-query";
