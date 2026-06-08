@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from "@atlas/vitest-conf";
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { QueueStatusPanel, QueueControlButton } from "./QueueStatusPanel";
 import * as queueService from "./queueService";
-import type { TaskWithPosition } from "./generated";
 
 afterEach(() => {
   vi.restoreAllMocks();
