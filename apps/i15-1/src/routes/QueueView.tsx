@@ -132,13 +132,22 @@ export function QueueView() {
           const draggedRow = table.getState().draggingRow;
           const targetRow = table.getState().hoveredRow;
 
-          if (!draggedRow || !targetRow) return;
+          if (
+            !draggedRow ||
+            !draggedRow.original.position ||
+            !targetRow ||
+            !targetRow.index
+          )
+            return;
 
-          const draggedTask = draggedRow.original;
-          const newPosition = calculateNewPosition(draggedRow, targetRow);
-          if (newPosition === undefined) return;
+          const newPosition = calculateNewPosition(
+            draggedRow.original.position,
+            draggedRow.index,
+            targetRow.index,
+          );
+
           moveTaskMutation.mutate({
-            taskId: draggedTask.id,
+            taskId: draggedRow.original.id,
             newPosition: newPosition,
           });
         },
