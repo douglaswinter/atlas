@@ -1,5 +1,5 @@
 import { http, HttpResponse, ws } from "msw";
-import plansResponse from "@atlas/blueapi-ui";
+import plansResponse from "./plans-response.json";
 
 const fakeTaskId = "7304e8e0-81c6-4978-9a9d-9046ab79ce3c";
 const workerStatus = { status: "IDLE", duration: 0 };
