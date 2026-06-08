@@ -14,8 +14,11 @@ vi.mock("@jsonforms/react", () => {
 });
 
 // mock run plan button which is out of scope of this test
+export function RunPlanButton() {
+  return <button>Run</button>;
+}
 vi.mock("./RunPlanButton", () => ({
-  default: () => <button>Run</button>,
+  RunPlanButton: RunPlanButton,
 }));
 
 const plan: Plan = {
