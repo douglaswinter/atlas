@@ -24,6 +24,7 @@ import type { QueueTableData } from "../queue/tableData";
 import { QueueStatusPanel } from "../queue/QueueStatusPanel";
 import type { QueuedTasks } from "../queue/tasks";
 import type { UseQueryResult } from "@tanstack/react-query";
+import { calculateNewPosition } from "../queue/queueUtils";
 
 function getChipColorMap() {
   return {
@@ -134,17 +135,8 @@ export function QueueView() {
           if (!draggedRow || !targetRow) return;
 
           const draggedTask = draggedRow.original;
-          const oldIndex = draggedRow.index;
-          const newIndex = targetRow.index;
-
-          if (newIndex === undefined || draggedRow.original.position === null)
-            return;
-
-          const newPosition = Math.max(
-            draggedRow.original.position + (newIndex - oldIndex),
-            0,
-          );
-
+          const newPosition = calculateNewPosition(draggedRow, targetRow);
+          if (newPosition === undefined) return;
           moveTaskMutation.mutate({
             taskId: draggedTask.id,
             newPosition: newPosition,
