@@ -7,12 +7,10 @@ function JsonFormsPlans() {
   const { data } = usePlans();
 
   return (
-    <>
-      <PlanBrowser
-        plans={data ? data.plans : []}
-        renderPlan={(plan) => <PlanParameters plan={plan} />}
-      />
-    </>
+    <PlanBrowser
+      plans={data ? data.plans : []}
+      renderPlan={(plan) => <PlanParameters plan={plan} />}
+    />
   );
 }
 
