@@ -31,6 +31,8 @@ export const PlanParameters: React.FC<PlanParametersProps> = (
   const schema = sanitizeSchema(props.plan.schema);
 
   const [planParameters, setPlanParameters] = useState({});
+  // TODO: Remove InstrumentSession box and state, retrieve from context when submitting.
+  //       See https://github.com/DiamondLightSource/atlas/issues/57
   const [instrumentSession, setInstrumentSession] = useState("cm12345-1");
 
   return (
@@ -56,6 +58,8 @@ export const PlanParameters: React.FC<PlanParametersProps> = (
           onChange={({ data }) => setPlanParameters(data)}
         />
       </Box>
+      {/* TODO: Remove InstrumentSession box and state, retrieve from context when submitting.
+                See https://github.com/DiamondLightSource/atlas/issues/57 */}
       <Box sx={{ mt: 2 }}>
         <TextField
           id="instrumentSession"
