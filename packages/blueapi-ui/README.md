@@ -26,14 +26,10 @@ function JsonFormsPlans() {
   const { data } = usePlans();
 
   return (
-    <>
-      <Box display={"flex"} justifyContent={"center"} sx={{ mt: 3, mb: 3 }}>
-        <PlanBrowser
-          plans={data ? data.plans : []}
-          renderPlan={(plan) => <PlanParameters plan={plan} />}
-        />
-      </Box>
-    </>
+    <PlanBrowser
+      plans={data ? data.plans : []}
+      renderPlan={(plan) => <PlanParameters plan={plan} />}
+    />
   );
 }
 
