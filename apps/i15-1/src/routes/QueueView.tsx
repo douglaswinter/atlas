@@ -134,9 +134,9 @@ export function QueueView() {
 
           if (
             !draggedRow ||
-            !draggedRow.original.position ||
+            draggedRow.original.position === null ||
             !targetRow ||
-            !targetRow.index
+            targetRow.index === undefined
           )
             return;
 
