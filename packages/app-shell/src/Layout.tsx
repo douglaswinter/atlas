@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import { Outlet } from "react-router-dom";
-import { SideNav } from "./SideNav";
+import { SidebarNav } from "./SidebarNav";
 import { TopBar } from "./TopBar";
 import type { RouterProps } from "./Router";
 import { usePersistentDrawerState } from "./usePersistentDrawerState";
@@ -12,7 +12,7 @@ export function Layout(props: RouterProps) {
   return (
     <Box sx={{ display: "flex" }}>
       <TopBar title={props.title} open={open} setOpen={setOpen} />
-      <SideNav navigation={props.navigation} open={open} />
+      <SidebarNav navigation={props.navigation} open={open} />
       <Box
         component="main"
         sx={{ display: "flex", flex: 1, flexDirection: "column" }}
