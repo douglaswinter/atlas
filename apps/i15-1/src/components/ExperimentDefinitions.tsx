@@ -19,6 +19,7 @@ type ExperimentNode = {
   experimentDefinition: ExperimentDefinitionNode;
 };
 
+// TODO: Autogenerate these from the schema, see https://github.com/DiamondLightSource/atlas/issues/63
 type GetExperimentQueryData = {
   instrumentSession: {
     experiments: {
