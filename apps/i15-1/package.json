@@ -13,8 +13,6 @@
     "@atlas/app-shell": "workspace:*",
     "@atlas/blueapi": "workspace:*",
     "@atlas/blueapi-query": "workspace:*",
-    "@atlas/pvws-config": "workspace:*",
-    "@diamondlightsource/cs-web-lib": "0.9.5",
     "@diamondlightsource/sci-react-ui": "^0.4.0",
     "@mui/icons-material": "^6.5.0",
     "@mui/material": "<7.0.0",
