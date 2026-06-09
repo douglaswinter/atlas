@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Robot from "./routes/Robot";
 import Dashboard from "./routes/Dashboard";
+import Playlist from "./routes/Playlist";
 
 const navigation: SectionGroup[] = [
   {
@@ -30,7 +31,7 @@ const navigation: SectionGroup[] = [
         pages: [
           {
             name: "Playlist",
-            element: <div />,
+            element: <Playlist />,
           },
           {
             name: "Samples",

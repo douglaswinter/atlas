@@ -7,5 +7,6 @@ The initial aim of this app to provide a science facing UI for the waffle projec
 To run this locally:
 
 1.  Start the devcontainer in VSCode
-2.  In a terminal in this devcontainer run `turbo dev --filter @atlas/i15-1`
-3.  Navigate to http://localhost:5173/
+1.  In a terminal in this container run `pnpm install`
+1.  Run `turbo dev --filter @atlas/i15-1`
+1.  Navigate to http://localhost:5173/
