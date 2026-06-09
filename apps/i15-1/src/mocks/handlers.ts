@@ -70,17 +70,11 @@ export const handlers = [
     return HttpResponse.json(workerStatus.status);
   }),
 
-<<<<<<< HEAD
   http.post("/api/graphql", () => {
     return HttpResponse.json(fakeExperiments);
   }),
 
-  // fakePvws.addEventListener("connection", () => {
-  //   console.log("WebSocket client connecting...");
-  // }),
-=======
   fakePvws.addEventListener("connection", () => {
     console.log("WebSocket client connecting...");
   }),
->>>>>>> parent of c863056 (Remove use of cs-web-lib from i15-1)
 ];
