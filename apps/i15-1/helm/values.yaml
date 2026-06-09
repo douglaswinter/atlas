@@ -16,7 +16,7 @@ ui-base:
 
     - id: supergraph
       path: /api/graphql
-      rewriteTarget: /
+      rewriteTarget: /graphql
       target:
         external:
           uri: https://graph-nightly.diamond.ac.uk
