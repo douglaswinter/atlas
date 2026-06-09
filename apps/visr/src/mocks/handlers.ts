@@ -35,7 +35,7 @@ export const handlers = [
     });
   }),
 
-  http.post("/api/tasks", () => {
+  http.post("/api/blueapi/tasks", () => {
     return HttpResponse.json({
       task_id: fakeTaskId,
       status: 201,
