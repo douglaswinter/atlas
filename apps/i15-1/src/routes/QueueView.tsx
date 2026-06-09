@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Stack,
   Switch,
+  type ChipProps,
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import {
@@ -25,15 +26,13 @@ import { QueueStatusPanel } from "../queue/QueueStatusPanel";
 import type { QueuedTasks } from "../queue/tasks";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { calculateNewPosition } from "../queue/queueUtils";
+import type { Status } from "../queue/generated";
 
-function getChipColorMap() {
+function getChipColorMap(): Record<Status, ChipProps["color"]> {
   return {
-    Waiting: "default",
-    Claimed: "warning",
+    Queued: "default",
     "In progress": "info",
-    Success: "success",
     Complete: "success",
-    Error: "error",
     Cancelled: "warning",
   };
 }
@@ -87,8 +86,7 @@ export function QueueView() {
         Cell: ({ cell }) => (
           <Chip
             label={cell.getValue<string>()}
-            // @ts-ignore
-            color={colorMap[cell.getValue<string>()]}
+            color={colorMap[cell.getValue<Status>()]}
           ></Chip>
         ),
       },

@@ -1,11 +1,5 @@
 import type { TaskWithPosition } from "./generated";
 
-type TaskResult = {
-  outcome: string;
-  result?: any;
-  type?: string;
-};
-
 // Temporary parameters to see if things work in the first instance
 type LoadParameters = {
   puck: number;
