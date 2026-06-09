@@ -54,7 +54,7 @@ ui-base:
   host: douglas.diamond.ac.uk
 
   image:
-    repository: ghcr.io/douglaswinter/atlas/visr
+    repository: ghcr.io/diamondlightsource/atlas/visr
     tag: 0.1.8
 
   # Note that if these have changed you may need to manually restart the oauth2-proxy pod on deployment
