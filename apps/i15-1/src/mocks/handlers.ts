@@ -4,6 +4,41 @@ import plansResponse from "./plans-response.json";
 const fakeTaskId = "7304e8e0-81c6-4978-9a9d-9046ab79ce3c";
 const workerStatus = { status: "IDLE", duration: 0 };
 
+const fakeExperiments = {
+  data: {
+    instrumentSession: {
+      experiments: {
+        edges: [
+          {
+            node: {
+              name: "Test experiment",
+              sample: {
+                name: "Test_sample",
+                data: {
+                  density: 56,
+                  capillary: "bs1.5",
+                  composition: "Stuff",
+                  packing_fraction: 0.5,
+                },
+              },
+              experimentDefinition: {
+                name: "My Experiment",
+                data: {
+                  q_max: 67,
+                  frames: 90,
+                  beam_energy: 40,
+                  time_per_pdf: 2,
+                  focused_beam_size: 10,
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+  },
+};
+
 const fakePvws = ws.link("wss://pvws.diamond.ac.uk/pvws/pv");
 
 export const handlers = [
@@ -34,6 +69,10 @@ export const handlers = [
       workerStatus.duration = 0;
     } else workerStatus.duration++;
     return HttpResponse.json(workerStatus.status);
+  }),
+
+  http.post("/api/graphql", () => {
+    return HttpResponse.json(fakeExperiments);
   }),
 
   fakePvws.addEventListener("connection", () => {

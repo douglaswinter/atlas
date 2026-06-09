@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@apollo/client": "^4.2.3",
     "@atlas/app-shell": "workspace:*",
     "@atlas/blueapi": "workspace:*",
     "@atlas/blueapi-query": "workspace:*",
@@ -21,6 +22,7 @@
     "@mui/material": "<7.0.0",
     "@tanstack/react-query": "^5.90.21",
     "axios": "^1.13.4",
+    "graphql": "^16.14.2",
     "lucide-react": "^1.17.0",
     "react-error-boundary": "^6.0.0"
   },
@@ -30,6 +32,7 @@
     "@vitejs/plugin-react-swc": "^3.11.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.26",
+    "get-graphql-schema": "^2.1.2",
     "globals": "^16.5.0",
     "msw": "^2.10.4",
     "react-redux": "^7.2.9",
