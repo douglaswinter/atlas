@@ -71,7 +71,7 @@ swift@1.2.0-beta.2
 
 ### What happens on release
 
-When a tag matching this format is pushed (or a release workflow is manually triggered with the same inputs), CI will:
+When a tag matching this format is pushed you will then need to create the release via https://github.com/DiamondLightSource/atlas/releases, CI will then:
 
 1. Parse the tag into application name and version
 2. Build and publish the application using repo-level Dockerfile and nginx configuration
