@@ -1,9 +1,10 @@
-import { http, HttpResponse, ws } from "msw";
+// import { http, HttpResponse, ws } from "msw";
+import { http, HttpResponse } from "msw";
 
 const fakeTaskId = "7304e8e0-81c6-4978-9a9d-9046ab79ce3c";
 const workerStatus = { status: "IDLE", duration: 0 };
 
-const fakePvws = ws.link("wss://pvws.diamond.ac.uk/pvws/pv");
+// const fakePvws = ws.link("wss://pvws.diamond.ac.uk/pvws/pv");
 
 export const handlers = [
   http.put("/api/worker/task", () => {
@@ -35,7 +36,7 @@ export const handlers = [
     return HttpResponse.json(workerStatus.status);
   }),
 
-  fakePvws.addEventListener("connection", () => {
-    console.log("WebSocket client connecting...");
-  }),
+  // fakePvws.addEventListener("connection", () => {
+  //   console.log("WebSocket client connecting...");
+  // }),
 ];
