@@ -8,7 +8,7 @@ function JsonFormsPlans() {
   return (
     <PlanBrowser
       plans={data ? data.plans : []}
-      renderPlan={plan => <PlanParameters plan={plan} />}
+      renderPlan={(plan) => <PlanParameters plan={plan} />}
     />
   );
 }

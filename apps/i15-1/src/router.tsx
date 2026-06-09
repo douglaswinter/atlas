@@ -9,6 +9,7 @@ import {
 import Robot from "./routes/Robot";
 import Dashboard from "./routes/Dashboard";
 import Playlist from "./routes/Playlist";
+import Plans from "./routes/Plans";
 
 const navigation: SectionGroup[] = [
   {
@@ -62,7 +63,7 @@ const navigation: SectionGroup[] = [
           },
           {
             name: "Plans",
-            element: <div />,
+            element: <Plans />,
           },
         ],
       },
