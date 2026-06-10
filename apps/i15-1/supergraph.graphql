@@ -68,6 +68,10 @@ type Mutation {
   createSamples(input: CreateSampleInput!): [Sample!]!
     @deprecated(reason: "Will be replaced by createOrValidateSamples")
   sample(sampleId: UUID!): SampleMutations
+  createExperimentDefinition(
+    input: CreateExperimentDefinitionInput!
+  ): ExperimentDefinition
+  experimentDefinition(id: UUID!): ExperimentDefinitionMutations
 }
 
 """
@@ -188,6 +192,22 @@ type Query {
     last: Int = null
     orderBy: SampleOrder! = { name: null, createdTime: null, updatedTime: null }
   ): SampleConnection!
+  experimentDefinition(id: UUID!): ExperimentDefinition
+  experimentDefinitions(
+    instrumentSessions: [InstrumentSessionInput!]!
+    first: Int = null
+    last: Int = null
+    after: String = null
+    before: String = null
+  ): ExperimentDefinitionConnection
+  experiment(id: UUID!): Experiment
+  experiments(
+    instrumentSessions: [InstrumentSessionInput!]!
+    first: Int = null
+    last: Int = null
+    after: String = null
+    before: String = null
+  ): ExperimentConnection
 
   """
   Get a sample by its id
@@ -756,6 +776,26 @@ type InstrumentSession {
     last: Int = null
     orderBy: SampleOrder! = { name: null, createdTime: null, updatedTime: null }
   ): SampleConnection!
+
+  """
+  Experiment Definitions
+  """
+  experimentDefinitions(
+    first: Int = null
+    last: Int = null
+    after: String = null
+    before: String = null
+  ): ExperimentDefinitionConnection!
+
+  """
+  Experiments associated with this session
+  """
+  experiments(
+    first: Int = null
+    last: Int = null
+    after: String = null
+    before: String = null
+  ): ExperimentConnection!
 }
 
 type InstrumentSessionMutations {
@@ -768,6 +808,7 @@ type InstrumentSessionMutations {
   createOrValidateSamples(
     input: CreateOrValidateSampleInputBase!
   ): CreateSamplesResponse!
+  experiments: [Experiment!]!
 }
 
 type InstrumentSessionRole {
@@ -932,10 +973,13 @@ input InstrumentSessionInput {
   instrumentSessionNumber: Int!
 }
 
+"""
+Currently receiving an error when generating types: input JSONOperator @oneOf
+"""
 input JSONOperator @oneOf {
-  stringOperator: StringOperatorInput = null
-  datetimeOperator: DatetimeOperatorInput = null
-  numericOperator: NumericOperatorInput = null
+  stringOperator: StringOperatorInput
+  datetimeOperator: DatetimeOperatorInput
+  numericOperator: NumericOperatorInput
 }
 
 input JSONOperatorInput {
@@ -1166,6 +1210,93 @@ scalar UUID
 Represents NULL values
 """
 scalar Void
+
+"""
+Values required to create an experiment definition
+"""
+input CreateExperimentDefinitionInput {
+  name: String!
+  data: JSON!
+  dataSchemaUrl: String!
+  proposalNumber: Int!
+  instrumentSessionNumber: Int!
+}
+
+"""
+Values required for the createExperiments mutation
+"""
+input CreateExperimentsInput {
+  experiments: [ExperimentInput!]!
+}
+
+type Experiment {
+  id: UUID!
+  name: String!
+  createdTime: DateTime!
+  updatedTime: DateTime!
+  experimentDefinition: ExperimentDefinition!
+
+  """
+  The sample that this experiment is associated with
+  """
+  sample: Sample!
+}
+
+type ExperimentConnection {
+  edges: [ExperimentEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ExperimentDefinition {
+  id: UUID!
+  name: String!
+  createdTime: DateTime!
+  updatedTime: DateTime!
+  data: JSON!
+  dataSchemaUrl: String!
+  proposalNumber: Int!
+  instrumentSessionNumber: Int!
+
+  """
+  The instrument session that this experiment definition is associated with
+  """
+  instrumentSession: InstrumentSession!
+
+  """
+  Experiments associated with this experiment definition
+  """
+  experiments: [Experiment!]!
+}
+
+type ExperimentDefinitionConnection {
+  edges: [ExperimentDefinitionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ExperimentDefinitionEdge {
+  cursor: String!
+  node: ExperimentDefinition!
+}
+
+"""
+Mutations for a given experiment defintion
+"""
+type ExperimentDefinitionMutations {
+  createExperiments(input: CreateExperimentsInput!): [Experiment!]!
+}
+
+type ExperimentEdge {
+  cursor: String!
+  node: Experiment!
+}
+
+"""
+Values required to create an experiment
+"""
+input ExperimentInput {
+  name: String!
+  sampleId: UUID!
+}
 
 """
 A JSON schema
