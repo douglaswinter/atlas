@@ -11,15 +11,15 @@ describe("QueueStatusPanel", () => {
   it("shows Queue Running when queue not paused and not empty", () => {
     vi.spyOn(queueService, "useConnected").mockReturnValue({
       connected: true,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useConnected>);
 
     vi.spyOn(queueService, "useGetQueuedTasks").mockReturnValue({
       data: [{ id: 1 }],
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useGetQueuedTasks>);
 
     vi.spyOn(queueService, "useToggleQueueState").mockReturnValue({
       paused: false,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useToggleQueueState>);
 
     render(<QueueStatusPanel />);
 
@@ -29,15 +29,15 @@ describe("QueueStatusPanel", () => {
   it("shows Queue Finished when queue empty", () => {
     vi.spyOn(queueService, "useConnected").mockReturnValue({
       connected: true,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useConnected>);
 
     vi.spyOn(queueService, "useGetQueuedTasks").mockReturnValue({
       data: [],
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useGetQueuedTasks>);
 
     vi.spyOn(queueService, "useToggleQueueState").mockReturnValue({
       paused: false,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useToggleQueueState>);
 
     render(<QueueStatusPanel />);
 
@@ -47,15 +47,15 @@ describe("QueueStatusPanel", () => {
   it("shows Queue Paused when queue paused", () => {
     vi.spyOn(queueService, "useConnected").mockReturnValue({
       connected: true,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useConnected>);
 
     vi.spyOn(queueService, "useGetQueuedTasks").mockReturnValue({
       data: [{ id: 1 }],
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useGetQueuedTasks>);
 
     vi.spyOn(queueService, "useToggleQueueState").mockReturnValue({
       paused: true,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useToggleQueueState>);
 
     render(<QueueStatusPanel />);
 
@@ -65,15 +65,15 @@ describe("QueueStatusPanel", () => {
   it("shows Queue Not Connected when queue not connected", () => {
     vi.spyOn(queueService, "useConnected").mockReturnValue({
       connected: false,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useConnected>);
 
     vi.spyOn(queueService, "useGetQueuedTasks").mockReturnValue({
       data: [{ id: 1 }],
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useGetQueuedTasks>);
 
     vi.spyOn(queueService, "useToggleQueueState").mockReturnValue({
       paused: true,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useToggleQueueState>);
 
     render(<QueueStatusPanel />);
 
@@ -87,13 +87,13 @@ describe("QueueControlButton", () => {
 
     vi.spyOn(queueService, "useConnected").mockReturnValue({
       connected: true,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useConnected>);
 
     vi.spyOn(queueService, "useToggleQueueState").mockReturnValue({
       paused: false,
       toggle,
       isLoading: false,
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useToggleQueueState>);
 
     render(<QueueControlButton />);
     fireEvent.click(screen.getByRole("button"));

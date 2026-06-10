@@ -2,12 +2,28 @@ import { render, screen, fireEvent } from "@atlas/vitest-conf";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { QueueView } from "./QueueView";
 import * as queueService from "../queue/queueService";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { QueuedTasks } from "../queue/tasks";
+
+type MockRow = {
+  id: string;
+  sampleId: string;
+};
+
+type MockTableOptions = {
+  data: MockRow[];
+  renderTopToolbarCustomActions?: () => React.ReactNode;
+};
+
+type MockTable = {
+  options: MockTableOptions;
+};
 
 vi.mock("material-react-table", () => ({
-  MaterialReactTable: ({ table }: any) => (
+  MaterialReactTable: ({ table }: { table: MockTable }) => (
     <div>
       <div data-testid="mock-table">
-        {table.options.data.map((row: any) => (
+        {table.options.data.map((row: MockRow) => (
           <div key={row.id}>{row.sampleId}</div>
         ))}
       </div>
@@ -15,7 +31,7 @@ vi.mock("material-react-table", () => ({
       {table.options.renderTopToolbarCustomActions?.()}
     </div>
   ),
-  useMaterialReactTable: (opts: any) => ({
+  useMaterialReactTable: (opts: MockTableOptions) => ({
     options: opts,
     getState: () => ({}),
   }),
@@ -46,7 +62,10 @@ describe("QueueView", () => {
           blueapi_calls: [],
         },
       ],
-    } as any);
+    } as Partial<UseQueryResult<QueuedTasks, Error>> as UseQueryResult<
+      QueuedTasks,
+      Error
+    >);
 
     vi.spyOn(queueService, "useGetAllTasks").mockReturnValue({
       data: [
@@ -75,11 +94,14 @@ describe("QueueView", () => {
           blueapi_calls: [],
         },
       ],
-    } as any);
+    } as Partial<UseQueryResult<QueuedTasks, Error>> as UseQueryResult<
+      QueuedTasks,
+      Error
+    >);
 
     vi.spyOn(queueService, "useMoveTask").mockReturnValue({
       mutate: vi.fn(),
-    } as any);
+    } as unknown as ReturnType<typeof queueService.useMoveTask>);
 
     vi.spyOn(queueService, "clearHistory").mockImplementation(vi.fn());
     vi.spyOn(queueService, "cancelTasks").mockImplementation(vi.fn());
