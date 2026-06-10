@@ -42,20 +42,20 @@ const fakeExperiments = {
 const fakePvws = ws.link("wss://pvws.diamond.ac.uk/pvws/pv");
 
 export const handlers = [
-  http.put("/api/worker/task", () => {
+  http.put("/api/blueapi/worker/task", () => {
     workerStatus.status = "RUNNING";
     return HttpResponse.json({
       task_id: fakeTaskId,
     });
   }),
 
-  http.post("/api/tasks", () => {
+  http.post("/api/blueapi/tasks", () => {
     return HttpResponse.json({
       task_id: fakeTaskId,
     });
   }),
 
-  http.put("/api/worker/state", () => {
+  http.put("/api/blueapi/worker/state", () => {
     return HttpResponse.json("IDLE");
   }),
 
@@ -63,7 +63,7 @@ export const handlers = [
     return HttpResponse.json({ preferredUsername: "abc123456" });
   }),
 
-  http.get("/api/worker/state", () => {
+  http.get("/api/blueapi/worker/state", () => {
     if (workerStatus.duration >= 10) {
       workerStatus.status = "IDLE";
       workerStatus.duration = 0;
@@ -79,7 +79,7 @@ export const handlers = [
     console.log("WebSocket client connecting...");
   }),
 
-  http.get("/api/plans", () => {
+  http.get("/api/blueapi/plans", () => {
     return HttpResponse.json(plansResponse);
   }),
 ];
