@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import axios, { type AxiosInstance } from "axios";
 import { useEffect, useRef } from "react";
-import type { QueueState, TaskCancelRequest } from "./generated";
+import type { QueueState, TaskCancelRequest } from "../../generated/queue";
 import type { QueuedTasks } from "./tasks";
 
 const QUEUE_MODE = import.meta.env.VITE_QUEUE_MODE;

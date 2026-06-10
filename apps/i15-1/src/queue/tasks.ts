@@ -1,4 +1,4 @@
-import type { TaskWithPosition } from "./generated";
+import type { TaskWithPosition } from "../../generated/queue";
 
 // Temporary parameters to see if things work in the first instance
 type LoadParameters = {

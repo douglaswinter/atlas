@@ -1,4 +1,4 @@
-import type { BlueapiCallResponse, Status } from "./generated";
+import type { BlueapiCallResponse, Status } from "../../generated/queue";
 
 export type QueueTableData = {
   position: number | null;

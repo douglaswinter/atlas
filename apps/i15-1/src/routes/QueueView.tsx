@@ -26,7 +26,7 @@ import { QueueStatusPanel } from "../queue/QueueStatusPanel";
 import type { QueuedTasks } from "../queue/tasks";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { calculateNewPosition } from "../queue/queueUtils";
-import type { Status } from "../queue/generated";
+import type { Status } from "../../generated/queue";
 
 function getChipColorMap(): Record<Status, ChipProps["color"]> {
   return {
