@@ -85,7 +85,9 @@ export function QueueView() {
         size: 150,
         Cell: ({ cell }) => (
           <Chip
+            size="small"
             label={cell.getValue<string>()}
+            variant="outlined"
             color={colorMap[cell.getValue<Status>()]}
           ></Chip>
         ),
@@ -93,8 +95,9 @@ export function QueueView() {
       { accessorKey: "calls", header: "BlueAPI tasks", size: 150 },
       {
         accessorKey: "cancel",
-        header: "Actions",
+        header: "",
         size: 150,
+        enableColumnActions: false,
         Cell: ({ row }) => {
           const task = row.original;
           const isDisabled = task.status != "Queued";
@@ -121,6 +124,8 @@ export function QueueView() {
     enableRowOrdering: true,
     enableRowDragging: true,
     enableSorting: false,
+    enableDensityToggle: false,
+    enableFullScreenToggle: false,
     muiRowDragHandleProps: ({ row, table }) => {
       const isDraggable = row.original.status === "Queued";
       return {
