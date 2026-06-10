@@ -1,8 +1,11 @@
 import { useQuery } from "@apollo/client/react";
 import { gql } from "@apollo/client";
-
+import {
+  MaterialReactTable,
+  useMaterialReactTable,
+} from "material-react-table";
 import type { TypedDocumentNode } from "@apollo/client";
-
+import { columns } from "./columns";
 type ExperimentDefinitionNode = {
   name: string;
   data: string;
@@ -34,6 +37,21 @@ type GetExperimentQueryVariables = {
   proposal: number;
   session: number;
 };
+
+const flatten = (node: ExperimentNode) => ({
+  name: node.name,
+  sampleName: node.sample.name,
+  density: node.sample.data.density,
+  capillary: node.sample.data.capillary,
+  composition: node.sample.data.composition,
+  packing_fraction: node.sample.data.packing_fraction,
+  experimentDefinitionName: node.experimentDefinition.name,
+  q_max: node.experimentDefinition.data.q_max,
+  frames: node.experimentDefinition.data.frames,
+  beam_energy: node.experimentDefinition.data.beam_energy,
+  time_per_pdf: node.experimentDefinition.data.time_per_pdf,
+  focused_beam_size: node.experimentDefinition.data.focused_beam_size,
+});
 
 const GET_EXPERIMENTS: TypedDocumentNode<
   GetExperimentQueryData,
@@ -76,11 +94,14 @@ export function ExperimentList() {
 
   const experiments = data?.instrumentSession.experiments.edges || [];
 
+  const flatExperiments = experiments.map((edge) => flatten(edge.node));
+
   return (
-    <ul>
-      {experiments.map((edge, i) => (
-        <li key={i}>{edge.node.name}</li>
-      ))}
-    </ul>
+    <MaterialReactTable
+      columns={columns}
+      data={flatExperiments}
+      enableColumnResizing
+      enableSorting
+    />
   );
 }

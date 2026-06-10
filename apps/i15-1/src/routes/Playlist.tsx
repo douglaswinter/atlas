@@ -1,6 +1,6 @@
 import { Container, Typography, Stack } from "@mui/material";
 
-import { ExperimentList } from "../components/ExperimentDefinitions.tsx";
+import { ExperimentList } from "../components/ExperimentTable/ULIMSExperimentsTable.tsx";
 
 function Playlist() {
   return (
