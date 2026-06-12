@@ -41,7 +41,7 @@ const fakeExperiments = {
 
 const fakePvws = ws.link("wss://pvws.diamond.ac.uk/pvws/pv");
 
-const fakeQueue = [
+const fakeHistory = [
   {
     experiment_definition: {
       plan_name: "sleep",
@@ -73,6 +73,9 @@ const fakeQueue = [
     ],
     position: 0,
   },
+];
+
+const fakeQueue = [
   {
     experiment_definition: {
       plan_name: "robot_load",
@@ -189,5 +192,13 @@ export const handlers = [
 
   http.get("/api/daq-queue/queue", () => {
     return HttpResponse.json(fakeQueue);
+  }),
+
+  http.get("/api/daq-queue/history", () => {
+    return HttpResponse.json(fakeHistory);
+  }),
+
+  http.get("/api/daq-queue/tasks", () => {
+    return HttpResponse.json([...fakeHistory, ...fakeQueue]);
   }),
 ];
