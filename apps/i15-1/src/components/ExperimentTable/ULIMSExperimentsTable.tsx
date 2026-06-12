@@ -6,6 +6,10 @@ import {
 } from "material-react-table";
 import type { TypedDocumentNode } from "@apollo/client";
 import { columns } from "./columns";
+import type { ExperimentTableData } from "./columns";
+import { useLocation } from "react-router-dom";
+import { useMemo, useState } from "react";
+
 type ExperimentDefinitionNode = {
   name: string;
   data: string;
@@ -38,19 +42,14 @@ type GetExperimentQueryVariables = {
   session: number;
 };
 
-const flatten = (node: ExperimentNode) => ({
-  name: node.name,
+const convertNodeToTableData = (node: ExperimentNode): ExperimentTableData => ({
+  experimentName: node.name,
   sampleName: node.sample.name,
   density: node.sample.data.density,
-  capillary: node.sample.data.capillary,
   composition: node.sample.data.composition,
-  packing_fraction: node.sample.data.packing_fraction,
-  experimentDefinitionName: node.experimentDefinition.name,
-  q_max: node.experimentDefinition.data.q_max,
-  frames: node.experimentDefinition.data.frames,
-  beam_energy: node.experimentDefinition.data.beam_energy,
-  time_per_pdf: node.experimentDefinition.data.time_per_pdf,
-  focused_beam_size: node.experimentDefinition.data.focused_beam_size,
+  beamEnergy: node.experimentDefinition.data.beam_energy,
+  timePerPDF: node.experimentDefinition.data.time_per_pdf,
+  beamSize: node.experimentDefinition.data.focused_beam_size,
 });
 
 const GET_EXPERIMENTS: TypedDocumentNode<
@@ -82,26 +81,35 @@ const GET_EXPERIMENTS: TypedDocumentNode<
 `;
 
 export function ExperimentList() {
+  const location = useLocation();
+
   const { data, loading, error } = useQuery(GET_EXPERIMENTS, {
     variables: {
       proposal: 44163,
       session: 3,
     },
+    fetchPolicy: "cache-and-network",
+    context: { pathname: location.pathname },
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  // if (loading) return <p>Loading...</p>;
+  // if (error) return <p>Error: {error.message}</p>;
 
   const experiments = data?.instrumentSession.experiments.edges || [];
 
-  const flatExperiments = experiments.map((edge) => flatten(edge.node));
+  const flatExperiments = useMemo(() => {
+    return (experiments ?? []).map((edge) => convertNodeToTableData(edge.node));
+  }, [experiments, location.pathname]);
 
-  return (
-    <MaterialReactTable
-      columns={columns}
-      data={flatExperiments}
-      enableColumnResizing
-      enableSorting
-    />
-  );
+  const table = useMaterialReactTable({
+    columns,
+    data: flatExperiments,
+    enableRowOrdering: false,
+    enableRowDragging: false,
+    enableSorting: false,
+    enableDensityToggle: false,
+    enableFullScreenToggle: false,
+  });
+
+  return <MaterialReactTable table={table} />;
 }
