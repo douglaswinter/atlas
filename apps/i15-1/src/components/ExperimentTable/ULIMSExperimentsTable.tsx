@@ -71,7 +71,7 @@ export function ExperimentList() {
     return (typedExperiments ?? []).map((edge) =>
       convertNodeToTableData(edge.node),
     );
-  }, [typedExperiments, location.pathname]);
+  }, [typedExperiments]);
 
   const table = useMaterialReactTable({
     columns,
