@@ -11,17 +11,19 @@ import { useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import QueueIcon from "@mui/icons-material/Queue";
 
+import { getSessionPlaylistQuery } from "../../graphql/getSessionPlaylistQuery";
+import { type ExperimentNode } from "../../graphql/getSessionPlaylistQueryTyped";
+import type {
+  GetSessionPlaylistQueryVariables,
+  GetSessionPlaylistQuery,
+} from "../../graphql/getSessionPlaylistQuery.generated";
+
 type ExperimentDefinitionData = {
   q_max: number;
   frames: number;
   beam_energy: number;
   time_per_pdf: number;
   focused_beam_size: number;
-};
-
-type ExperimentDefinitionNode = {
-  name: string;
-  data: ExperimentDefinitionData;
 };
 
 type SampleData = {
@@ -31,34 +33,9 @@ type SampleData = {
   packing_fraction: number;
 };
 
-type SampleNode = {
-  name: string;
-  data: SampleData;
-};
-
-type ExperimentNode = {
-  name: string;
-  sample: SampleNode;
-  experimentDefinition: ExperimentDefinitionNode;
-};
-
-// TODO: Autogenerate these from the schema, see https://github.com/DiamondLightSource/atlas/issues/63
-type GetExperimentQueryData = {
-  instrumentSession: {
-    experiments: {
-      edges: {
-        node: ExperimentNode;
-      }[];
-    };
-  };
-};
-
-type GetExperimentQueryVariables = {
-  proposal: number;
-  session: number;
-};
-
-const convertNodeToTableData = (node: ExperimentNode): ExperimentTableData => ({
+const convertNodeToTableData = (
+  node: ExperimentNode<SampleData, ExperimentDefinitionData>,
+): ExperimentTableData => ({
   experimentName: node.name,
   sampleName: node.sample.name,
   density: node.sample.data.density,
@@ -69,32 +46,9 @@ const convertNodeToTableData = (node: ExperimentNode): ExperimentTableData => ({
 });
 
 const GET_EXPERIMENTS: TypedDocumentNode<
-  GetExperimentQueryData,
-  GetExperimentQueryVariables
-> = gql`
-  query GetSessionPlaylist($proposal: Int!, $session: Int!) {
-    instrumentSession(
-      proposalNumber: $proposal
-      instrumentSessionNumber: $session
-    ) {
-      experiments {
-        edges {
-          node {
-            name
-            sample {
-              name
-              data
-            }
-            experimentDefinition {
-              name
-              data
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+  GetSessionPlaylistQuery,
+  GetSessionPlaylistQueryVariables
+> = getSessionPlaylistQuery;
 
 export function ExperimentList() {
   const location = useLocation();
@@ -108,11 +62,17 @@ export function ExperimentList() {
     context: { pathname: location.pathname },
   });
 
-  const experiments = data?.instrumentSession.experiments.edges || [];
+  const experiments = data?.instrumentSession?.experiments.edges || [];
+
+  const typedExperiments = experiments as {
+    node: ExperimentNode<SampleData, ExperimentDefinitionData>;
+  }[];
 
   const flatExperiments = useMemo(() => {
-    return (experiments ?? []).map((edge) => convertNodeToTableData(edge.node));
-  }, [experiments, location.pathname]);
+    return (typedExperiments ?? []).map((edge) =>
+      convertNodeToTableData(edge.node),
+    );
+  }, [typedExperiments, location.pathname]);
 
   const table = useMaterialReactTable({
     columns,
