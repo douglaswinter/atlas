@@ -174,7 +174,7 @@ export const handlers = [
     return HttpResponse.json(workerStatus.status);
   }),
 
-  http.post("/api/graphql", () => {
+  http.post("/api/graphql", async () => {
     return HttpResponse.json(fakeExperiments);
   }),
 
