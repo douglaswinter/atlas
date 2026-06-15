@@ -1,14 +1,22 @@
 import { useQuery } from "@apollo/client/react";
 import { gql } from "@apollo/client";
 import {
+  Box,
+  Button,
+  FormControlLabel,
+  Stack,
+  Switch,
+  Typography,
+} from "@mui/material";
+import {
   MaterialReactTable,
   useMaterialReactTable,
 } from "material-react-table";
 import type { TypedDocumentNode } from "@apollo/client";
-import { columns } from "./columns";
-import type { ExperimentTableData } from "./columns";
+import { columns, type ExperimentTableData } from "./columns";
 import { useLocation } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import QueueIcon from "@mui/icons-material/Queue";
 
 type ExperimentDefinitionNode = {
   name: string;
@@ -92,9 +100,6 @@ export function ExperimentList() {
     context: { pathname: location.pathname },
   });
 
-  // if (loading) return <p>Loading...</p>;
-  // if (error) return <p>Error: {error.message}</p>;
-
   const experiments = data?.instrumentSession.experiments.edges || [];
 
   const flatExperiments = useMemo(() => {
@@ -106,9 +111,56 @@ export function ExperimentList() {
     data: flatExperiments,
     enableRowOrdering: false,
     enableRowDragging: false,
+    enableRowSelection: true,
     enableSorting: false,
     enableDensityToggle: false,
     enableFullScreenToggle: false,
+    renderTopToolbarCustomActions: ({ table }) => {
+      const selectedCount = table.getSelectedRowModel().rows.length;
+
+      return (
+        <Stack
+          direction="row"
+          spacing={2}
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
+        >
+          <Typography variant="h6" component="h1" textAlign={"left"}>
+            Experiment Playlist
+          </Typography>
+
+          {selectedCount > 0 ? (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                const selected = table
+                  .getSelectedRowModel()
+                  .rows.map((row) => row.original);
+
+                console.log("Selected:", selected);
+              }}
+            >
+              Add selected {selectedCount} to queue
+            </Button>
+          ) : (
+            <Button variant="contained">Add all to queue</Button>
+          )}
+        </Stack>
+      );
+    },
+
+    state: {
+      isLoading: loading,
+      showAlertBanner: !!error,
+    },
+    muiToolbarAlertBannerProps: error
+      ? {
+          color: "error",
+          children: `Error: ${error.message}`,
+        }
+      : undefined,
   });
 
   return <MaterialReactTable table={table} />;
