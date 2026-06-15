@@ -1,8 +1,6 @@
 import { http, HttpResponse, ws } from "msw";
 import plansResponse from "./plans-response.json";
 
-let mode: "success" | "error" | "loading" = "success";
-
 const fakeTaskId = "7304e8e0-81c6-4978-9a9d-9046ab79ce3c";
 const workerStatus = { status: "IDLE", duration: 0 };
 
@@ -177,14 +175,6 @@ export const handlers = [
   }),
 
   http.post("/api/graphql", async () => {
-    if (mode === "loading") {
-      return new Promise(() => {});
-    }
-
-    if (mode === "error") {
-      return HttpResponse.error();
-    }
-
     return HttpResponse.json(fakeExperiments);
   }),
 
