@@ -4,6 +4,14 @@ import { ExperimentList } from "./ULIMSExperimentsTable";
 import * as apollo from "@apollo/client/react";
 import { MemoryRouter } from "react-router-dom";
 
+vi.mock("@apollo/client/react", async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    actual,
+    useQuery: vi.fn(),
+  };
+});
+
 afterEach(() => {
   vi.restoreAllMocks();
 });
@@ -46,7 +54,7 @@ const renderComponent = () =>
 
 describe("ExperimentList", () => {
   it("renders experiment data in table", () => {
-    vi.spyOn(apollo, "useQuery").mockReturnValue({
+    (apollo.useQuery as any).mockReturnValue({
       data: mockExperiments,
       loading: false,
       error: undefined,
@@ -60,7 +68,7 @@ describe("ExperimentList", () => {
   });
 
   it("shows loading state", () => {
-    vi.spyOn(apollo, "useQuery").mockReturnValue({
+    (apollo.useQuery as any).mockReturnValue({
       data: undefined,
       loading: true,
       error: undefined,
@@ -73,7 +81,7 @@ describe("ExperimentList", () => {
   });
 
   it("shows error banner when query fails", () => {
-    vi.spyOn(apollo, "useQuery").mockReturnValue({
+    (apollo.useQuery as any).mockReturnValue({
       data: undefined,
       loading: false,
       error: new Error("Failed to fetch"),
@@ -85,7 +93,7 @@ describe("ExperimentList", () => {
   });
 
   it("shows 'Add all to queue' when nothing selected", () => {
-    vi.spyOn(apollo, "useQuery").mockReturnValue({
+    (apollo.useQuery as any).mockReturnValue({
       data: mockExperiments,
       loading: false,
       error: undefined,
@@ -99,7 +107,7 @@ describe("ExperimentList", () => {
   });
 
   it("changes button text when a row is selected", () => {
-    vi.spyOn(apollo, "useQuery").mockReturnValue({
+    (apollo.useQuery as any).mockReturnValue({
       data: mockExperiments,
       loading: false,
       error: undefined,

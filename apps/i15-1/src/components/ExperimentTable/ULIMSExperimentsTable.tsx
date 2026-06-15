@@ -1,13 +1,6 @@
 import { useQuery } from "@apollo/client/react";
 import { gql } from "@apollo/client";
-import {
-  Box,
-  Button,
-  FormControlLabel,
-  Stack,
-  Switch,
-  Typography,
-} from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 import {
   MaterialReactTable,
   useMaterialReactTable,
@@ -18,14 +11,29 @@ import { useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import QueueIcon from "@mui/icons-material/Queue";
 
+type ExperimentDefinitionData = {
+  q_max: number;
+  frames: number;
+  beam_energy: number;
+  time_per_pdf: number;
+  focused_beam_size: number;
+};
+
 type ExperimentDefinitionNode = {
   name: string;
-  data: string;
+  data: ExperimentDefinitionData;
+};
+
+type SampleData = {
+  density: number;
+  capillary: string;
+  composition: string;
+  packing_fraction: number;
 };
 
 type SampleNode = {
   name: string;
-  data: string;
+  data: SampleData;
 };
 
 type ExperimentNode = {
@@ -134,6 +142,7 @@ export function ExperimentList() {
             <Button
               variant="contained"
               color="primary"
+              startIcon={<QueueIcon />}
               onClick={() => {
                 const selected = table
                   .getSelectedRowModel()
@@ -145,7 +154,9 @@ export function ExperimentList() {
               Add selected {selectedCount} to queue
             </Button>
           ) : (
-            <Button variant="contained">Add all to queue</Button>
+            <Button variant="contained" startIcon={<QueueIcon />}>
+              Add all to queue
+            </Button>
           )}
         </Stack>
       );
