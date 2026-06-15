@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client/react";
-import { gql } from "@apollo/client";
 import { Button, Stack, Typography } from "@mui/material";
 import {
   MaterialReactTable,
