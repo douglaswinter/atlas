@@ -15,7 +15,7 @@ To run this locally:
 
 1. Navigate to app containing folder (i.e. `.../atlas/apps/i15-1`)
 1. Update the `supergraph.graphql` schema from most recent `supergraph.graphql` schema from https://github.com/DiamondLightSource/graph-federation/releases
-1. Generate types by running `pnpm run codegen`
+1. Generate types by running `pnpm run generate:graphql`
 
 The available types are generated based on queries detected in the documents (`[./src/**/*.ts*]`), so if a new query is added you will need to generate the types again. Type names will be automatically generated based on your query name. To use, follow the example below:
 
@@ -36,8 +36,8 @@ export const myNewQuery = gql`
 `;
 ```
 
-2. Generate types by running `pnpm run codegen`. This will generate a new `.generated.ts` file with the types.
-1. Use query and types in your component.
+2. Generate types by running `pnpm run generate:graphql`. This will generate a new `.generated.ts` file with the types.
+3. Use query and types in your component.
 
 ```ts
 import { useQuery } from "@apollo/client/react";
