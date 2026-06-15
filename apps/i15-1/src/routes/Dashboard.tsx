@@ -40,7 +40,7 @@ function Dashboard() {
           <Stack direction={"row"} spacing={5}>
             <Button
               component={Link}
-              to="/Robot"
+              to="/Acquisition/Robot"
               variant="contained"
               startIcon={<PrecisionManufacturingIcon />}
               sx={{ width: 150, height: 50 }}
