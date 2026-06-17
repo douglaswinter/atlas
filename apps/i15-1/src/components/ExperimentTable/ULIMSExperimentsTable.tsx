@@ -9,7 +9,7 @@ import { columns, type ExperimentTableData } from "./columns";
 import { useLocation } from "react-router-dom";
 import { useMemo } from "react";
 import QueueIcon from "@mui/icons-material/Queue";
-
+import { useSumbitTask } from "../../queue/queueService";
 import { getSessionPlaylistQuery } from "../../graphql/getSessionPlaylistQuery";
 import { type ExperimentNode } from "../../graphql/getSessionPlaylistQueryTyped";
 import type {
@@ -51,6 +51,18 @@ const GET_EXPERIMENTS: TypedDocumentNode<
 
 export function ExperimentList() {
   const location = useLocation();
+  const { mutateAsync: submitTaskAsync } = useSumbitTask();
+
+  async function submitTasks(selected: ExperimentTableData[]) {
+    await Promise.all(
+      selected.map((exp, index) =>
+        submitTaskAsync({
+          taskPosition: index,
+          taskParams: exp,
+        }),
+      ),
+    );
+  }
 
   const { data, loading, error } = useQuery(GET_EXPERIMENTS, {
     variables: {
@@ -102,18 +114,29 @@ export function ExperimentList() {
               variant="contained"
               color="primary"
               startIcon={<QueueIcon />}
-              onClick={() => {
+              onClick={async () => {
                 const selected = table
                   .getSelectedRowModel()
                   .rows.map((row) => row.original);
-
-                console.log("Selected:", selected);
+                await submitTasks(selected);
               }}
             >
               Add selected {selectedCount} to queue
             </Button>
           ) : (
-            <Button variant="contained" startIcon={<QueueIcon />}>
+            <Button
+              variant="contained"
+              startIcon={<QueueIcon />}
+              onClick={async () => {
+                table.toggleAllRowsSelected(true);
+
+                const allRows = table
+                  .getPrePaginationRowModel()
+                  .rows.map((row) => row.original);
+
+                await submitTasks(allRows);
+              }}
+            >
               Add all to queue
             </Button>
           )}

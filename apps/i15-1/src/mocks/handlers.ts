@@ -33,6 +33,30 @@ const fakeExperiments = {
               },
             },
           },
+          {
+            node: {
+              name: "Test experiment 2",
+              sample: {
+                name: "Test_sample 2",
+                data: {
+                  density: 56,
+                  capillary: "bs1.5",
+                  composition: "Stuff",
+                  packing_fraction: 0.5,
+                },
+              },
+              experimentDefinition: {
+                name: "My Experiment",
+                data: {
+                  q_max: 67,
+                  frames: 100,
+                  beam_energy: 40,
+                  time_per_pdf: 2,
+                  focused_beam_size: 3,
+                },
+              },
+            },
+          },
         ],
       },
     },
