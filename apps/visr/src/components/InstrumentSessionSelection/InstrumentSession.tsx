@@ -1,4 +1,3 @@
-import { visitToText, type Visit } from "@diamondlightsource/sci-react-ui";
 import { useLazyLoadQuery } from "react-relay/hooks";
 import { graphql } from "relay-runtime";
 import type { InstrumentSessionQuery as InstrumentSessionQueryType } from "./__generated__/InstrumentSessionQuery.graphql";
