@@ -265,12 +265,12 @@ export const submitTask = async ({
         plan_name: "run_full_collection",
         sample_id: sampleId,
         params: taskParams,
-        instrument_session: "cm123-123",
+        instrument_session: "cm44163-3",
       },
     ],
     query: {
       position: taskPosition,
-      // @ts-ignore -
+      // @ts-ignore
       validate_with_blueapi: false,
     },
   };
