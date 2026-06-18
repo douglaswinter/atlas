@@ -270,7 +270,8 @@ export const submitTask = async ({
     ],
     query: {
       position: taskPosition,
-      // @ts-ignore
+      // @ts-expect-error - validation is still a bit in flux,
+      // see https://github.com/DiamondLightSource/daq-queuing-service/issues/42
       validate_with_blueapi: false,
     },
   };
