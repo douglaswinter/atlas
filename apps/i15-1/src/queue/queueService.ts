@@ -2,13 +2,21 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import axios, { type AxiosInstance } from "axios";
 import { useEffect, useRef } from "react";
-import type { QueueState, TaskCancelRequest } from "../../generated/queue";
+import type {
+  QueueState,
+  TaskCancelRequest,
+  AddTasksToQueueQueuePostData,
+} from "../../generated/queue";
+import { addTasksToQueueQueuePost } from "../../generated/queue";
+import { client } from "../../generated/queue/client.gen";
 import type { QueuedTasks } from "./tasks";
 
 // This should be tidied up in https://github.com/DiamondLightSource/atlas/issues/59
 const QUEUE_MODE = import.meta.env.VITE_QUEUE_MODE;
 const QUEUE_SOCKET: string =
   QUEUE_MODE === "local" ? "http://127.0.0.1:8001" : "/api/daq-queue";
+
+client.setConfig({ baseUrl: QUEUE_SOCKET });
 
 const handlers = {
   state_update: "state",
@@ -239,3 +247,47 @@ export const clearHistory = async (): Promise<number> => {
 
   return response.data;
 };
+
+export const submitTask = async ({
+  taskPosition,
+  taskParams,
+}: {
+  taskPosition: number;
+  taskParams: Record<string, unknown>;
+}) => {
+  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+  const sampleId = `test_1_${timestamp}`;
+
+  const data: AddTasksToQueueQueuePostData = {
+    url: `/queue`,
+    body: [
+      {
+        plan_name: "run_full_collection",
+        sample_id: sampleId,
+        params: taskParams,
+        instrument_session: "cm44163-3",
+      },
+    ],
+    query: {
+      position: taskPosition,
+      // @ts-expect-error - validation is still a bit in flux,
+      // see https://github.com/DiamondLightSource/daq-queuing-service/issues/42
+      validate_with_blueapi: false,
+    },
+  };
+
+  return await addTasksToQueueQueuePost(data);
+};
+
+export function useSumbitTask() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: submitTask,
+    onSuccess: async () => {
+      await Promise.all([
+        client.invalidateQueries({ queryKey: ["queue"] }),
+        client.invalidateQueries({ queryKey: ["tasks"] }),
+      ]);
+    },
+  });
+}
