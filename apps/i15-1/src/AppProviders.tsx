@@ -1,5 +1,5 @@
 import type { Api } from "@atlas/blueapi";
-import { ThemeProvider } from "@diamondlightsource/sci-react-ui";
+import { AuthProvider, ThemeProvider } from "@diamondlightsource/sci-react-ui";
 import type { Theme } from "@mui/material";
 import type { ReactNode } from "react";
 import { InstrumentSessionProvider } from "./context/instrumentSession/InstrumentSessionProvider";
@@ -20,19 +20,33 @@ type Props = {
 
 export function AppProviders({ api, theme, children }: Props) {
   const config = useLoadPvwsConfig();
+
+  const keycloakConfig = {
+    url: "https://identity-test.diamond.ac.uk",
+    realm: "dls",
+    clientId: "douglas",
+  };
+
   return (
-    <ThemeProvider theme={theme}>
-      <InstrumentSessionProvider>
-        <ReduxProvider store={store(config)}>
-          <QueryClientProvider client={new QueryClient()}>
-            <UserAuthProvider>
-              <BlueapiProvider api={api}>
-                <ApolloProvider client={client}>{children}</ApolloProvider>
-              </BlueapiProvider>
-            </UserAuthProvider>
-          </QueryClientProvider>
-        </ReduxProvider>
-      </InstrumentSessionProvider>
-    </ThemeProvider>
+    <AuthProvider
+      keycloakConfig={keycloakConfig}
+      keycloakInitOptions={{
+        silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <InstrumentSessionProvider>
+          <ReduxProvider store={store(config)}>
+            <QueryClientProvider client={new QueryClient()}>
+              <UserAuthProvider>
+                <BlueapiProvider api={api}>
+                  <ApolloProvider client={client}>{children}</ApolloProvider>
+                </BlueapiProvider>
+              </UserAuthProvider>
+            </QueryClientProvider>
+          </ReduxProvider>
+        </InstrumentSessionProvider>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

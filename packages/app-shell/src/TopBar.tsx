@@ -6,7 +6,12 @@ import Typography from "@mui/material/Typography";
 
 import { Menu } from "lucide-react";
 
-import { ColourSchemeButton, Logo } from "@diamondlightsource/sci-react-ui";
+import {
+  ColourSchemeButton,
+  Logo,
+  useAuth,
+  User,
+} from "@diamondlightsource/sci-react-ui";
 import { Divider } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
 
@@ -75,9 +80,18 @@ export function TopBar({ title, open, setOpen }: Props) {
         </Typography>
 
         <Box sx={{ ml: "auto" }}>
+          <Login />
           <ColourSchemeButton />
         </Box>
       </Toolbar>
     </AppBar>
   );
+}
+
+function Login() {
+  const auth = useAuth();
+  if (!auth.authenticated) {
+    return <User onLogin={auth.login} />;
+  }
+  return <User auth={auth} />;
 }
