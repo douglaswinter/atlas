@@ -1,13 +1,29 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: oauth2-proxy-config
+  name: nginx-reverse-proxy
+  namespace: {{ .Release.Namespace }}
 data:
-  oauth2_proxy.cfg: |
-    email_domains = ["*"]
-    cookie_secure = true
-    cookie_samesite = "lax"
-    cookie_expire = "168h"
-    cookie_refresh = "45s"
-    cookie_name = "{{ include "oauth2-proxy.fullname" . }}-cookie"
-{{ include "ui-base.extraConfig" . | indent 4 }}
+  default.conf: |
+    server {
+      listen 8080;
+
+      {{- range (include "ui-base.renderUpstreams" . | fromYamlArray) }}
+
+      location {{ .path }}/ {
+
+        {{- if .passHostHeader }}
+        proxy_set_header Host $host;
+        {{- end }}
+
+        proxy_set_header Authorization $http_authorization;
+
+        {{- if .rewriteTarget }}
+        rewrite ^{{ .path }}/?(.*)$ {{ .rewriteTarget }}$1 break;
+        {{- end }}
+
+        proxy_pass {{ .uri }};
+      }
+
+    {{- end }}
+    }

@@ -1,0 +1,6 @@
+dependencies:
+- name: ui-base
+  repository: file://../../../helm/
+  version: 0.1.0
+digest: sha256:42a4d8b0c92d3c33d29d9a990632b09e3b5f5bb42237a6fc6893c81ea07aad5b
+generated: "2026-06-24T11:21:45.085972158+01:00"

@@ -1,12 +1,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: {{ include "ui-base.name" . }}
-    namespace: {{ .Release.Namespace }}
+  name: {{ include "ui-base.name" . }}
 spec:
-    type: ClusterIP
-    selector:
-        app: {{ include "ui-base.name" . }}
-    ports:
+  selector:
+    app: {{ include "ui-base.name" . }}
+  ports:
     - port: 80
-      targetPort: {{ .Values.ui.port }}
+      targetPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-reverse-proxy
+spec:
+  selector:
+    app: {{ include "ui-base.name" . }}
+  ports:
+    - port: 8080
+      targetPort: 8080

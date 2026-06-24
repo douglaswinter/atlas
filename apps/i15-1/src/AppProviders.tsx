@@ -24,16 +24,11 @@ export function AppProviders({ api, theme, children }: Props) {
   const keycloakConfig = {
     url: "https://identity-test.diamond.ac.uk",
     realm: "dls",
-    clientId: "douglas",
+    clientId: "douglas-test",
   };
 
   return (
-    <AuthProvider
-      keycloakConfig={keycloakConfig}
-      keycloakInitOptions={{
-        silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
-      }}
-    >
+    <AuthProvider keycloakConfig={keycloakConfig}>
       <ThemeProvider theme={theme}>
         <InstrumentSessionProvider>
           <ReduxProvider store={store(config)}>

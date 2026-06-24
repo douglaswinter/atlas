@@ -1,7 +1,8 @@
 import { render, screen, userEvent } from "@atlas/vitest-conf";
 import { SidebarNav } from "./SidebarNav";
-import type { SectionGroup } from "./Router";
+import type { RouterProps, SectionGroup } from "./Router";
 import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { toNavItemGroups } from "./Layout";
 
 describe("SidebarNav", () => {
   const groups: SectionGroup[] = [
@@ -35,11 +36,18 @@ describe("SidebarNav", () => {
     },
   ];
 
+  const routerProps: RouterProps = {
+    title: "test",
+    navigation: groups,
+  };
+
   function renderSidenav(open: boolean) {
     const router = createMemoryRouter([
       {
         path: "/",
-        element: <SidebarNav navigation={groups} open={open} />,
+        element: (
+          <SidebarNav navigation={toNavItemGroups(routerProps)} open={open} />
+        ),
       },
     ]);
     render(<RouterProvider router={router} />);

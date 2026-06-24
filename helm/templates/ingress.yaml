@@ -1,24 +1,28 @@
-{{ if .Values.host }}
-apiVersion: {{ include "capabilities.ingress.apiVersion" . }}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "ui-base.name" . }}
-  labels:
-    {{ include "ui-base.labels" . | nindent 4 }}
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 spec:
   ingressClassName: nginx
+
   rules:
     - host: {{ .Values.host | quote }}
       http:
         paths:
+          # UI
           - path: /
             pathType: Prefix
             backend:
-{{ include "ingress.backend" (dict
-     "serviceName" (printf "%s-oauth2-proxy" .Release.Name )
-     "servicePort" (index .Values "oauth2-proxy" "service" "portNumber")
-     "context" $
-) | nindent 14 }}
-{{ end }}
+              service:
+                name: {{ include "ui-base.name" . }}
+                port:
+                  number: 80
+
+          # API reverse proxy
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-reverse-proxy
+                port:
+                  number: 8080

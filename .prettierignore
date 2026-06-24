@@ -1,0 +1,3 @@
+helm/**/templates/**
+charts/**/templates/**
+*.tpl

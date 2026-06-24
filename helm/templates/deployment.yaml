@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
     name: {{ include "ui-base.name" . }}
     namespace: {{ .Release.Namespace }}
+
 spec:
     replicas: {{ include "ui-base.replicas" . }}
     selector:
@@ -19,4 +20,18 @@ spec:
               image: {{ include "ui-base.image" . }}
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               ports:
-              - containerPort: {{ .Values.ui.port }}
+                - containerPort: 80
+
+            - name: proxy
+              image: nginx:1.29
+              ports:
+                - containerPort: 8080
+
+              volumeMounts:
+              - name: nginx-config
+                mountPath: /etc/nginx/conf.d
+
+            volumes:
+            - name: nginx-config
+            configMap:
+                name: nginx-reverse-proxy

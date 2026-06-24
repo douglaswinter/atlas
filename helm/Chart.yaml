@@ -1,11 +1,6 @@
 apiVersion: v2
 name: ui-base
-description: Web UI behind oauth2-proxy
+description: Web UI with NGINX reverse proxy sidecar
 type: application
 version: 0.1.0
 appVersion: "0.1.0"
-
-dependencies:
-  - name: oauth2-proxy
-    repository: https://oauth2-proxy.github.io/manifests
-    version: 10.1.0 

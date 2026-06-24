@@ -42,12 +42,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 
 {{- define "ui-base.renderUpstreams" -}}
 
-# Base UI upstream (always present)
-- id: ui
-  path: /
-  uri: http://{{ include "ui-base.name" . }}.{{ .Release.Namespace }}.svc.cluster.local:80
-  passHostHeader: true
-
 {{- range (.Values.upstreams | default list) }}
 - id: {{ .id }}
   path: {{ .path }}
