@@ -25,4 +25,4 @@ spec:
               service:
                 name: nginx-reverse-proxy
                 port:
-                  number: 8080
+                  number: 80

@@ -20,12 +20,12 @@ spec:
               image: {{ include "ui-base.image" . }}
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               ports:
-                - containerPort: 80
+                - containerPort: 8080
 
             - name: proxy
               image: nginx:1.29
               ports:
-                - containerPort: 8080
+                - containerPort: 80
 
               volumeMounts:
               - name: nginx-config
@@ -33,5 +33,5 @@ spec:
 
             volumes:
             - name: nginx-config
-            configMap:
+              configMap:
                 name: nginx-reverse-proxy

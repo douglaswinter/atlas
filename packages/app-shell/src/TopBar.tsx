@@ -90,8 +90,5 @@ export function TopBar({ title, open, setOpen }: Props) {
 
 function Login() {
   const auth = useAuth();
-  if (!auth.authenticated) {
-    return <User onLogin={auth.login} />;
-  }
   return <User auth={auth} />;
 }
