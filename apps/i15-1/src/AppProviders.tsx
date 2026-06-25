@@ -28,20 +28,20 @@ export function AppProviders({ api, theme, children }: Props) {
   };
 
   return (
-    <AuthProvider keycloakConfig={keycloakConfig}>
-      <ThemeProvider theme={theme}>
-        <InstrumentSessionProvider>
-          <ReduxProvider store={store(config)}>
-            <QueryClientProvider client={new QueryClient()}>
-              <UserAuthProvider>
-                <BlueapiProvider api={api}>
-                  <ApolloProvider client={client}>{children}</ApolloProvider>
-                </BlueapiProvider>
-              </UserAuthProvider>
-            </QueryClientProvider>
-          </ReduxProvider>
-        </InstrumentSessionProvider>
-      </ThemeProvider>
-    </AuthProvider>
+    // <AuthProvider keycloakConfig={keycloakConfig}>
+    <ThemeProvider theme={theme}>
+      <InstrumentSessionProvider>
+        <ReduxProvider store={store(config)}>
+          <QueryClientProvider client={new QueryClient()}>
+            <UserAuthProvider>
+              <BlueapiProvider api={api}>
+                <ApolloProvider client={client}>{children}</ApolloProvider>
+              </BlueapiProvider>
+            </UserAuthProvider>
+          </QueryClientProvider>
+        </ReduxProvider>
+      </InstrumentSessionProvider>
+    </ThemeProvider>
+    // </AuthProvider>
   );
 }

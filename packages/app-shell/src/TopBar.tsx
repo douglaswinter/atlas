@@ -80,7 +80,7 @@ export function TopBar({ title, open, setOpen }: Props) {
         </Typography>
 
         <Box sx={{ ml: "auto" }}>
-          <Login />
+          {/* <Login /> */}
           <ColourSchemeButton />
         </Box>
       </Toolbar>

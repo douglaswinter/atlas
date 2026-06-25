@@ -18,7 +18,7 @@ function Dashboard() {
           <Typography variant="h4" component="h1" textAlign={"center"}>
             Welcome to I15-1
           </Typography>
-          <User
+          {/* <User
             onLogin={handleLogIn}
             onLogout={handleLogOut}
             user={
@@ -27,7 +27,7 @@ function Dashboard() {
                 : { fedid: user.person }
             }
             colour="white"
-          />
+          /> */}
           <InstrumentSessionView
             sessionsList={[
               "cm12345-1",
