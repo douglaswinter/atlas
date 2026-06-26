@@ -49,6 +49,8 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
   {{- if .rewriteTarget }}
   rewriteTarget: {{ .rewriteTarget }}
   {{- end }}
+  sse: {{ .sse | default false }}
+  websocket: {{ .websocket | default false }}
   passHostHeader: {{ .passHostHeader | default false }}
 {{- end }}
 

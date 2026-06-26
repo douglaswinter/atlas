@@ -4,10 +4,17 @@ ui-base:
 
   image:
     repository: ghcr.io/douglaswinter/atlas/i15-1
-    tag: 0.0.1-manual.16
+    tag: 0.0.1-noauth-manual.17
 
-  # Note that if these have changed you may need to manually restart the oauth2-proxy pod on deployment
   upstreams:
+    - id: echo
+      path: /api/echo
+      sse: true
+      target:
+        service:
+          name: echo-server
+          port: 8080
+
     - id: testapi
       path: /api/test
       rewriteTarget: /
@@ -16,14 +23,14 @@ ui-base:
           uri: https://jsonplaceholder.typicode.com
 
     - id: blueapi
-      path: /api/blueapi/
+      path: /api/blueapi
       rewriteTarget: /
       target:
         external:
           uri: https://i15-1-blueapi.diamond.ac.uk
 
     - id: daq-queue
-      path: /api/daq-queue/
+      path: /api/daq-queue
       rewriteTarget: /
       target:
         external:
@@ -36,8 +43,3 @@ ui-base:
         external:
           uri: https://graph-nightly.diamond.ac.uk
       passHostHeader: false
-
-  authConfigFlags: |
-    skip_auth_routes = ["GET=^/$", "GET=^/assets"]
-    api_routes = ["^/oauth2", "^/api"]
-    skip_provider_button = true

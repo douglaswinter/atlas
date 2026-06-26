@@ -12,17 +12,31 @@ data:
 
       location {{ .path }}/ {
 
+        proxy_ssl_server_name on;
+
+        proxy_http_version 1.1;
+
+        {{- if .websocket }}
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_read_timeout 24h;
+        {{- end }}
+
+        {{- if .sse }}
+        proxy_buffering off;
+        proxy_cache off;
+        proxy_set_header Connection "";
+        proxy_read_timeout 24h;
+        {{- end }}
+
         {{- if .passHostHeader }}
         proxy_set_header Host $host;
         {{- end }}
 
         proxy_set_header Authorization $http_authorization;
 
-        {{- if .rewriteTarget }}
-        rewrite ^{{ .path }}/?(.*)$ {{ .rewriteTarget }}$1 break;
-        {{- end }}
-
-        proxy_pass {{ .uri }};
+        # IMPORTANT: trailing slash enforces path stripping correctly
+        proxy_pass {{ .uri }}/;
       }
 
     {{- end }}

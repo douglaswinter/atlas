@@ -80,7 +80,7 @@ export function TopBar({ title, open, setOpen }: Props) {
         </Typography>
 
         <Box sx={{ ml: "auto" }}>
-          {/* <Login /> */}
+          <Login />
           <ColourSchemeButton />
         </Box>
       </Toolbar>
@@ -90,5 +90,9 @@ export function TopBar({ title, open, setOpen }: Props) {
 
 function Login() {
   const auth = useAuth();
+  console.log(auth);
+  if (auth.errors) {
+    console.error(auth.errors.join(", "));
+  }
   return <User auth={auth} />;
 }
