@@ -4,7 +4,7 @@ ui-base:
 
   image:
     repository: ghcr.io/douglaswinter/atlas/i15-1
-    tag: 0.0.1-noauth-manual.17
+    tag: 0.0.1-manual.22
 
   upstreams:
     - id: echo

@@ -18,6 +18,15 @@ type Props = {
   children: ReactNode;
 };
 
+const tokenItemName = "KEYCLOAK.TOKEN";
+
+export function updateTokenStore(token: string) {
+  sessionStorage.setItem(tokenItemName, token);
+}
+export function readTokenStore(): string {
+  return sessionStorage.getItem(tokenItemName) ?? "";
+}
+
 export function AppProviders({ api, theme, children }: Props) {
   const config = useLoadPvwsConfig();
 
@@ -28,7 +37,13 @@ export function AppProviders({ api, theme, children }: Props) {
   };
 
   return (
-    <AuthProvider keycloakConfig={keycloakConfig}>
+    <AuthProvider
+      keycloakConfig={keycloakConfig}
+      keycloakInitOptions={{
+        silentCheckSsoRedirectUri: `${location.origin}/auth/silent-check-sso.html`,
+      }}
+      onTokenChange={updateTokenStore}
+    >
       <ThemeProvider theme={theme}>
         <InstrumentSessionProvider>
           <ReduxProvider store={store(config)}>

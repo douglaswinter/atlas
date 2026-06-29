@@ -11,9 +11,11 @@ import {
   Logo,
   useAuth,
   User,
+  type AuthState,
 } from "@diamondlightsource/sci-react-ui";
 import { Divider } from "@mui/material";
 import type { Theme } from "@mui/material/styles";
+import { useMemo } from "react";
 
 type Props = {
   title: string;
@@ -22,6 +24,13 @@ type Props = {
 };
 
 export function TopBar({ title, open, setOpen }: Props) {
+  const auth = useAuth();
+
+  const user: AuthState | null = useMemo(() => {
+    if (!auth || !auth.authenticated || !auth.user) return null;
+    return { name: auth.user.name };
+  }, [auth]);
+
   return (
     <AppBar
       position="fixed"
@@ -80,19 +89,15 @@ export function TopBar({ title, open, setOpen }: Props) {
         </Typography>
 
         <Box sx={{ ml: "auto" }}>
-          <Login />
+          <User
+            key="user"
+            onLogin={auth.login}
+            onLogout={auth.logout}
+            user={user}
+          />
           <ColourSchemeButton />
         </Box>
       </Toolbar>
     </AppBar>
   );
-}
-
-function Login() {
-  const auth = useAuth();
-  console.log(auth);
-  if (auth.errors) {
-    console.error(auth.errors.join(", "));
-  }
-  return <User auth={auth} />;
 }
