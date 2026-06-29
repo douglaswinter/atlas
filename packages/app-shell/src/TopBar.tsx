@@ -32,6 +32,7 @@ export function TopBar({ title, open, setOpen }: Props) {
   }, [auth]);
 
   console.log(auth);
+  console.log(user);
 
   return (
     <AppBar

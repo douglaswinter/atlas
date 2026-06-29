@@ -46,6 +46,9 @@ export function AppProviders({ api, theme, children }: Props) {
   return (
     <AuthProvider
       keycloakConfig={keycloakConfig}
+      keycloakInitOptions={{
+        silentCheckSsoRedirectUri: `${location.origin}/auth/silent-check-sso.html`,
+      }}
       onTokenChange={updateTokenStore}
     >
       <CastThemeProvider theme={theme}>
