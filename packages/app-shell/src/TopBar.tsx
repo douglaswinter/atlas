@@ -96,7 +96,6 @@ export function TopBar({ title, open, setOpen }: Props) {
             onLogin={auth.login}
             onLogout={auth.logout}
             user={user}
-            auth={auth}
           />
           <ColourSchemeButton />
         </Box>

@@ -31,9 +31,9 @@ export function AppProviders({ api, theme, children }: Props) {
   const config = useLoadPvwsConfig();
 
   const keycloakConfig = {
-    url: "https://identity.diamond.ac.uk",
+    url: "https://identity-test.diamond.ac.uk",
     realm: "dls",
-    clientId: "douglas",
+    clientId: "douglas-test",
   };
 
   return (
