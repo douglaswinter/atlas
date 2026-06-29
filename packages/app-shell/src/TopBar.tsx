@@ -31,6 +31,8 @@ export function TopBar({ title, open, setOpen }: Props) {
     return { name: auth.user.name };
   }, [auth]);
 
+  console.log(auth);
+
   return (
     <AppBar
       position="fixed"
@@ -94,6 +96,7 @@ export function TopBar({ title, open, setOpen }: Props) {
             onLogin={auth.login}
             onLogout={auth.logout}
             user={user}
+            auth={auth}
           />
           <ColourSchemeButton />
         </Box>
