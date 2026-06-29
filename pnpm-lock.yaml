@@ -90,6 +90,9 @@ importers:
       graphql:
         specifier: ^16.14.2
         version: 16.14.2
+      keycloak-js:
+        specifier: ^26.2.4
+        version: 26.2.4
       lucide-react:
         specifier: ^1.17.0
         version: 1.17.0(react@18.3.1)

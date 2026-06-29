@@ -28,7 +28,12 @@ export function AppProviders({ api, theme, children }: Props) {
   };
 
   return (
-    <AuthProvider keycloakConfig={keycloakConfig}>
+    <AuthProvider
+      keycloakConfig={keycloakConfig}
+      keycloakInitOptions={{
+        silentCheckSsoRedirectUri: `${location.origin}/auth/silent-check-sso.html`,
+      }}
+    >
       <ThemeProvider theme={theme}>
         <InstrumentSessionProvider>
           <ReduxProvider store={store(config)}>
