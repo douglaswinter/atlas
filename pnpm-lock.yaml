@@ -676,7 +676,7 @@ packages:
       react: ^18.3.1
 
   '@diamondlightsource/sci-react-ui@file:srui.tgz':
-    resolution: {integrity: sha512-BjVuFWhZfAupTFK0ok2l79q/yAFtRJBCfrftKfLL84z2mABnW+TvRXxP6YJoaLNHHgNPvByedILNs67aNeZQkw==, tarball: file:srui.tgz}
+    resolution: {integrity: sha512-mjD4iKzaX89KcttlCr+plxEjrLxK9m2TntIUzprk1Mr7nj5wnmx3v1Vk4PvFDRTD9ZAz1Us5ekC8vFBm7xd4HQ==, tarball: file:srui.tgz}
     version: 0.6.1-alpha.1
     peerDependencies:
       '@emotion/react': ^11.13.3
