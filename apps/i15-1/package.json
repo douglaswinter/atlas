@@ -23,7 +23,7 @@
     "@diamondlightsource/cs-web-lib": "0.10.15",
     "@diamondlightsource/sci-react-ui": "file://../../srui.tgz",
     "@mui/icons-material": "^6.5.0",
-    "@mui/material": "<7.0.0",
+    "@mui/material": "^7.3.11",
     "@tanstack/react-query": "^5.90.21",
     "axios": "^1.13.4",
     "graphql": "^16.14.2",
