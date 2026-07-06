@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
   AuthProvider,
@@ -19,12 +19,19 @@ function UserButton() {
   return <User auth={auth} />;
 }
 
+const CastThemeProvider = ThemeProvider as React.ComponentType<
+  React.PropsWithChildren<{
+    theme?: any;
+    defaultMode?: string;
+  }>
+>;
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider keycloakConfig={keycloakConfig}>
-      <ThemeProvider theme={DiamondDSTheme}>
+      <CastThemeProvider theme={DiamondDSTheme}>
         <UserButton />
-      </ThemeProvider>
+      </CastThemeProvider>
     </AuthProvider>
   </StrictMode>,
 );
