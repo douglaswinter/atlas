@@ -1,0 +1,14 @@
+{
+  "name": "@atlas/auth",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "test": "echo 'Add test script here'",
+    "lint": "echo 'Add lint script here'"
+  },
+  "dependencies": {
+    "@diamondlightsource/sci-react-ui": "0.6.1-alpha.1"
+  }
+}
