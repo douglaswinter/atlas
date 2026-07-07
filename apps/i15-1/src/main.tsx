@@ -1,4 +1,8 @@
-import { DiamondDSTheme } from "@diamondlightsource/sci-react-ui";
+import {
+  DiamondDSTheme,
+  useAuth,
+  User,
+} from "@diamondlightsource/sci-react-ui";
 import { RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import { StrictMode } from "react";
@@ -17,10 +21,23 @@ async function enableMocking() {
 
 const api = createApi("/api/blueapi");
 
+const keycloakConfig = {
+  url: "https://identity-test.diamond.ac.uk",
+  realm: "dls",
+  clientId: "douglas-test",
+};
+
+function UserButton() {
+  const auth = useAuth();
+  console.log("UserButton", auth.initialised);
+  return <User auth={auth} />;
+}
+
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <AppProviders api={api} theme={DiamondDSTheme}>
+        <UserButton />
         <RouterProvider router={router} />
       </AppProviders>
     </StrictMode>,
