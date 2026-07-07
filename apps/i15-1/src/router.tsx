@@ -11,6 +11,8 @@ import Dashboard from "./routes/Dashboard";
 import Playlist from "./routes/Playlist";
 import Plans from "./routes/Plans";
 import { QueueView } from "./routes/QueueView";
+import { useMemo } from "react";
+import { RouterProvider } from "react-router-dom";
 
 const navigation: SectionGroup[] = [
   {
@@ -100,6 +102,19 @@ const navigation: SectionGroup[] = [
     ],
   },
 ];
+
+export function RoutedApp() {
+  const router = useMemo(
+    () =>
+      createRouter({
+        title: "i15-1",
+        navigation,
+      }),
+    [],
+  );
+
+  return <RouterProvider router={router} />;
+}
 
 export const router = createRouter({
   title: "i15-1",

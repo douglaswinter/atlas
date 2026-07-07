@@ -5,9 +5,9 @@ import {
 } from "@diamondlightsource/sci-react-ui";
 import { RouterProvider } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import { StrictMode } from "react";
+import { StrictMode, useMemo } from "react";
 
-import { router } from "./router.tsx";
+import { RoutedApp, router } from "./router.tsx";
 
 import { createApi } from "@atlas/blueapi";
 import { AppProviders } from "./AppProviders.tsx";
@@ -38,7 +38,7 @@ enableMocking().then(() => {
     <StrictMode>
       <AppProviders api={api} theme={DiamondDSTheme}>
         <UserButton />
-        <RouterProvider router={router} />
+        <RoutedApp />
       </AppProviders>
     </StrictMode>,
   );
