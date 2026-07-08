@@ -103,19 +103,6 @@ const navigation: SectionGroup[] = [
   },
 ];
 
-export function RoutedApp() {
-  const router = useMemo(
-    () =>
-      createRouter({
-        title: "i15-1",
-        navigation,
-      }),
-    [],
-  );
-
-  return <RouterProvider router={router} />;
-}
-
 export const router = createRouter({
   title: "i15-1",
   navigation,

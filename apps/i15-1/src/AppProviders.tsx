@@ -44,14 +44,14 @@ export function AppProviders({ api, theme, children }: Props) {
   };
 
   return (
-    <CastThemeProvider theme={theme}>
-      <AuthProvider
-        keycloakConfig={keycloakConfig}
-        keycloakInitOptions={{
-          silentCheckSsoRedirectUri: `${location.origin}/auth/silent-check-sso.html`,
-        }}
-        onTokenChange={updateTokenStore}
-      >
+    <AuthProvider
+      keycloakConfig={keycloakConfig}
+      keycloakInitOptions={{
+        silentCheckSsoRedirectUri: `${location.origin}/auth/silent-check-sso.html`,
+      }}
+      onTokenChange={updateTokenStore}
+    >
+      <CastThemeProvider theme={theme}>
         <InstrumentSessionProvider>
           <ReduxProvider store={store(config)}>
             <QueryClientProvider client={new QueryClient()}>
@@ -63,7 +63,7 @@ export function AppProviders({ api, theme, children }: Props) {
             </QueryClientProvider>
           </ReduxProvider>
         </InstrumentSessionProvider>
-      </AuthProvider>
-    </CastThemeProvider>
+      </CastThemeProvider>
+    </AuthProvider>
   );
 }
