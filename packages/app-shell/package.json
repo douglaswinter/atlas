@@ -14,9 +14,9 @@
     "keycloak-js": "^26.2.4"
   },
   "peerDependencies": {
-    "@diamondlightsource/sci-react-ui": "^0.4.0",
-    "@mui/material": "<7.0.0",
-    "react-router-dom": "^7.18.0",
+    "@diamondlightsource/sci-react-ui": "*",
+    "@mui/material": "*",
+    "react-router-dom": "*",
     "lucide-react": "^1.16.0"
   },
   "devDependencies": {
