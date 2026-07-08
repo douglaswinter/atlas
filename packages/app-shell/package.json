@@ -14,14 +14,14 @@
     "keycloak-js": "^26.2.4"
   },
   "peerDependencies": {
-    "@diamondlightsource/sci-react-ui": "workspace:*",
+    "@diamondlightsource/sci-react-ui": "0.6.1-alpha.1",
     "@mui/material": "workspace:*",
     "react-router-dom": "workspace:*",
     "lucide-react": "^1.16.0"
   },
   "devDependencies": {
     "@atlas/vitest-conf": "workspace:*",
-    "@diamondlightsource/sci-react-ui": "^0.4.1",
+    "@diamondlightsource/sci-react-ui": "0.6.1-alpha.1",
     "@mui/material": "^6.5.0",
     "lucide-react": "^1.16.0",
     "react-router-dom": "^7.18.0",
