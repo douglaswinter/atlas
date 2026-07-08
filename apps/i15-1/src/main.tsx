@@ -25,7 +25,7 @@ enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
       <AppProviders api={api} theme={DiamondDSTheme}>
-        <RoutedApp />
+        <RouterProvider router={router} />
       </AppProviders>
     </StrictMode>,
   );
