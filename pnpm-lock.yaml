@@ -74,7 +74,7 @@ importers:
         version: 0.10.15(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(graphql@16.14.2)(plotly.js@3.7.0(mapbox-gl@1.13.3))(react-dom@18.3.1(react@18.3.1))(react-gauge-component@2.0.29(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-redux@7.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-router@7.18.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@diamondlightsource/sci-react-ui':
         specifier: ^0.4.0
-        version: 0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(68fc6333891d37b39b5d4b15599d518c))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(v42mvqlrgyjgq66mzx3nvljj6u))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@mui/icons-material':
         specifier: ^6.5.0
         version: 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
@@ -95,7 +95,7 @@ importers:
         version: 1.23.0(react@18.3.1)
       material-react-table:
         specifier: ^3.2.1
-        version: 3.2.1(49ed8f777d4129543bd26613c46691ee)
+        version: 3.2.1(zyuivgc2zbsnezykm3sht6dlty)
       react-error-boundary:
         specifier: ^6.0.0
         version: 6.1.2(react@18.3.1)
@@ -244,7 +244,7 @@ importers:
         version: 3.6.0
       '@jsonforms/material-renderers':
         specifier: 3.6.0
-        version: 3.6.0(68fc6333891d37b39b5d4b15599d518c)
+        version: 3.6.0(v42mvqlrgyjgq66mzx3nvljj6u)
       '@jsonforms/react':
         specifier: 3.6.0
         version: 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
@@ -351,7 +351,7 @@ importers:
         version: link:../vitest-conf
       '@diamondlightsource/sci-react-ui':
         specifier: ^0.4.0
-        version: 0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(856c8d608861a30b6de16f4e19930dda))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(d3utkmkfi455xc3ttqaozwyjty))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@mui/material':
         specifier: ^6.5.0
         version: 6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -407,7 +407,7 @@ importers:
         version: 3.6.0
       '@jsonforms/material-renderers':
         specifier: 3.6.0
-        version: 3.6.0(856c8d608861a30b6de16f4e19930dda)
+        version: 3.6.0(d3utkmkfi455xc3ttqaozwyjty)
       '@jsonforms/react':
         specifier: 3.6.0
         version: 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
@@ -1144,14 +1144,14 @@ packages:
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-tools/load@8.1.12':
-    resolution: {integrity: sha512-3xDm8vzTb8DPXzN04K4AbWAIFrSwkDpISv+/YX8cd2xRbifFNVOu5tuhFK0chC1Wj6fJ8fThry+IV72hC41BiQ==}
+  '@graphql-tools/load@8.1.13':
+    resolution: {integrity: sha512-XstLIkH2gDVk3xlzbfNyR+MFGTaCop2rJSEyShXTnIy4Sh+DoNM6re8eXzZPIOs+N33kuOWm6e0EGE9tGpHUNQ==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-tools/merge@9.1.11':
-    resolution: {integrity: sha512-APuOIPBUm9NQQCl1qfKC39zclR1p8UVsEhCg9t9nYF3kSe859F9/wq4VmBqiz/ETuABS7Bm7WA+yDYWC6HoD8A==}
+  '@graphql-tools/merge@9.2.0':
+    resolution: {integrity: sha512-kChDH/sOxm3TCICup5NgTiz/aJBk+5GAuC0lfJS8FcRfsqZvlCkNwpsYTGAATBCJMrgZ9+csRugCjS97jPcNMw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
@@ -1168,8 +1168,8 @@ packages:
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@graphql-tools/schema@10.0.35':
-    resolution: {integrity: sha512-g/7IUmuLr3y4xoK1PDUm3B7arLBEMZatcbCIMf2690CU66xncY+GlMH37G0Sbm2lJY1/ELFpXa/S50rHKmoEkQ==}
+  '@graphql-tools/schema@10.0.36':
+    resolution: {integrity: sha512-g8S5aLirZInoi3NojzmBxwsZfVawOE0UBlVWYe8kDAR0FxS0riBDiyW7JnlAKayooHMRAMwGaze4RQU3VTTyig==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
@@ -1457,7 +1457,7 @@ packages:
   '@mui/base@5.0.0-beta.68':
     resolution: {integrity: sha512-F1JMNeLS9Qhjj3wN86JUQYBtJoXyQvknxlzwNl6eS0ZABo1MiohMONj3/WQzYPSXIKC2bS/ZbyBzdHhi2GnEpA==}
     engines: {node: '>=14.0.0'}
-    deprecated: This package has been replaced by @base-ui/react
+    deprecated: This package has been replaced by @base-ui-components/react
     peerDependencies:
       '@types/react': ^17.0.0 || ^18.0.0 || ^19.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -6023,28 +6023,28 @@ snapshots:
       react: 18.3.1
       react-icons: 5.7.0(react@18.3.1)
 
-  '@diamondlightsource/sci-react-ui@0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(68fc6333891d37b39b5d4b15599d518c))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@diamondlightsource/sci-react-ui@0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(d3utkmkfi455xc3ttqaozwyjty))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.31)(react@18.3.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
       '@jsonforms/core': 3.6.0
-      '@jsonforms/material-renderers': 3.6.0(68fc6333891d37b39b5d4b15599d518c)
+      '@jsonforms/material-renderers': 3.6.0(d3utkmkfi455xc3ttqaozwyjty)
       '@jsonforms/react': 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
-      '@mui/icons-material': 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
+      '@mui/icons-material': 7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
       '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       keycloak-js: 26.2.4
       react: 18.3.1
       react-icons: 5.7.0(react@18.3.1)
       utif: 3.1.0
 
-  '@diamondlightsource/sci-react-ui@0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(856c8d608861a30b6de16f4e19930dda))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@diamondlightsource/sci-react-ui@0.4.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@jsonforms/core@3.6.0)(@jsonforms/material-renderers@3.6.0(v42mvqlrgyjgq66mzx3nvljj6u))(@jsonforms/react@3.6.0(@jsonforms/core@3.6.0)(react@18.3.1))(@mui/icons-material@6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.31)(react@18.3.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
       '@jsonforms/core': 3.6.0
-      '@jsonforms/material-renderers': 3.6.0(856c8d608861a30b6de16f4e19930dda)
+      '@jsonforms/material-renderers': 3.6.0(v42mvqlrgyjgq66mzx3nvljj6u)
       '@jsonforms/react': 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
-      '@mui/icons-material': 7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
+      '@mui/icons-material': 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
       '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       keycloak-js: 26.2.4
       react: 18.3.1
@@ -6322,8 +6322,8 @@ snapshots:
       '@graphql-tools/github-loader': 9.1.4(@types/node@25.9.5)(graphql@16.14.2)
       '@graphql-tools/graphql-file-loader': 8.1.16(graphql@16.14.2)
       '@graphql-tools/json-file-loader': 8.0.30(graphql@16.14.2)
-      '@graphql-tools/load': 8.1.12(graphql@16.14.2)
-      '@graphql-tools/merge': 9.1.11(graphql@16.14.2)
+      '@graphql-tools/load': 8.1.13(graphql@16.14.2)
+      '@graphql-tools/merge': 9.2.0(graphql@16.14.2)
       '@graphql-tools/url-loader': 9.1.4(@types/node@25.9.5)(bufferutil@4.1.0)(graphql@16.14.2)(utf-8-validate@5.0.10)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       '@inquirer/prompts': 8.5.2(@types/node@25.9.5)
@@ -6377,7 +6377,7 @@ snapshots:
   '@graphql-codegen/core@6.2.0(graphql@16.14.2)':
     dependencies:
       '@graphql-codegen/plugin-helpers': 7.1.0(graphql@16.14.2)
-      '@graphql-tools/schema': 10.0.35(graphql@16.14.2)
+      '@graphql-tools/schema': 10.0.36(graphql@16.14.2)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       graphql: 16.14.2
       tslib: 2.8.1
@@ -6491,7 +6491,7 @@ snapshots:
     dependencies:
       '@graphql-tools/batch-execute': 10.0.9(graphql@16.14.2)
       '@graphql-tools/executor': 1.5.5(graphql@16.14.2)
-      '@graphql-tools/schema': 10.0.35(graphql@16.14.2)
+      '@graphql-tools/schema': 10.0.36(graphql@16.14.2)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       '@repeaterjs/repeater': 3.1.0
       '@whatwg-node/promise-helpers': 1.3.2
@@ -6627,15 +6627,15 @@ snapshots:
       tslib: 2.8.1
       unixify: 1.0.0
 
-  '@graphql-tools/load@8.1.12(graphql@16.14.2)':
+  '@graphql-tools/load@8.1.13(graphql@16.14.2)':
     dependencies:
-      '@graphql-tools/schema': 10.0.35(graphql@16.14.2)
+      '@graphql-tools/schema': 10.0.36(graphql@16.14.2)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       graphql: 16.14.2
       p-limit: 3.1.0
       tslib: 2.8.1
 
-  '@graphql-tools/merge@9.1.11(graphql@16.14.2)':
+  '@graphql-tools/merge@9.2.0(graphql@16.14.2)':
     dependencies:
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       graphql: 16.14.2
@@ -6653,9 +6653,9 @@ snapshots:
       graphql: 16.14.2
       tslib: 2.8.1
 
-  '@graphql-tools/schema@10.0.35(graphql@16.14.2)':
+  '@graphql-tools/schema@10.0.36(graphql@16.14.2)':
     dependencies:
-      '@graphql-tools/merge': 9.1.11(graphql@16.14.2)
+      '@graphql-tools/merge': 9.2.0(graphql@16.14.2)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       graphql: 16.14.2
       tslib: 2.8.1
@@ -6693,7 +6693,7 @@ snapshots:
   '@graphql-tools/wrap@11.1.17(graphql@16.14.2)':
     dependencies:
       '@graphql-tools/delegate': 12.0.18(graphql@16.14.2)
-      '@graphql-tools/schema': 10.0.35(graphql@16.14.2)
+      '@graphql-tools/schema': 10.0.36(graphql@16.14.2)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       '@whatwg-node/promise-helpers': 1.3.2
       graphql: 16.14.2
@@ -6901,21 +6901,7 @@ snapshots:
       ajv-formats: 2.1.1(ajv@8.20.0)
       lodash: 4.18.1
 
-  '@jsonforms/material-renderers@3.6.0(68fc6333891d37b39b5d4b15599d518c)':
-    dependencies:
-      '@date-io/dayjs': 3.2.0(dayjs@1.10.7)
-      '@emotion/react': 11.14.0(@types/react@18.3.31)(react@18.3.1)
-      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
-      '@jsonforms/core': 3.6.0
-      '@jsonforms/react': 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
-      '@mui/icons-material': 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
-      '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@mui/x-date-pickers': 7.29.4(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mui/system@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(dayjs@1.10.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      dayjs: 1.10.7
-      lodash: 4.18.1
-      react: 18.3.1
-
-  '@jsonforms/material-renderers@3.6.0(856c8d608861a30b6de16f4e19930dda)':
+  '@jsonforms/material-renderers@3.6.0(d3utkmkfi455xc3ttqaozwyjty)':
     dependencies:
       '@date-io/dayjs': 3.2.0(dayjs@1.10.7)
       '@emotion/react': 11.14.0(@types/react@18.3.31)(react@18.3.1)
@@ -6923,6 +6909,20 @@ snapshots:
       '@jsonforms/core': 3.6.0
       '@jsonforms/react': 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
       '@mui/icons-material': 7.3.11(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
+      '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@mui/x-date-pickers': 7.29.4(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mui/system@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(dayjs@1.10.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      dayjs: 1.10.7
+      lodash: 4.18.1
+      react: 18.3.1
+
+  '@jsonforms/material-renderers@3.6.0(v42mvqlrgyjgq66mzx3nvljj6u)':
+    dependencies:
+      '@date-io/dayjs': 3.2.0(dayjs@1.10.7)
+      '@emotion/react': 11.14.0(@types/react@18.3.31)(react@18.3.1)
+      '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
+      '@jsonforms/core': 3.6.0
+      '@jsonforms/react': 3.6.0(@jsonforms/core@3.6.0)(react@18.3.1)
+      '@mui/icons-material': 6.5.0(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
       '@mui/material': 6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mui/x-date-pickers': 7.29.4(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@mui/material@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mui/system@6.5.0(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(dayjs@1.10.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       dayjs: 1.10.7
@@ -9456,8 +9456,8 @@ snapshots:
     dependencies:
       '@graphql-tools/graphql-file-loader': 8.1.16(graphql@16.14.2)
       '@graphql-tools/json-file-loader': 8.0.30(graphql@16.14.2)
-      '@graphql-tools/load': 8.1.12(graphql@16.14.2)
-      '@graphql-tools/merge': 9.1.11(graphql@16.14.2)
+      '@graphql-tools/load': 8.1.13(graphql@16.14.2)
+      '@graphql-tools/merge': 9.2.0(graphql@16.14.2)
       '@graphql-tools/url-loader': 9.1.4(@types/node@25.9.5)(bufferutil@4.1.0)(graphql@16.14.2)(utf-8-validate@5.0.10)
       '@graphql-tools/utils': 11.2.0(graphql@16.14.2)
       cosmiconfig: 8.3.6(typescript@5.9.3)
@@ -9944,7 +9944,7 @@ snapshots:
       tinyqueue: 3.0.0
       vt-pbf: 3.1.3
 
-  material-react-table@3.2.1(49ed8f777d4129543bd26613c46691ee):
+  material-react-table@3.2.1(zyuivgc2zbsnezykm3sht6dlty):
     dependencies:
       '@emotion/react': 11.14.0(@types/react@18.3.31)(react@18.3.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@18.3.31)(react@18.3.1))(@types/react@18.3.31)(react@18.3.1)
