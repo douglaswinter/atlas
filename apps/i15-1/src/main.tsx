@@ -1,5 +1,5 @@
 import {
-  DiamondDSTheme,
+  DiamondTheme,
   useAuth,
   User,
 } from "@diamondlightsource/sci-react-ui";
@@ -24,7 +24,7 @@ const api = createApi("/api/blueapi");
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
-      <AppProviders api={api} theme={DiamondDSTheme}>
+      <AppProviders api={api} theme={DiamondTheme}>
         <RoutedApp />
       </AppProviders>
     </StrictMode>,
