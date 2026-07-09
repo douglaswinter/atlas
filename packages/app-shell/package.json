@@ -16,13 +16,13 @@
   "peerDependencies": {
     "@diamondlightsource/sci-react-ui": "*",
     "@mui/material": "*",
-    "react-router-dom": "*",
-    "lucide-react": "^1.16.0"
+    "lucide-react": "^1.16.0",
+    "react-router-dom": "*"
   },
   "devDependencies": {
     "@atlas/vitest-conf": "workspace:*",
     "@diamondlightsource/sci-react-ui": "file:../../srui.tgz",
-    "@mui/material": "<7.0.0",
+    "@mui/material": "7.0.0",
     "lucide-react": "^1.16.0",
     "react-router-dom": "^7.18.0",
     "vitest": "*"
