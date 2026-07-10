@@ -26,24 +26,11 @@ type Props = {
 export function TopBar({ title, open, setOpen }: Props) {
   const auth = useAuth();
 
-  console.log("Consumer render", {
-    initialised: auth.initialised,
-    authenticated: auth.authenticated,
-    authRef: auth,
-  });
-
   const user: AuthState | null = useMemo(() => {
     if (!auth || !auth.authenticated || !auth.user) return null;
     return { name: auth.user.name };
   }, [auth]);
 
-  useEffect(() => {
-    console.log("Consumer auth changed", auth);
-  }, [auth]);
-
-  console.log("should be false:", auth === (window as any).providerAuth);
-
-  console.log((window as any).__authModuleId);
   return (
     <AppBar
       position="fixed"

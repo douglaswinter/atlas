@@ -44,6 +44,9 @@ export interface Section extends LabelledRoute {
 
   /** First one is default */
   pages: Page[];
+
+  /** Set to true if safe to render these pages before login */
+  skipAuth?: boolean;
 }
 
 export interface Page extends LabelledRoute {
@@ -68,7 +71,11 @@ function childRoute(section: Section): RouteObject {
   });
   const sectionPath = routePath(section);
   const element = (
-    <TabbedPanel basePath={`/${sectionPath}`} tabs={tabbedPages} />
+    <TabbedPanel
+      basePath={`/${sectionPath}`}
+      tabs={tabbedPages}
+      skipAuth={section.skipAuth}
+    />
   );
   const childPageRoutes: RouteObject[] = section.pages.map((page) => {
     return {

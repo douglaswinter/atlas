@@ -22,8 +22,6 @@ export function toNavItemGroups(routerProps: RouterProps): Navigation {
 }
 
 export function Layout(props: RouterProps) {
-  const auth = useAuth();
-  console.log("Layout auth", auth.initialised);
   const { open, setOpen } = usePersistentDrawerState();
 
   const navigation = toNavItemGroups(props);

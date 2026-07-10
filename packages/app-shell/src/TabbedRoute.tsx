@@ -1,5 +1,6 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Box, Tabs, Tab, Paper } from "@mui/material";
+import { Box, Tabs, Tab, Paper, Alert, Typography } from "@mui/material";
+import { useAuth } from "@diamondlightsource/sci-react-ui";
 
 export interface TabDescription {
   label: string;
@@ -7,12 +8,13 @@ export interface TabDescription {
 }
 
 export interface TabbedPanelProps {
+  skipAuth?: boolean;
   tabs: TabDescription[];
   basePath: string;
 }
 
 /** An outlet for tabbed pages */
-export function TabbedPanel({ tabs, basePath }: TabbedPanelProps) {
+export function TabbedPanel({ skipAuth, tabs, basePath }: TabbedPanelProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,6 +25,20 @@ export function TabbedPanel({ tabs, basePath }: TabbedPanelProps) {
   const handleChange = (_: React.SyntheticEvent, value: string) => {
     navigate(`${basePath}/${value}`);
   };
+
+  if (!skipAuth) {
+    const auth = useAuth();
+
+    if (auth.errors) {
+      return <Alert severity="error">{auth.errors.join(", ")}</Alert>;
+    }
+
+    if (!auth.authenticated) {
+      return (
+        <Alert severity="info">You must be logged in to view this page.</Alert>
+      );
+    }
+  }
 
   return (
     <Box

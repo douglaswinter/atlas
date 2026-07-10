@@ -25,6 +25,7 @@ const navigation: SectionGroup[] = [
             element: <Dashboard />,
           },
         ],
+        skipAuth: true,
       },
       {
         name: "Setup",

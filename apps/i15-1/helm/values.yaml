@@ -7,13 +7,12 @@ ui-base:
     tag: 0.0.1-manual.50
 
   upstreams:
-    - id: echo
+    - id: echo-txt
       path: /api/echo
-      sse: true
       target:
         service:
           name: echo-server
-          port: 8080
+          port: 80
 
     - id: testapi
       path: /api/test
