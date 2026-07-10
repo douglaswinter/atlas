@@ -5,6 +5,7 @@ import { routePath, type RouterProps } from "./Router";
 import { SidebarNav, type Navigation } from "./SidebarNav";
 import { TopBar } from "./TopBar";
 import { usePersistentDrawerState } from "./usePersistentDrawerState";
+import { useAuth } from "@diamondlightsource/sci-react-ui";
 
 export function toNavItemGroups(routerProps: RouterProps): Navigation {
   return routerProps.navigation.map((group) => ({
@@ -21,6 +22,8 @@ export function toNavItemGroups(routerProps: RouterProps): Navigation {
 }
 
 export function Layout(props: RouterProps) {
+  const auth = useAuth();
+  console.log("Layout auth", auth.initialised);
   const { open, setOpen } = usePersistentDrawerState();
 
   const navigation = toNavItemGroups(props);

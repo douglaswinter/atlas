@@ -11,7 +11,6 @@ import Dashboard from "./routes/Dashboard";
 import Playlist from "./routes/Playlist";
 import Plans from "./routes/Plans";
 import { QueueView } from "./routes/QueueView";
-import { getUser } from "./keycloak";
 
 const navigation: SectionGroup[] = [
   {

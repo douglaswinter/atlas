@@ -1,12 +1,6 @@
 import { useState, type ReactNode } from "react";
 import type { Plan } from "@atlas/blueapi";
-import {
-  Box,
-  Container,
-  Grid2 as Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, Paper, Typography } from "@mui/material";
 import SearchablePlanList from "./SearchablePlanList";
 
 export type PlanBrowserProps = {

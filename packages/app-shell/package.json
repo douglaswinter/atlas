@@ -11,19 +11,20 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "keycloak-js": "^26.2.4",
-    "react-router-dom": "^7.13.1"
+    "keycloak-js": "^26.2.4"
   },
   "peerDependencies": {
-    "@diamondlightsource/sci-react-ui": "workspace:*",
-    "@mui/material": "workspace:*",
-    "lucide-react": "^1.16.0"
+    "@diamondlightsource/sci-react-ui": "*",
+    "@mui/material": "*",
+    "lucide-react": "^1.16.0",
+    "react-router-dom": "*"
   },
   "devDependencies": {
     "@atlas/vitest-conf": "workspace:*",
-    "@diamondlightsource/sci-react-ui": "^0.4.0",
-    "@mui/material": "^6.5.0",
+    "@diamondlightsource/sci-react-ui": "file:../../srui.tgz",
+    "@mui/material": "7.0.0",
     "lucide-react": "^1.16.0",
+    "react-router-dom": "^7.18.0",
     "vitest": "*"
   }
 }
